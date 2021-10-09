@@ -6,3 +6,19 @@ from django.http import HttpResponse
 def home(request):
     return render(request, "tutorials/index.html")
     # return HttpResponse("Hello")
+
+
+def about(request):
+    return render(request, "tutorials/about.html")
+
+
+def contact(request):
+    return render(request, "tutorials/contact.html")
+
+
+def tutorial_series(request):
+    return render(request, "tutorials/series-tutorials.html")
+
+
+def individual_tutorial(request):
+    return render(request, 'tutorials/individual-tutorial.html')
