@@ -12,9 +12,10 @@
     {% include "tutorials/layout/menu.html" %}
     {% block content %}
     {% endblock %}
+    {% include "tutorials/layout/footer.html" %}
 </div>
 
 <script src="{% static '/js/bootstrap.min.js' %}"></script>
-<script src="{% static '/js/main.js' %}"></script>
+<script src="{% static '/js/main.js' %}" type="text/javascript"></script>
 </body>
 </html>

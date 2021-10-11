@@ -36,6 +36,9 @@ def tutorial_series(request):
             "video_url": "https://www.youtube.com/watch?v=QjoWsrzP-SI"
         },
     )
+    
+    video_url = "https://www.youtube.com/watch?v=QjoWsrzP-SI"
+    
 
     serilize_tutorials = sorted(tutorials, key=lambda x: x['num'])
 

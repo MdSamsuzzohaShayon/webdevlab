@@ -31,6 +31,11 @@ const tutorialDesc = document.querySelectorAll('.tutorial-desc');
 const tabContent = document.getElementById("v-pills-tabContent");
 
 
+tutorialDesc.forEach(td => td.classList.remove('active'));
+const firstDescElement = tabContent.querySelector("[num='1']");
+firstDescElement.classList.add('active');
+//console.log(firstDescElement);
+
 
 tutorialTitle.forEach((tt, i)=>{
     tt.addEventListener('click', (e)=>{
@@ -42,3 +47,24 @@ tutorialTitle.forEach((tt, i)=>{
         selectedTutorial.classList.add('active');
     });
 });
+
+
+
+function getId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[2].length === 11)
+      ? match[2]
+      : null;
+}
+
+const videoId = getId('http://www.youtube.com/watch?v=zbYf5_S7oJo');
+const iframeMarkup = '<iframe width="560" height="315" src="//www.youtube.com/embed/'
+    + videoId + '" frameborder="0" allowfullscreen></iframe>';
+
+//const videoURL = '{{ tutorials }}';
+//console.log("Video utl - ",videoURL)
+
+
+//console.log('Video ID:', videoId)

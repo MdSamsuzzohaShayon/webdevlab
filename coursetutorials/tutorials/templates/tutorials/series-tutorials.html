@@ -5,15 +5,7 @@
 {% block content %}
 <!--series tutorials-->
 
-<!--<iframe-->
-<!--        width="560"-->
-<!--        height="315"-->
-<!--        src="https://www.youtube.com/embed/LzVzen_L2c8"-->
-<!--        title="YouTube video player"-->
-<!--        frameborder="0"-->
-<!--        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
-<!--        allowfullscreen>-->
-<!--</iframe>-->
+
 
 
 <div class="row">
@@ -22,26 +14,36 @@
             {% for tutorial in tutorials %}
             <li class="nav-link title-nav-link" num="{{ tutorial.num }}" role="tab">{{ tutorial.title }}</li>
             {% endfor %}
-<!--            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"-->
-<!--               aria-controls="v-pills-home" aria-selected="true">Home</a>-->
-<!--            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"-->
-<!--               aria-controls="v-pills-profile" aria-selected="false">Profile</a>-->
         </ul>
     </div>
+<!--    https://www.youtube.com/watch?v=-QQKdM_vxjU-->
+<!--    https://www.youtube.com/watch?v=mE1S9tGvvtY&list=PLDbgPtNOy-yDNvC2UBWwWsJT8J-X5BUzv-->
     <div class="col-9">
         <div class="tab-content" id="v-pills-tabContent">
             {% for tutorial in tutorials %}
-                <div class="tab-pane fade show active tutorial-desc" num="{{tutorial.num}}" >{{ tutorial.desc }}</div>
+                <div class="tab-pane fade show active tutorial-desc" num="{{tutorial.num}}" >
+                    <h2 class="h2">{{ tutorial.title }}</h2>
+                    <p class="tutorial-desc">{{ tutorial.desc }}</p>
+                    <div class="video-tutorial" id="iframe-video">
+<!--                        <iframe-->
+<!--                                width="560"-->
+<!--                                height="315"-->
+<!--                                src="{{ tutorial.video_url }}"-->
+<!--                                allowfullscreen>-->
+<!--                        </iframe>-->
+<!--                        <script type="text/javascript">-->
+<!--                            const videoURL = '{{ tutorial.video_url }}';-->
+<!--                            console.log("Video utl - ",videoURL)-->
+<!--                        </script>-->
+                    </div>
+                </div>
             {% endfor %}
-
-<!--            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">-->
-<!--                1-->
-<!--            </div>-->
-<!--            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">2-->
-<!--            </div>-->
         </div>
     </div>
 </div>
 
 
 {% endblock %}
+
+
+

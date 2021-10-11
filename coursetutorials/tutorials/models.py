@@ -14,12 +14,6 @@ class TutorialSeries(models.Model):
 
 
 
-# class Product(models.Model):
-#     fields here
-#
-#     def save(self, *args, **kwargs):
-#         self.tags = self.category + '' + self.subcategory
-#         super(Product, self).save(*args, **kwargs)
 
 # Create your models here.
 class Tutorial(models.Model):
@@ -27,15 +21,14 @@ class Tutorial(models.Model):
     title = models.CharField(max_length=120, blank=False)
     desc = models.TextField()
     video_url = models.CharField(max_length=150)
+    # https://stackoverflow.com/questions/22340258/list-field-in-model
+    # https://django-mysql.readthedocs.io/en/latest/model_fields/list_fields.html
     # tags =
     individual = models.BooleanField(default=True)  # SET TRUE IF IT IS SERIES
     series = models.ForeignKey(TutorialSeries, on_delete=models.CASCADE, default=None, blank=True, null=True)
     
     
     def save(self, *args, **kwargs):
-        # print(self.series)
-        # pass
-        # self.series
         if self.series == None:
             self.individual = True
         else:
