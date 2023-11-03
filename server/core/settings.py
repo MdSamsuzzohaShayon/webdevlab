@@ -37,7 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #External
+    'graphene_django',
+
+    # Internal
+    'blog',
 ]
+
+# GraphQL Schema Path
+GRAPHENE = {
+    "SCHEMA": "blog.schema.schema"
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
