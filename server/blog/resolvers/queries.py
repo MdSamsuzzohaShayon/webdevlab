@@ -20,13 +20,19 @@ class Query(graphene.ObjectType):
         return Author.objects.all()
 
     def resolve_all_categories(self, info):
-        return Category.objects.all()
+        objects = Category.objects.all().order_by('-id')
+        return objects
 
     def resolve_all_articles(self, info, start: int=0, limit: int=20):
-        return Article.objects.all()[start:start+limit]
+        # Get all objects in reverse order
+        queryset = Article.objects.all().order_by('-id')
+        # Apply start and limit using array slicing
+        objects = queryset[start:start + limit]
+        return objects
 
     def resolve_all_comments(self, info):
-        return Comment.objects.all()
+        objects = Comment.objects.all().order_by('-id')
+        return objects
 
     def resolve_all_tags(self, info):
         return Tag.objects.all()

@@ -1,6 +1,16 @@
 # Web Dev Lab
 
-### Database Modeling
+### Features
+ - Selling courses
+ - Blog on http://blog.webdevlab.org
+ - Create short tutorial
+ - Create developer team (career opportunity)
+ - Create most advanced User Authentication system (Cookie based)
+ - Forum on http://forum.webdevlab.org
+ - User role (Admin, Student, Viewer)
+ - 
+
+### Database Modeling (PostgresSQL)
  - Articles Table:
     - article_id (Primary Key)
     - title

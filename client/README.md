@@ -1,49 +1,75 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Minimal TypeScript Starter
-</h1>
+# Nuxt 3 Minimal Starter
 
-## 🚀 Quick start
+Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-1.  **Create a Gatsby site.**
+## Setup
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+Make sure to install the dependencies:
 
-    ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby -- -ts
-    ```
+```bash
+# npm
+npm install
 
-2.  **Start developing.**
+# pnpm
+pnpm install
 
-    Navigate into your new site’s directory and start it up.
+# yarn
+yarn install
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+# bun
+bun install
+```
 
-3.  **Open the code and start customizing!**
+## Development Server
 
-    Your site is now running at http://localhost:8000!
+Start the development server on `http://localhost:3000`:
 
-    Edit `src/pages/index.tsx` to see your site update in real-time!
+```bash
+# npm
+npm run dev
 
-4.  **Learn more**
+# pnpm
+pnpm run dev
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+# yarn
+yarn dev
 
-## 🚀 Quick start (Netlify)
+# bun
+bun run dev
+```
 
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
+## Production
 
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+Build the application for production:
+
+```bash
+# npm
+npm run build
+
+# pnpm
+pnpm run build
+
+# yarn
+yarn build
+
+# bun
+bun run build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm run preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
