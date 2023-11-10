@@ -1,6 +1,7 @@
 <template>
-    <div>
-      <p>Admin layout</p>
-      <slot />
-    </div>
-  </template>
+  <div>
+    <AdminNavbar />
+    <slot />
+    <AdminFooter />
+  </div>
+</template>

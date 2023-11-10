@@ -13,6 +13,7 @@ class Query(graphene.ObjectType):
     author_by_id = graphene.Field(AuthorType, id=graphene.Int())
     category_by_id = graphene.Field(CategoryType, id=graphene.Int())
     article_by_id = graphene.Field(ArticleType, id=graphene.Int())
+    article_by_link = graphene.Field(ArticleType, link=graphene.String())
     # comment_by_id = graphene.Field(CommentType, id=graphene.Int())
     # tag_by_id = graphene.Field(TagType, id=graphene.Int())
 
@@ -45,6 +46,9 @@ class Query(graphene.ObjectType):
 
     def resolve_article_by_id(self, info, id):
         return Article.objects.get(pk=id)
+
+    def resolve_article_by_link(self, info, link):
+        return Article.objects.get(link=link)
 
     # def resolve_comment_by_id(self, info, id):
     #     return Comment.objects.get(pk=id)

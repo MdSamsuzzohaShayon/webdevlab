@@ -5,10 +5,16 @@
  - Blog on http://blog.webdevlab.org
  - Create short tutorial
  - Create developer team (career opportunity)
- - Create most advanced User Authentication system (Cookie based)
+ - Create most advanced User Authentication system (Cookie based, refresh token)
  - Forum on http://forum.webdevlab.org
  - User role (Admin, Student, Viewer)
- - 
+ - Do nuxt js seo for all pages
+
+### Requirements
+ - Quill text editor 
+ - Use time function [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
+ - Design layout for admin
+ - Main menu for home
 
 ### Database Modeling (PostgresSQL)
  - Articles Table:

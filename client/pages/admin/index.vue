@@ -1,3 +1,8 @@
 <template>
-  <h1>Admin page</h1>
+  <Admin />
 </template>
+<script setup lang="ts">
+definePageMeta({
+  layout: "admin",
+});
+</script>
