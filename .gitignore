@@ -1,1 +1,4 @@
-/virtual-env
+/server/.venv
+/**/**/__pycache__
+/client/node_modules
+/client/.cache
