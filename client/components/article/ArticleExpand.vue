@@ -17,16 +17,14 @@
         <p className="font-semibold text-gray-400 text-xs">{{ data.articleByLink.createdAt }}</p>
       </div>
     </div>
-    <p className="mt-10">
-      Breakfast agreeable incommode departure it an. By ignorant at on wondered relation. Enough at tastes really so cousin am of. Extensive therefore supported
-      by extremity of contented. Is pursuit compact demesne invited elderly be. View him she roof tell her case has sigh. Moreover is possible he admitted
-      sociable concerns. By in cold no less been sent hard hill.
-    </p>
+    <!-- <QuillEditor v-model="initialContent" :options="options" /> -->
     <p>{{ data.articleByLink.content }}</p>
   </main>
 </template>
 
 <script lang="ts" setup>
+// @ts-ignore
+import {Delta} from '@vueup/vue-quill';
 import type { IArticle } from "../../types/Article";
 
 const props = defineProps(["postLink"]);
@@ -50,6 +48,57 @@ const query = gql`
     }
   }
 `;
+
+const isReadOnly = true;
+
+const options = {
+  debug: "info",
+  modules: {
+    toolbar: isReadOnly ? false : ["bold", "italic", "underline"],
+  },
+  placeholder: "Compose an epic...",
+  readOnly: true,
+  theme: "snow",
+};
+
+const initialContent = new Delta([
+  {
+    insert: "sdsdssdds\n\nhhg\nhello\n\n\nho\n\ngoal",
+  },
+  {
+    attributes: {
+      list: "ordered",
+    },
+    insert: "\n",
+  },
+  {
+    insert: "sure",
+  },
+  {
+    attributes: {
+      list: "ordered",
+    },
+    insert: "\n",
+  },
+  {
+    insert: "be",
+  },
+  {
+    attributes: {
+      list: "ordered",
+    },
+    insert: "\n",
+  },
+  {
+    insert: "wit",
+  },
+  {
+    insert: "\n",
+    attributes: {
+      list: "ordered",
+    },
+  },
+]);
 
 type ArticlesResult = {
   articleByLink: IArticle;

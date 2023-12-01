@@ -5,10 +5,10 @@ export interface IArticle {
   id: number;
   title: string;
   content: string;
-  createdAt: string;
-  author: IAuthor;
-  category: ICategory;
   link: string;
+  createdAt: string;
+  category: ICategory;
+  author: IAuthor;
 }
 
 export interface IArticleProps {
