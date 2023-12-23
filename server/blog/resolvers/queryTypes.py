@@ -15,11 +15,13 @@ class CategoryType(DjangoObjectType):
 class ArticleType(DjangoObjectType):
     class Meta:
         model = Article
+        exclude = ("created_at",)
 
 
 class CommentType(DjangoObjectType):
     class Meta:
         model = Comment
+        exclude = ("created_at",)
 
 
 class TagType(DjangoObjectType):

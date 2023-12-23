@@ -21,7 +21,7 @@
         id
         title
         content
-        createdAt
+        thumbnail
         link
         author {
           id

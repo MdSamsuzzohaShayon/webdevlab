@@ -48,7 +48,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
-  modules: ["@nuxtjs/apollo", "@nuxtjs/tailwindcss", "@nuxt/devtools"],
+  modules: ["@nuxtjs/apollo", "@nuxtjs/tailwindcss", "@nuxt/devtools", "@nuxtjs/cloudinary"],
   apollo: {
     clients: {
       default: {
