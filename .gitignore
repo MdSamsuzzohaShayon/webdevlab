@@ -1,4 +1,6 @@
 /server/.venv
+/server/.env
 /**/**/__pycache__
 /client/node_modules
 /client/.cache
+/client/.env
