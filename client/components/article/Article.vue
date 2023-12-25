@@ -18,13 +18,13 @@
   </NuxtLink> -->
   <NuxtLink rel="noopener noreferrer" v-bind:to="'http://localhost:3000/' + article.link"
     class="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900">
-    <CldImage v-if="article.thumbnail && article.thumbnail !== ''" v-bind:src="article.thumbnail" width="200" height="200"
+    <CldImage v-if="article.thumbnail && article.thumbnail !== ''" v-bind:src="article.thumbnail" width="400" height="400" class="object-cover w-full rounded h-44 dark:bg-gray-500"
       v-bind:alt="article.title" />
     <img v-else class="object-cover w-full rounded h-44 dark:bg-gray-500"
       src="https://source.unsplash.com/random/480x360?1" />
     <div class="p-6 space-y-2">
       <h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">{{ article.title }}</h3>
-      <!-- <span class="text-xs dark:text-gray-400">{{ article.createdAt }}</span> -->
+      <span class="text-xs dark:text-gray-400">{{ article.createdAt }}</span>
       <p>
         {{ article.content }}
       </p>

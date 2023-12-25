@@ -6,7 +6,8 @@ export interface IArticle {
   title: string;
   content: string;
   link: string;
-  createdAt: string;
+  thumbnail: string;
+  createdAt?: string;
   category: ICategory;
   author: IAuthor;
 }

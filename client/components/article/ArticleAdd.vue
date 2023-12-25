@@ -4,11 +4,18 @@
     <form class="mb-4" v-on:submit.prevent="handleArticleAdd">
       <div class="input-group mb-3">
         <label for="title">Title</label>
-        <input type="text" class="border outline-none bg-gray-300" name="title" id="title" />
+        <input type="text" class="border outline-none bg-gray-300" name="title" id="title" v-model="articleState.title" />
+      </div>
+      <div class="input-group flex mb-3 flex-col items-start gap-2">
+        <label for="thumbnail">Thumbnail</label>
+        <input type="file" class="border outline-none bg-gray-300" name="thumbnail" id="thumbnail"
+          v-on:change="handleFileChange" />
+          <img v-if="imgUrl" v-bind:src="imgUrl" class="w-full h-36 object-cover object-center" />
       </div>
       <div class="input-group mb-3">
         <label for="content">Content</label>
-        <QuillEditor v-model:content="state.content" theme="snow" v-bind:options="options" v-on:editorChange="handleContentChange" contentType="delta" />
+        <QuillEditor v-model:content="state.content" theme="snow" :options="options" @editorChange="handleContentChange"
+          contentType="delta" />
         <!-- <div class="border border-green-500">
           <h2>Display content</h2>
           <QuillEditor v-model="initialContent" :options="options" />
@@ -20,19 +27,19 @@
       </div>
       <div class="input-group mb-3">
         <label for="category">Category</label>
-        <select name="category" id="category">
+        <select name="category" id="category" v-model="articleState.category">
           <option v-for="cat in props.categories" v-bind:value="cat.id">{{ cat.name }}</option>
         </select>
       </div>
       <div class="input-group mb-3">
         <label for="author">Author</label>
-        <select name="author" id="author">
+        <select name="author" id="author" v-model="articleState.author">
           <option v-for="a in props.authors" v-bind:value="a.id">{{ a.name }}</option>
         </select>
       </div>
       <div class="input-group mb-3">
         <label for="link">Link</label>
-        <input type="text" class="border outline-none bg-gray-300" name="link" id="link" />
+        <input type="text" class="border outline-none bg-gray-300" name="link" id="link" v-model="articleState.link" />
       </div>
       <div class="input-group">
         <button type="submit">Add</button>
@@ -48,25 +55,92 @@ import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 const isReadOnly = true;
 
+const articleState = reactive({
+  title: '',
+  category: '',
+  author: '',
+  link: '',
+});
+
+const uploadedImg = ref<File | null>(null);
+const imgUrl = ref<string | null>(null);
+
 const options = {
   debug: "info",
   modules: {
     toolbar: isReadOnly ? false : ["bold", "italic", "underline"],
   },
   placeholder: "Compose an epic...",
-  readOnly: true,
+  readOnly: false,
   theme: "snow",
 };
+
+const initialContent = new Delta([
+  {
+    insert: "sdsdssdds\n\nhhg\nhello\n\n\nho\n\ngoal",
+  },
+  {
+    attributes: {
+      list: "ordered",
+    },
+    insert: "\n",
+  },
+  {
+    insert: "sure",
+  },
+  {
+    attributes: {
+      list: "ordered",
+    },
+    insert: "\n",
+  },
+  {
+    insert: "be",
+  },
+  {
+    attributes: {
+      list: "ordered",
+    },
+    insert: "\n",
+  },
+  {
+    insert: "wit",
+  },
+  {
+    insert: "\n",
+    attributes: {
+      list: "ordered",
+    },
+  },
+]);
 
 
 const state = reactive({ content: initialContent });
 const props = defineProps(["categories", "authors"]);
 
-const handleArticleAdd = (e) => {
-  console.log({ state: state.content });
+const handleArticleAdd = (e: Event) => {
+  e.preventDefault();
+  const formData = {
+    title: articleState.title,
+    content: state.content,
+    category: articleState.category,
+    author: articleState.author,
+    link: articleState.link,
+  };
+  console.log(formData);
 };
 
-const handleContentChange = (e: EventListener) => {
+const handleFileChange = (e: Event) => {
+  e.preventDefault();
+  const inputEl = e.target as HTMLInputElement;
+  if (inputEl.files && inputEl.files.length > 0) {
+    uploadedImg.value = inputEl.files[0];
+    const objectUrl = URL.createObjectURL(inputEl.files[0]);
+    imgUrl.value = objectUrl;;
+  }
+}
+
+const handleContentChange = (e: Delta) => {
   console.log(e);
 };
 </script>
@@ -75,10 +149,12 @@ const handleContentChange = (e: EventListener) => {
 :deep(.ql-editor) {
   min-height: 200px;
 }
+
 :deep(.ql-toolbar.ql-snow) {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
+
 :deep(.ql-container.ql-snow) {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;

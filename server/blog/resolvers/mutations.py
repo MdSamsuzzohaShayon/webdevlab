@@ -1,11 +1,12 @@
 import graphene
 from graphene_django import DjangoObjectType
-from ..models import Category, Article
-from .queryTypes import CategoryType, ArticleType
+from ..models import Category, Article, Comment
+from .queryTypes import CategoryType, ArticleType, CommentType
 from core.settings import cloudinary
 from graphene_file_upload.scalars import Upload
 from datetime import datetime
 import os
+
 
 class CategoryMutation(graphene.Mutation):
     class Arguments:
@@ -32,13 +33,14 @@ class ArticleMutation(graphene.Mutation):
         thumbnail = Upload(required=True)
         author_id = graphene.ID()
         category_id = graphene.ID()
+        created_at = graphene.DateTime(required=False)
         id = graphene.ID()
 
     success = graphene.Boolean()
     article = graphene.Field(ArticleType)
 
     @classmethod
-    def mutate(cls, root, info, title, content, thumbnail, author_id, category_id, id=None):
+    def mutate(cls, root, info, title, content, thumbnail, author_id, category_id, created_at=None, id=None):
 
         # Upload the image to Cloudinary
         options = {
@@ -67,23 +69,42 @@ class ArticleMutation(graphene.Mutation):
                 article.category_id = category_id
             article.save()
         else:
-            article = Article.objects.create(title=title, content=content, thumbnail=thumbnail_url, created_at=current_date_time, author_id=author_id,
+            article = Article.objects.create(title=title, content=content, thumbnail=thumbnail_url,
+                                             created_at=current_date_time, author_id=author_id,
                                              category_id=category_id)
         return ArticleMutation(article=article)
+
+
+class CommentMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+        author = graphene.String(required=True)  # Who made the comment
+        email = graphene.String(required=True)
+        text = graphene.String(required=True)
+        created_at = graphene.DateTime(required=False)
+        article_id = graphene.ID()
+
+    comment = graphene.Field(CommentType)
+
+    @classmethod
+    def mutate(cls, root, info, author, email, text, article_id, created_at=None, id=None):
+        current_date_time = datetime.now()
+        if id:
+            comment = Comment.objects.get(pk=id)
+            comment.author = author
+            comment.created_at = current_date_time
+            comment.text = text
+            comment.email = email
+            if article_id:
+                comment.article_id = article_id
+            comment.save()
+        else:
+            comment = Comment.objects.create(author=author, email=email, text=text, article_id=article_id,
+                                             created_at=current_date_time)
+        return CommentMutation(comment=comment)
 
 
 class Mutation(graphene.ObjectType):
     create_or_update_category = CategoryMutation.Field()
     create_or_update_article = ArticleMutation.Field()
-
-
-# {
-#   "query": "mutation ($title: String!, $content: String!, $thumbnail: Upload, $authorId: ID!, $categoryId: ID!, $id: ID) { createOrUpdateArticle(title: $title, content: $content, thumbnail: $thumbnail, authorId: $authorId, categoryId: $categoryId, id: $id) { article { id title content thumbnail author { id name } category { id name } } } }",
-#   "variables": {
-#     "title": "Test Article",
-#     "content": "This is a test article",
-#     "thumbnail": null,
-#     "authorId": "1",
-#     "categoryId": "1"
-#   }
-# }
+    create_or_update_comment = CommentMutation.Field()

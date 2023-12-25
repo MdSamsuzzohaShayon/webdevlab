@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
-    <h1>Article</h1>
     <ArticleAdd v-bind:categories="data.allCategories" v-bind:authors="data.allAuthors" />
+    <h1 class="mt-8">All articles</h1>
     <Article v-for="article in data.allArticles" v-bind:key="article.id" v-bind:article="article" />
   </ClientOnly>
 </template>

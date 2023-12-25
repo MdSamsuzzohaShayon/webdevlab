@@ -23,6 +23,7 @@
         content
         thumbnail
         link
+        createdAt
         author {
           id
           name
