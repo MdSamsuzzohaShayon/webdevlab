@@ -10,12 +10,12 @@
         <label for="thumbnail">Thumbnail</label>
         <input type="file" class="border outline-none bg-gray-300" name="thumbnail" id="thumbnail"
           v-on:change="handleFileChange" />
-          <img v-if="imgUrl" v-bind:src="imgUrl" class="w-full h-36 object-cover object-center" />
+        <img v-if="imgUrl" v-bind:src="imgUrl" class="w-full h-36 object-cover object-center" />
       </div>
       <div class="input-group mb-3">
         <label for="content">Content</label>
-        <QuillEditor v-model:content="state.content" theme="snow" :options="options" @editorChange="handleContentChange"
-          contentType="delta" />
+        <QuillEditor v-model:content="state.content" :options="options" theme="snow" @editorChange="handleContentChange"
+          contentType="html" />
         <!-- <div class="border border-green-500">
           <h2>Display content</h2>
           <QuillEditor v-model="initialContent" :options="options" />
@@ -52,6 +52,7 @@
 // @ts-ignore
 import { QuillEditor, Delta, Quill } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import { ADD_ARTICLE_RAW } from '../../graphql/articles';
 
 const isReadOnly = true;
 
@@ -75,59 +76,59 @@ const options = {
   theme: "snow",
 };
 
-const initialContent = new Delta([
-  {
-    insert: "sdsdssdds\n\nhhg\nhello\n\n\nho\n\ngoal",
-  },
-  {
-    attributes: {
-      list: "ordered",
-    },
-    insert: "\n",
-  },
-  {
-    insert: "sure",
-  },
-  {
-    attributes: {
-      list: "ordered",
-    },
-    insert: "\n",
-  },
-  {
-    insert: "be",
-  },
-  {
-    attributes: {
-      list: "ordered",
-    },
-    insert: "\n",
-  },
-  {
-    insert: "wit",
-  },
-  {
-    insert: "\n",
-    attributes: {
-      list: "ordered",
-    },
-  },
-]);
+const initialContent = `
+  <h1>Main Title</h1>
+  <h2>Subheading 1</h2>
+  <p>Content...</p>
+  <h2>Subheading 2</h2>
+  <p>Content...</p>
+`;
 
 
 const state = reactive({ content: initialContent });
 const props = defineProps(["categories", "authors"]);
 
-const handleArticleAdd = (e: Event) => {
+const handleArticleAdd = async (e: Event) => {
   e.preventDefault();
-  const formData = {
-    title: articleState.title,
-    content: state.content,
-    category: articleState.category,
-    author: articleState.author,
-    link: articleState.link,
+  // const formData = {
+  //   title: articleState.title,
+  //   content: state.content,
+  //   category: articleState.category,
+  //   author: articleState.author,
+  //   link: articleState.link,
+  // };
+  const formData = new FormData();
+
+
+  const myHeaders = new Headers();
+  myHeaders.append("Cookie", "csrftoken=ccS5qh2RZofjzKhe6KeN51RMYOGQAb5t");
+
+  const newImgFile = uploadedImg.value as File;
+
+  const operations = {
+    query: ADD_ARTICLE_RAW,
+    variables: {
+      title: articleState.title,
+      content: state.content,
+      thumbnail: null, // You may need to handle thumbnail separately based on your requirements
+      authorId: articleState.author,
+      categoryId: articleState.category,
+    },
   };
-  console.log(formData);
+
+  formData.set("operations", JSON.stringify(operations));
+  formData.set("map", "{\n  \"0\": [\"variables.thumbnail\"]\n}");
+  formData.set("0", newImgFile);
+
+  const response = await fetch("http://localhost:8000/graphql/", {
+    method: 'POST',
+    headers: myHeaders,
+    body: formData,
+    redirect: 'follow'
+  });
+
+  console.log(response);
+  
 };
 
 const handleFileChange = (e: Event) => {

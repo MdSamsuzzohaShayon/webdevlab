@@ -39,7 +39,9 @@ SECRET_KEY = os.environ["DJANGO_SECRET"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # 'http://localhost:3000',
+                 ]
 
 
 # Application definition
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
 
     #External
     'graphene_django',
+    'corsheaders',
 
     # Internal
     'blog',
@@ -72,6 +75,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -90,6 +95,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'

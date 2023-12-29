@@ -2,10 +2,10 @@
   <main className="continer mx-auto px-4">
     <div class="relative w-full h-80" v-if="data?.articleByLink">
       <div class="static h-full">
-        <CldImage v-if="data?.articleByLink && data.articleByLink.thumbnail && data.articleByLink.thumbnail !== ''" v-bind:src="data.articleByLink.thumbnail" width="400"
-          height="400" class="w-full h-full object-cover object-center" v-bind:alt="data.articleByLink.title" />
-        <img
-          v-else
+        <CldImage v-if="data?.articleByLink && data.articleByLink.thumbnail && data.articleByLink.thumbnail !== ''"
+          v-bind:src="data.articleByLink.thumbnail" width="400" height="400"
+          class="w-full h-full object-cover object-center" v-bind:alt="data.articleByLink.title" />
+        <img v-else
           src="https://images.unsplash.com/photo-1493770348161-369560ae357d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80"
           alt="thumbnail" class="w-full h-full object-cover object-center" />
       </div>
@@ -18,18 +18,19 @@
         <p className="font-semibold text-gray-200 text-sm">{{ data.articleByLink.author.name }}</p>
         <p className="font-semibold text-gray-400 text-xs">{{ data.articleByLink?.createdAt }}</p>
       </div>
+      <div v-html="data.articleByLink.content"></div>
     </div>
     <div class="no-article-found" v-else>
       <p class="text-text-red-700">No article found!</p>
     </div>
-    <!-- <p>{{ data.articleByLink.content }}</p> -->
-    <!-- <QuillEditor v-model="initialContent" :options="options" /> -->
+    <!-- <QuillEditor v-model="state.content" theme="snow" :options="options" /> -->
   </main>
 </template>
 
 <script lang="ts" setup>
 // @ts-ignore
-// import {Delta} from '@vueup/vue-quill';
+import { Delta, QuillEditor } from '@vueup/vue-quill';
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import type { IArticle } from "../../types/Article";
 
 const props = defineProps(["postLink"]);
@@ -54,57 +55,6 @@ const query = gql`
     }
   }
 `;
-
-const isReadOnly = true;
-
-// const options = {
-//   debug: "info",
-//   modules: {
-//     toolbar: isReadOnly ? false : ["bold", "italic", "underline"],
-//   },
-//   placeholder: "Compose an epic...",
-//   readOnly: true,
-//   theme: "snow",
-// };
-
-// const initialContent = new Delta([
-//   {
-//     insert: "sdsdssdds\n\nhhg\nhello\n\n\nho\n\ngoal",
-//   },
-//   {
-//     attributes: {
-//       list: "ordered",
-//     },
-//     insert: "\n",
-//   },
-//   {
-//     insert: "sure",
-//   },
-//   {
-//     attributes: {
-//       list: "ordered",
-//     },
-//     insert: "\n",
-//   },
-//   {
-//     insert: "be",
-//   },
-//   {
-//     attributes: {
-//       list: "ordered",
-//     },
-//     insert: "\n",
-//   },
-//   {
-//     insert: "wit",
-//   },
-//   {
-//     insert: "\n",
-//     attributes: {
-//       list: "ordered",
-//     },
-//   },
-// ]);
 
 type ArticlesResult = {
   articleByLink: IArticle;

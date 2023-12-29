@@ -53,7 +53,7 @@ export default defineNuxtConfig({
     clients: {
       default: {
         httpEndpoint: "http://localhost:8000/graphql/",
-        httpLinkOptions: { credentials: "include" },
+        // httpLinkOptions: { credentials: "include" },
       },
     },
   },
