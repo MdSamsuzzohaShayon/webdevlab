@@ -107,12 +107,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': os.environ["POSTGRES_ENGINE"],
+            'NAME':  os.environ["SUPABASE_DB"],
+            'USER': os.environ["SUPABASE_DB_USER"],
+            'PASSWORD': os.environ["SUPABASE_DB_PASSWORD"],
+            'HOST': os.environ["SUPABASE_DB_HOST"],  # Set to the appropriate host
+            'PORT': os.environ["SUPABASE_DB_PORT"],       # Set to the appropriate port
+        }
+    }
 
 
 # Password validation
