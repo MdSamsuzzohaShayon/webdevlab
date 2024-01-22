@@ -4,3 +4,5 @@
 /client/node_modules
 /client/.cache
 /client/.env
+.idea
+
