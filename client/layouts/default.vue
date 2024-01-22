@@ -1,6 +1,8 @@
 <template>
-    <div>
-      <p>Some default layout content shared across all pages</p>
-      <slot />
-    </div>
-  </template>
+  <div>
+    <p class="text-amber-800 bg-amber-100 w-full p-2 text-center font-semibold">Under Development</p>
+    <Navbar />
+    <slot />
+    <Footer />
+  </div>
+</template>

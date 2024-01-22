@@ -11,6 +11,20 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()  # loads the configs from .env
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config( 
+  cloud_name = os.environ["CLOUDINARY_CLOUD_NAME"], 
+  api_key = os.environ["CLOUDINARY_API_KEY"], 
+  api_secret = os.environ["CLOUDINARY_API_SECRET"],
+  secure = True
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +34,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r8m94=*au9tiz3n-16kha-%&tw$zi!g3w+)q^^i3*0^b*1yo80'
+SECRET_KEY = os.environ["DJANGO_SECRET"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # 'http://localhost:3000',
+                 ]
 
 
 # Application definition
@@ -40,6 +56,7 @@ INSTALLED_APPS = [
 
     #External
     'graphene_django',
+    'corsheaders',
 
     # Internal
     'blog',
@@ -58,6 +75,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -78,18 +97,34 @@ TEMPLATES = [
     },
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': os.environ["POSTGRES_ENGINE"],
+            'NAME':  os.environ["SUPABASE_DB"],
+            'USER': os.environ["SUPABASE_DB_USER"],
+            'PASSWORD': os.environ["SUPABASE_DB_PASSWORD"],
+            'HOST': os.environ["SUPABASE_DB_HOST"],  # Set to the appropriate host
+            'PORT': os.environ["SUPABASE_DB_PORT"],       # Set to the appropriate port
+        }
+    }
 
 
 # Password validation
