@@ -2,34 +2,43 @@ name: Django CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
-  deploy:
+  # build:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Set up Python
+  #     uses: actions/setup-python@v2
+  #     with:
+  #       python-version: '3.8'
+  #   - name: Install dependencies
+  #     run: |
+  #       pip install -r requirements.txt
+  #   - name: Run Tests
+  #     run: |
+  #       # Add commands to run your tests
+  deploy_backend:
+    # needs: build
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Tests
-      run: |
-        python manage.py test
-    - name: Deploy to VPS
+    - uses: actions/checkout@v3
+    - name: SSH and Deploy
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.SERVER_IP }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_KEY }}
+        host: ${{ secrets.VPS_IP }}
+        username: ${{ secrets.LINUX_USER_NAME }}
+        key: ${{ secrets.VPS_AUTHORIZED_SSH_KEY }}
         script: |
-          cd /path/to/your/project
-          git pull
+          cd /home/shayon/webdevlab
+          git pull origin master
+          cd /home/shayon/webdevlab/server
+          source .venv/bin/activate
           pip install -r requirements.txt
-          python manage.py migrate
-          sudo systemctl restart gunicorn
-          sudo systemctl restart nginx
+          ./manage.py migrate
+          sudo systemctl restart your_project_service

@@ -50,3 +50,4 @@
  - ArticleTags Table (a junction table to implement many-to-many relationship between Articles and Tags):
    - article_id (Foreign Key referencing the Articles Table)
    - tag_id (Foreign Key referencing the Tags Table)
+
