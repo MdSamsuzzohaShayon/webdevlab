@@ -40,7 +40,7 @@ SECRET_KEY = os.environ["DJANGO_SECRET"]
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    # 'http://localhost:3000',
+                'localhost',
                  ]
 
 
@@ -99,6 +99,7 @@ TEMPLATES = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    os.environ["FRONTEND_URL"]
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
