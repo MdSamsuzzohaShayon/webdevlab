@@ -39,6 +39,7 @@ echo "==========================================================================
 cd /home/shayon/webdevlab/client
 echo "# Nuxt.js Dot Environment" > .env
 nano .env
+nano nuxt.config.ts
 nano utils/keys.ts
 npm install
 npm run build
