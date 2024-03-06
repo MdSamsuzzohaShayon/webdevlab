@@ -105,7 +105,8 @@ const handleArticleAdd = async (e: Event) => {
         title: articleState.title,
         content: state.content,
         thumbnail: null, // You may need to handle thumbnail separately based on your requirements
-        authorId: articleState.author,
+        // authorId: articleState.author,
+        authorId: 1,
         categoryId: articleState.category,
       },
     };

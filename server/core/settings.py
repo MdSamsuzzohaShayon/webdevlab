@@ -60,11 +60,19 @@ INSTALLED_APPS = [
 
     # Internal
     'blog',
+    'account',
+    'forum',
+    'career',
+    'service',
+    'course'
 ]
 
 # GraphQL Schema Path
 GRAPHENE = {
-    "SCHEMA": "blog.schema.schema"
+    "SCHEMA": "core.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
 
 MIDDLEWARE = [
@@ -77,6 +85,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+]
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -101,6 +115,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     os.environ["FRONTEND_URL"]
 ]
+
+AUTH_USER_MODEL = 'account.User'
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
