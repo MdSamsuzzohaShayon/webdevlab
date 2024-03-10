@@ -49,16 +49,18 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
-  modules: ["@nuxtjs/apollo", "@nuxtjs/tailwindcss", "@nuxt/devtools", "@nuxtjs/cloudinary"],
+  modules: ['@nuxtjs/apollo', "@nuxtjs/tailwindcss", "@nuxt/devtools", "@nuxtjs/cloudinary"],
   apollo: {
+    autoImports: true,
     clients: {
       default: {
-        httpEndpoint: "http://localhost:8000/graphql/",
-        // httpLinkOptions: { credentials: "include" },
-      },
+        httpEndpoint: 'http://localhost:8000/graphql/'
+      }
     },
   },
-  plugins: [],
+  plugins: [ 
+    //'~/plugins/apollo-client.ts'
+  ],
   // some nuxt config...
   css: [
     // ...

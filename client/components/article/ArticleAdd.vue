@@ -14,7 +14,7 @@
       </div>
       <div class="input-group mb-3">
         <label for="content">Content</label>
-        <QuillEditor v-model:content="state.content" :options="options" theme="snow" @editorChange="handleContentChange"
+        <QuillEditor v-model:content="state.content" :options="options" toolbar="essential" theme="snow" @editorChange="handleContentChange"
           contentType="html" />
         <!-- <div class="border border-green-500">
           <h2>Display content</h2>
@@ -54,7 +54,7 @@ import { QuillEditor, Delta, Quill } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import { ADD_ARTICLE_RAW } from '../../graphql/articles';
 
-const isReadOnly = true;
+const isReadOnly = false;
 
 const articleState = reactive({
   title: '',
@@ -68,11 +68,11 @@ const imgUrl = ref<string | null>(null);
 
 const options = {
   debug: "info",
-  modules: {
-    toolbar: isReadOnly ? false : ["bold", "italic", "underline"],
-  },
+  // modules: {
+  //   toolbar:  "essential" /*["bold", "italic", "underline"]*/,
+  // },
   placeholder: "Compose an epic...",
-  readOnly: false,
+  readOnly: isReadOnly,
   theme: "snow",
 };
 
@@ -142,7 +142,7 @@ const handleFileChange = (e: Event) => {
 }
 
 const handleContentChange = (e: Delta) => {
-  console.log(e);
+  // console.log(e);
 };
 </script>
 

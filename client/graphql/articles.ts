@@ -1,3 +1,6 @@
+import gql from "graphql-tag";
+
+
 const GET_ARTICLES = gql`
   query GetArticles {
     allArticles(limit: 10, start: 0) {

@@ -1,6 +1,9 @@
 <template>
-  <h1>Category</h1>
-  <Category v-for="cat in data.allCategories" v-bind:key="cat.id" v-bind:category="cat" />
+  <ClientOnly>
+    <h1>Category</h1>
+    <Category v-for="cat in data.allCategories" v-bind:key="cat.id" v-bind:category="cat" />
+    <CategoryAdd />
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
