@@ -9,7 +9,7 @@
         </div>
       </section>
   
-      <Posts v-bind:allArticles="data.allArticles" v-bind:firstArticle="data.allArticles[0]" />
+      <Posts v-if="data.allArticles && data.allArticles.length > 0" v-bind:allArticles="data.allArticles" v-bind:firstArticle="data.allArticles[0]" />
     </div>
   </template>
   
@@ -48,6 +48,6 @@
   
   const variables = { limit: 20 };
   const { data } = await useAsyncQuery<ArticlesResult>(query, variables);
-  // console.log({ allArticles: data.value.allArticles });
+  console.log({ allArticles: data.value.allArticles });
   </script>
   

@@ -60,11 +60,19 @@ INSTALLED_APPS = [
 
     # Internal
     'blog',
+    'account',
+    'forum',
+    'career',
+    'service',
+    'course'
 ]
 
 # GraphQL Schema Path
 GRAPHENE = {
-    "SCHEMA": "blog.schema.schema"
+    "SCHEMA": "core.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
 
 MIDDLEWARE = [
@@ -77,6 +85,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+]
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -102,28 +116,37 @@ CORS_ALLOWED_ORIGINS = [
     os.environ["FRONTEND_URL"]
 ]
 
+AUTH_USER_MODEL = 'account.User'
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': os.environ["POSTGRES_ENGINE"],
+#             'NAME':  os.environ["SUPABASE_DB"],
+#             'USER': os.environ["SUPABASE_DB_USER"],
+#             'PASSWORD': os.environ["SUPABASE_DB_PASSWORD"],
+#             'HOST': os.environ["SUPABASE_DB_HOST"],  # Set to the appropriate host
+#             'PORT': os.environ["SUPABASE_DB_PORT"],       # Set to the appropriate port
+#         }
+#     }
+
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': os.environ["POSTGRES_ENGINE"],
-            'NAME':  os.environ["SUPABASE_DB"],
-            'USER': os.environ["SUPABASE_DB_USER"],
-            'PASSWORD': os.environ["SUPABASE_DB_PASSWORD"],
-            'HOST': os.environ["SUPABASE_DB_HOST"],  # Set to the appropriate host
-            'PORT': os.environ["SUPABASE_DB_PORT"],       # Set to the appropriate port
         }
     }
 

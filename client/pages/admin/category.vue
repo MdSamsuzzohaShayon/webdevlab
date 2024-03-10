@@ -1,5 +1,6 @@
 <template>
   <h1>Category</h1>
+  <CategoryAdd />
   <Category v-for="cat in data.allCategories" v-bind:key="cat.id" v-bind:category="cat" />
 </template>
 
