@@ -12,7 +12,7 @@ class UserRegistrationMutation(graphene.Mutation):
         password = graphene.String(required=True)
         first_name = graphene.String(required=True)
         last_name = graphene.String(required=True)
-        birth = graphene.String()  # Accept birthdate as a string in ISO 8601 format
+        birth = graphene.String(required=False)  # Accept birthdate as a string in ISO 8601 format
 
     def mutate(self, info, email, password, first_name, last_name, birth=None):
         birthdate = None

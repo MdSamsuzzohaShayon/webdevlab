@@ -9,6 +9,8 @@ mutation RegisterUser($email: String!, $password: String!,
       id
       password
       lastLogin
+      firstName
+      lastName
       birth
     }
   }
@@ -17,10 +19,12 @@ mutation RegisterUser($email: String!, $password: String!,
 
 ```
 {
-  "email": "u1@example.com",
+  "email": "u2@example.com",
   "password": "Test1234",
-  "firstName": "fn1",
-  "lastName": "ln1",
-  "birth": "2024-03-06T11:26:12.306Z"
+  "firstName": "fn2",
+  "lastName": "ln2",
+  "birth": "2024-03-08T08:14:45.562Z"
 }
 ```
+ - The `--run-syncdb` option helps to synchronize the database tables with the current state of your models without relying on the migration history.
+ - `./manage.py migrate --run-syncdb`

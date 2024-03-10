@@ -5,3 +5,7 @@ import graphene
 class UserType(DjangoObjectType):
     class Meta:
         model = User
+class GetUserType(DjangoObjectType):
+    class Meta:
+        model = User
+        exclude = ("password",)

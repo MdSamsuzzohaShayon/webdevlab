@@ -33,7 +33,7 @@ class User(AbstractUser):
         max_length=255,
         unique=True,
     )
-    birth = models.DateField()
+    birth = models.DateField(null=True, blank=True, default=None)
     is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
