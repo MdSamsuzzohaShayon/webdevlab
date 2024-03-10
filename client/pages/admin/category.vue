@@ -21,12 +21,12 @@ const query = gql`
 `;
 
 
-interface ICategory{
+interface ICategory {
   id: number;
   name: string;
 }
 
-type Category={
+type Category = {
   allCategories: ICategory[];
 }
 const { data } = await useAsyncQuery<Category>(query);

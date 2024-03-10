@@ -22,5 +22,5 @@ type Article = {
 
 const variables = { start: 0, limit: 20 };
 const { data } = await useAsyncQuery<Article>(GET_ARTICLES, variables);
-console.log(data.value);
+console.log({data:data.value});
 </script>

@@ -90,45 +90,44 @@ const props = defineProps(["categories", "authors"]);
 
 const handleArticleAdd = async (e: Event) => {
   e.preventDefault();
-  // const formData = {
-  //   title: articleState.title,
-  //   content: state.content,
-  //   category: articleState.category,
-  //   author: articleState.author,
-  //   link: articleState.link,
-  // };
-  const formData = new FormData();
+  try {
+    const formData = new FormData();
 
 
-  const myHeaders = new Headers();
-  myHeaders.append("Cookie", "csrftoken=ccS5qh2RZofjzKhe6KeN51RMYOGQAb5t");
+    const myHeaders = new Headers();
+    myHeaders.append("Cookie", "csrftoken=ccS5qh2RZofjzKhe6KeN51RMYOGQAb5t");
 
-  const newImgFile = uploadedImg.value as File;
+    const newImgFile = uploadedImg.value as File;
 
-  const operations = {
-    query: ADD_ARTICLE_RAW,
-    variables: {
-      title: articleState.title,
-      content: state.content,
-      thumbnail: null, // You may need to handle thumbnail separately based on your requirements
-      authorId: articleState.author,
-      categoryId: articleState.category,
-    },
-  };
+    const operations = {
+      query: ADD_ARTICLE_RAW,
+      variables: {
+        title: articleState.title,
+        content: state.content,
+        thumbnail: null, // You may need to handle thumbnail separately based on your requirements
+        // authorId: articleState.author,
+        authorId: 1,
+        categoryId: articleState.category,
+      },
+    };
 
-  formData.set("operations", JSON.stringify(operations));
-  formData.set("map", "{\n  \"0\": [\"variables.thumbnail\"]\n}");
-  formData.set("0", newImgFile);
+    formData.set("operations", JSON.stringify(operations));
+    formData.set("map", "{\n  \"0\": [\"variables.thumbnail\"]\n}");
+    formData.set("0", newImgFile);
 
-  const response = await fetch("http://localhost:8000/graphql/", {
-    method: 'POST',
-    headers: myHeaders,
-    body: formData,
-    redirect: 'follow'
-  });
+    const response = await fetch("http://localhost:8000/graphql/", {
+      method: 'POST',
+      headers: myHeaders,
+      body: formData,
+      redirect: 'follow'
+    });
 
-  console.log(response);
-  
+    console.log(response);
+  } catch (error) {
+    console.log("Error adding article", error);
+
+  }
+
 };
 
 const handleFileChange = (e: Event) => {
