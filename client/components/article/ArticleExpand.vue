@@ -32,35 +32,17 @@
 import { Delta, QuillEditor } from '@vueup/vue-quill';
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import type { IArticle } from "../../types/Article";
+import { GET_ARTICLE_BY_LINK } from '~/graphql/articles';
 
 const props = defineProps(["postLink"]);
 
-const query = gql`
-  query ArticleByLink($link: String) {
-    articleByLink(link: $link) {
-      content
-      id
-      link
-      title
-      thumbnail
-      createdAt
-      author {
-        name
-        id
-      }
-      category {
-        id
-        name
-      }
-    }
-  }
-`;
+
 
 type ArticlesResult = {
   articleByLink: IArticle;
 };
 
 const variables = { link: props.postLink };
-const { data } = await useAsyncQuery<ArticlesResult>(query, variables);
+const { data } = await useAsyncQuery<ArticlesResult>(GET_ARTICLE_BY_LINK, variables);
 console.log({ ...data });
 </script>

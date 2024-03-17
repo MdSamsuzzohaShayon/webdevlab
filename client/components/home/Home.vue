@@ -14,28 +14,8 @@
   </template>
   
   <script lang="ts" setup>
-  import type { IArticle } from '../../types/Article';
-  const query = gql`
-    query GetArticles($limit: Int) {
-      allArticles(limit: $limit) {
-        id
-        title
-        content
-        thumbnail
-        link
-        createdAt
-        author {
-          id
-          name
-          email
-        }
-        category {
-          id
-          name
-        }
-      }
-    }
-  `;
+  import { GET_ARTICLES } from '~/graphql/articles';
+import type { IArticle } from '../../types/Article';
   
   
   
@@ -47,7 +27,7 @@
   
   
   const variables = { limit: 20 };
-  const { data } = await useAsyncQuery<ArticlesResult>(query, variables);
+  const { data } = await useAsyncQuery<ArticlesResult>(GET_ARTICLES, variables);
   console.log({ allArticles: data.value.allArticles });
   </script>
   

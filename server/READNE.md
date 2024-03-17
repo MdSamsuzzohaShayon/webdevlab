@@ -68,6 +68,36 @@ mutation Login($email: String! $password: String!){
 }
 ```
 
+- Get users
+
+```
+query GetUsers{
+  users{
+    id
+    email
+    firstName
+    lastName
+    isActive
+  }
+}
+```
+
+- Test protected auth
+``` 
+query ProtectedAuth{
+  protectedAuth{
+    id
+    email
+  }
+} 
+```
+
+```
+{
+  "Authorization": "Bearer Access_token"
+}
+```
+
 
  - The `--run-syncdb` option helps to synchronize the database tables with the current state of your models without relying on the migration history.
  - `./manage.py migrate --run-syncdb`

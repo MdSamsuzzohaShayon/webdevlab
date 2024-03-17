@@ -7,6 +7,14 @@ export default defineNuxtConfig({
     head: {
       // link: [{ rel: "stylesheet", href: "https://cdn.quilljs.com/1.3.6/quill.snow.css" }],
     },
+    pageTransition: {
+      name: 'fade',
+      mode: 'out-in' // default
+    },
+    layoutTransition: {
+      name: 'slide',
+      mode: 'out-in' // default
+    }
   },
   components: [
     {
@@ -49,7 +57,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
-  modules: ['@nuxtjs/apollo', "@nuxtjs/tailwindcss", "@nuxt/devtools", "@nuxtjs/cloudinary"],
+  modules: ['@nuxtjs/apollo', "@nuxtjs/tailwindcss", "@nuxt/devtools", "@nuxtjs/cloudinary", "nuxt-icon"],
   apollo: {
     autoImports: true,
     clients: {

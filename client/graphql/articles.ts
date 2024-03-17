@@ -52,4 +52,26 @@ mutation ($title: String!, $content: String!, $thumbnail: Upload!, $authorId: ID
   }
 `;
 
-export { GET_ARTICLES, ADD_ARTICLE_RAW };
+
+const GET_ARTICLE_BY_LINK = gql`
+  query ArticleByLink($link: String) {
+    articleByLink(link: $link) {
+      content
+      id
+      link
+      title
+      thumbnail
+      createdAt
+      author {
+        name
+        id
+      }
+      category {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export { GET_ARTICLES, ADD_ARTICLE_RAW, GET_ARTICLE_BY_LINK };

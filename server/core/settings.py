@@ -86,6 +86,7 @@ MIDDLEWARE = [
 
     'corsheaders.middleware.CorsMiddleware',
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+
 ]
 
 JWT_ACCESS_TOKEN_EXPIRATION_DELTA = timedelta(minutes=15)

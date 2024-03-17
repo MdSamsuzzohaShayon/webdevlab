@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../youthspike-event-management"
+		},
+		{
+			"path": "../youthspike-event-management/youthspike-frontend"
+		},
+		{
+			"path": "../youthspike-event-management/youthspike-admin-frontend"
+		},
+		{
+			"path": "../youthspike-event-management/youthspike-nest-backend"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "youthspike-event-management"
+	}
+}
