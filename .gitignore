@@ -1,5 +1,6 @@
 /server/.venv
 /server/.env
+/server/google-drive-credentials.json
 /**/**/__pycache__
 /client/node_modules
 /client/.cache

@@ -70,6 +70,11 @@ button{
 }
 /* Borders end */
 
+/* Bg primary start  */
+.bg-primary{
+    @apply bg-gray-900 text-gray-50;
+}
+
 /* Input color start */
 
 /* Input color end */

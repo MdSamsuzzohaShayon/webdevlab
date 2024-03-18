@@ -131,7 +131,7 @@ const state = reactive({ menuCollapse: false });
 const bgClr = "bg-gray-900";
 const txtClr = "text-gray-50";
 const iconClr = "white";
-const is = "1.5rem";
+
 
 
 
