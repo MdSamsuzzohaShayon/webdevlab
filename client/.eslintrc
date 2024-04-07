@@ -1,0 +1,41 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2022": true,
+  },
+  "extends": [
+    "@nuxtjs/eslint-config-typescript",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2022
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          [
+            "~",
+            "./"
+          ],
+          [
+            "@",
+            "./"
+          ]
+        ],
+        "extensions": [
+          ".ts",
+          ".js",
+          ".vue",
+          ".json"
+        ]
+      }
+    }
+  },
+  "plugins": [],
+  "rules": {
+    "prettier/prettier": "warn"
+  }
+}

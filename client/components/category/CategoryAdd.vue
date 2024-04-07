@@ -2,7 +2,7 @@
 <template>
   <form @submit.prevent="addCategory">
     <label for="categoryName">Category Name:</label>
-    <input v-model="categoryName" type="text" id="categoryName" required />
+    <input id="categoryName" v-model="categoryName" type="text" required />
 
     <button type="submit">Add</button>
   </form>
@@ -10,7 +10,6 @@
 
 <script setup lang="ts">
 import { CREATE_CATEGORY } from '~/graphql/categories';
-
 
 const categoryName = ref('');
 

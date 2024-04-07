@@ -6,10 +6,14 @@
           <span class="flex-shrink-0 w-2 h-2 uppercase rounded-full dark:bg-violet-400"></span>
           <span class="text-xs font-bold tracki uppercase">Exclusive</span>
         </h3>
-        <a rel="noopener noreferrer" href="#" class="font-serif hover:underline">Donec sed elit quis odio mollis dignissim eget et nulla.</a>
+        <a rel="noopener noreferrer" href="#" class="font-serif hover:underline"
+          >Donec sed elit quis odio mollis dignissim eget et nulla.</a
+        >
         <p class="text-xs dark:text-gray-400">
           47 minutes ago by
-          <a rel="noopener noreferrer" href="#" class="hover:underline dark:text-violet-400">Leroy Jenkins</a>
+          <a rel="noopener noreferrer" href="#" class="hover:underline dark:text-violet-400"
+            >Leroy Jenkins</a
+          >
         </p>
       </div>
       <div class="flex flex-col space-y-2">
@@ -17,10 +21,14 @@
           <span class="flex-shrink-0 w-2 h-2 uppercase rounded-full dark:bg-violet-400"></span>
           <span class="text-xs font-bold tracki uppercase">Exclusive</span>
         </h3>
-        <a rel="noopener noreferrer" href="#" class="font-serif hover:underline">Ut fermentum nunc quis ipsum laoreet condimentum.</a>
+        <a rel="noopener noreferrer" href="#" class="font-serif hover:underline"
+          >Ut fermentum nunc quis ipsum laoreet condimentum.</a
+        >
         <p class="text-xs dark:text-gray-400">
           2 hours ago by
-          <a rel="noopener noreferrer" href="#" class="hover:underline dark:text-violet-400">Leroy Jenkins</a>
+          <a rel="noopener noreferrer" href="#" class="hover:underline dark:text-violet-400"
+            >Leroy Jenkins</a
+          >
         </p>
       </div>
       <div class="flex flex-col space-y-2">
@@ -28,10 +36,14 @@
           <span class="flex-shrink-0 w-2 h-2 uppercase rounded-full dark:bg-violet-400"></span>
           <span class="text-xs font-bold tracki uppercase">Exclusive</span>
         </h3>
-        <a rel="noopener noreferrer" href="#" class="font-serif hover:underline">Nunc nec ipsum lobortis, pulvinar neque sed.</a>
+        <a rel="noopener noreferrer" href="#" class="font-serif hover:underline"
+          >Nunc nec ipsum lobortis, pulvinar neque sed.</a
+        >
         <p class="text-xs dark:text-gray-400">
           4 hours ago by
-          <a rel="noopener noreferrer" href="#" class="hover:underline dark:text-violet-400">Leroy Jenkins</a>
+          <a rel="noopener noreferrer" href="#" class="hover:underline dark:text-violet-400"
+            >Leroy Jenkins</a
+          >
         </p>
       </div>
     </div>
@@ -41,7 +53,14 @@
       </div>
       <a rel="noopener noreferrer" href="#" class="flex items-center justify-between w-full">
         <span class="text-xs font-bold tracki uppercase">See more exclusives</span>
-        <svg viewBox="0 0 24 24" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" class="w-4 strokeCurrent dark:text-violet-400">
+        <svg
+          viewBox="0 0 24 24"
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          class="w-4 strokeCurrent dark:text-violet-400"
+        >
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>

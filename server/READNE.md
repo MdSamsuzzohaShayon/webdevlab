@@ -113,3 +113,18 @@ query ProtectedAuth{
  SELECT * FROM account_user;
  .exit
 ```
+
+
+### Create credentials 
+ - for accessing Google Drive API, you need to follow these steps:
+ - Go to the Google Cloud Console: Visit the Google Cloud Console. You may need to sign in with your Google account.
+ - Create a new project (if necessary): If you don't have a project yet, create one by clicking on the project drop-down menu at the top of the page and selecting "New Project". Follow the prompts to set up your project.
+ - Enable the Google Drive API: In the left sidebar menu, navigate to "APIs & Services" > "Dashboard". Click on the "+ ENABLE APIS AND SERVICES" button. Search for "Google Drive API", select it, and click "Enable".
+ - Create credentials: In the left sidebar menu, navigate to "APIs & Services" > "Credentials". Click on "Create credentials" and select "Service account".
+
+ - Fill out the form:
+    - Service account name: Give your service account a name.
+    - Role: Choose the role based on what access you need. For Google Drive, the role should have sufficient permissions like "Editor" or "Owner".
+    - Key type: Choose "JSON" as the key type.
+    - Create: Click the "Create" button. This will download a JSON file containing your credentials. Keep this file secure, as it contains sensitive information.
+- Share folders or files (optional): If you want to upload files to specific folders or access specific files, make sure to share those folders/files with the email address associated with the service account.

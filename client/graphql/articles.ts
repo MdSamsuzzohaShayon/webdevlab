@@ -1,5 +1,4 @@
-import gql from "graphql-tag";
-
+import gql from 'graphql-tag';
 
 const GET_ARTICLES = gql`
   query GetArticles {
@@ -30,7 +29,6 @@ const GET_ARTICLES = gql`
   }
 `;
 
-
 const ADD_ARTICLE_RAW = `
 mutation ($title: String!, $content: String!, $thumbnail: Upload!, $authorId: ID!, $categoryId: ID!, $id: ID) {
     createOrUpdateArticle(title: $title, content: $content, thumbnail: $thumbnail, authorId: $authorId, categoryId: $categoryId, id: $id) {
@@ -51,7 +49,6 @@ mutation ($title: String!, $content: String!, $thumbnail: Upload!, $authorId: ID
     }
   }
 `;
-
 
 const GET_ARTICLE_BY_LINK = gql`
   query ArticleByLink($link: String) {

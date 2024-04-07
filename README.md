@@ -1,5 +1,11 @@
 # Web Dev Lab
 
+### Todo
+ - Add tests for Django and Nuxt.js
+ - Add eslint on Nuxt.js
+ - Add linting for Django project
+ - 
+
 ### Features
  - Selling courses
  - Blog on http://blog.webdevlab.org

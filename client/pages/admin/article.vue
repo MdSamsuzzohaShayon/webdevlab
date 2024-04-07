@@ -1,17 +1,17 @@
 <template>
   <ClientOnly>
-    <ArticleAdd v-bind:categories="data.allCategories" v-bind:authors="data.allAuthors" />
+    <ArticleAdd :categories="data.allCategories" :authors="data.allAuthors" />
     <h1 class="mt-8">All articles</h1>
-    <Article v-for="article in data.allArticles" v-bind:key="article.id" v-bind:article="article" />
+    <Article v-for="article in data.allArticles" :key="article.id" :article="article" />
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
-import type { IArticle, IAuthor, ICategory } from "~/types";
-import { GET_ARTICLES } from "../../graphql/articles";
+import { GET_ARTICLES } from '../../graphql/articles';
+import type { IArticle, IAuthor, ICategory } from '~/types';
 
 definePageMeta({
-  layout: "admin",
+  layout: 'admin',
 });
 
 type Article = {
@@ -22,5 +22,5 @@ type Article = {
 
 const variables = { start: 0, limit: 20 };
 const { data } = await useAsyncQuery<Article>(GET_ARTICLES, variables);
-console.log({data:data.value});
+console.log({ data: data.value });
 </script>

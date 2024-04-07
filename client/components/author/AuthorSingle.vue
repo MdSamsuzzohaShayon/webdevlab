@@ -4,5 +4,6 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["author"]);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const props = defineProps(['author']);
 </script>

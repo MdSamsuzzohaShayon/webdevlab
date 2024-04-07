@@ -9,74 +9,82 @@ export default defineNuxtConfig({
     },
     pageTransition: {
       name: 'fade',
-      mode: 'out-in' // default
+      mode: 'out-in', // default
     },
     layoutTransition: {
       name: 'slide',
-      mode: 'out-in' // default
-    }
+      mode: 'out-in', // default
+    },
   },
   components: [
     {
-      path: "~/components/layouts",
+      path: '~/components/layouts',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/home",
+      path: '~/components/home',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/admin",
+      path: '~/components/admin',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/article",
+      path: '~/components/article',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/category",
+      path: '~/components/category',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/author",
+      path: '~/components/author',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/elements",
+      path: '~/components/elements',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     // "~/components",
   ],
   typescript: {
     strict: true,
   },
-  modules: ['@nuxtjs/apollo', "@nuxtjs/tailwindcss", "@nuxt/devtools", "@nuxtjs/cloudinary", "nuxt-icon"],
+  modules: [
+    '@nuxtjs/apollo',
+    '@nuxtjs/tailwindcss',
+    '@nuxt/devtools',
+    '@nuxtjs/cloudinary',
+    'nuxt-icon',
+    '@nuxtjs/eslint-module',
+  ],
+  // buildModules: ['@nuxt/typescript-build'],
   apollo: {
     autoImports: true,
     clients: {
       default: {
-        httpEndpoint: 'http://localhost:8000/graphql/'
-      }
+        httpEndpoint: 'http://localhost:8000/graphql/',
+      },
     },
   },
-  plugins: [ 
-    //'~/plugins/apollo-client.ts'
+  plugins: [
+    // '~/plugins/apollo-client.ts'
   ],
   // some nuxt config...
   css: [
     // ...
-    "quill/dist/quill.core.css",
+    'quill/dist/quill.core.css',
     // for snow theme
-    "quill/dist/quill.snow.css",
+    'quill/dist/quill.snow.css',
     // for bubble theme
-    "quill/dist/quill.bubble.css",
+    'quill/dist/quill.bubble.css',
     // ...
   ],
 });

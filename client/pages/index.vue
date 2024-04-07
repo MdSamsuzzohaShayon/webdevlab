@@ -1,6 +1,3 @@
-<!-- <NuxtWelcome /> -->
 <template>
-  <Home />
+  <HomePage />
 </template>
-
-

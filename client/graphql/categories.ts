@@ -1,9 +1,9 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 const CREATE_CATEGORY = gql`
-mutation CreateCategory($name:String!){
-    createOrUpdateCategory(name:$name){
-      category{
+  mutation CreateCategory($name: String!) {
+    createOrUpdateCategory(name: $name) {
+      category {
         id
         name
       }
@@ -11,4 +11,4 @@ mutation CreateCategory($name:String!){
   }
 `;
 
-export {CREATE_CATEGORY};
+export { CREATE_CATEGORY };

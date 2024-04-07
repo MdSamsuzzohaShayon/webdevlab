@@ -1,14 +1,14 @@
 <template>
   <ClientOnly>
     <h1>Category</h1>
-    <Category v-for="cat in data.allCategories" v-bind:key="cat.id" v-bind:category="cat" />
+    <Category v-for="cat in data.allCategories" :key="cat.id" :category="cat" />
     <CategoryAdd />
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  layout: "admin",
+  layout: 'admin',
 });
 
 const query = gql`
@@ -20,7 +20,6 @@ const query = gql`
   }
 `;
 
-
 interface ICategory {
   id: number;
   name: string;
@@ -28,9 +27,7 @@ interface ICategory {
 
 type Category = {
   allCategories: ICategory[];
-}
+};
 const { data } = await useAsyncQuery<Category>(query);
 console.log(data.value);
-
-
 </script>

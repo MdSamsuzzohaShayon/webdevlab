@@ -40,8 +40,8 @@ cd /home/shayon/webdevlab/client
 echo "# Nuxt.js Dot Environment" > .env
 nano .env
 nano nuxt.config.ts
-nano utils/keys.ts
-npm install
+nano utils/keys.t
+npm install --legacy-peer-deps
 npm run build
 npm run generate
 sudo rm -rf /var/www/html

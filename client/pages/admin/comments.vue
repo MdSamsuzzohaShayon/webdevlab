@@ -1,9 +1,9 @@
 <template>
-    <h1>Comments</h1>
+  <h1>Comments</h1>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  layout: "admin",
+  layout: 'admin',
 });
 </script>
