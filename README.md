@@ -4,7 +4,7 @@
  - Add tests for Django and Nuxt.js
  - Add eslint on Nuxt.js
  - Add linting for Django project
- - 
+ -
 
 ### Features
  - Selling courses
@@ -17,7 +17,7 @@
  - Do nuxt js seo for all pages
 
 ### Requirements
- - Quill text editor 
+ - Quill text editor
  - Use time function [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
  - Design layout for admin
  - Main menu for home
@@ -57,3 +57,12 @@
    - article_id (Foreign Key referencing the Articles Table)
    - tag_id (Foreign Key referencing the Tags Table)
 
+### Flake setup
+ - pip install flake8 flake8-django
+ - nano setup.cfg
+ - flake8 .
+ - nano setup.cfgpip install pre-commit
+ - flake8 .
+ - pip install pre-commit
+ - pip freeze > requirements.txt
+ - pre-commit install
