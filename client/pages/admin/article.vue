@@ -1,9 +1,9 @@
 <template>
-  <ClientOnly>
-    <ArticleAdd :categories="data.allCategories" :authors="data.allAuthors" />
+  <main v-if="data"  >
+    <ArticleAdd v-if="data" :categories="data.allCategories" :authors="data.allAuthors" />
     <h1 class="mt-8">All articles</h1>
-    <Article v-for="article in data.allArticles" :key="article.id" :article="article" />
-  </ClientOnly>
+    <Article  v-for="article in data.allArticles" :key="article.id" :article="article" />
+  </main>
 </template>
 
 <script setup lang="ts">

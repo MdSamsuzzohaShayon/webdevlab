@@ -1,25 +1,32 @@
 <template>
-  <div>
-    <div class="flex justify-between h-full">
-      <div class="w-3/12 h-screen sticky bg-primary items-start top-0">
-        <div class="px-3">
-          <ul class="flex flex-col justify-start items-start mt-4 gap-y-4">
-            <li v-for="item in adminMenuList" :key="item.id">
-              <NuxtLink :to="item.link">
-                <span class="mr-2">
-                  <Icon :name="item.iconName" :size="is" color="white" />
-                </span>
-                <span>{{ item.text }}</span>
-              </NuxtLink>
-            </li>
-          </ul>
+  <div class="admin-layout p-0 m-0 overflow-x-hidden">
+    <div class="row">
+      <div v-if="state.showMenu" class="col-md-2 bg-dark text-capitalize">
+        <div class="menu-wrapper w-full d-flex justify-content-end me-3 mt-3">
+          <Icon
+            :name="iName.close"
+            :size="iDesign.smSize"
+            :color="iColor.light"
+            role="presentation"
+            @click.prevent="handleToggleMenu(false)"
+          />
         </div>
+        <ul v-if="state.showMenu" class="nav flex-column">
+          <li v-for="(item, index) in adminMenuList" :key="index" class="nav-item">
+            <NuxtLink :to="item.link" class="nav-link text-light">
+              <span class="me-2">
+                <Icon :name="item.iconName" :size="iDesign.smSize" :color="iColor.light" />
+              </span>
+              <span>{{ item.text }}</span>
+            </NuxtLink>
+          </li>
+        </ul>
       </div>
-      <div class="w-9/12 text-gray-900">
-        <div class="px-3">
-          <AdminNavbar />
+      <div :class="`${state.showMenu ? 'col-md-10' : 'col-md-12'} `">
+        <AdminNavbar :show-menu="state.showMenu" :handle-toggle-menu="handleToggleMenu" />
+        <main>
           <slot />
-        </div>
+        </main>
       </div>
     </div>
     <AdminFooter />
@@ -27,7 +34,12 @@
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue';
 import { adminMenuList } from '~/assets/js/staticData';
 
-console.log(adminMenuList);
+const state = reactive({ showMenu: false });
+
+const handleToggleMenu = (showMenu: boolean) => {
+  state.showMenu = showMenu;
+};
 </script>

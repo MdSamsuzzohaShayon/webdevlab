@@ -1,74 +1,60 @@
 <template>
-  <ClientOnly>
-    <h1>Add Article</h1>
+  <div class="container-fluid bg-light">
+    <h1 class="mb-4 text-center">Add Article</h1>
     <form class="mb-4" @submit.prevent="handleArticleAdd">
-      <div class="input-group mb-3">
-        <label for="title">Title</label>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
         <input
           id="title"
           v-model="articleState.title"
           type="text"
-          class="border outline-none bg-gray-300"
+          class="form-control"
           name="title"
         />
       </div>
-      <div class="input-group flex mb-3 flex-col items-start gap-2">
-        <label for="thumbnail">Thumbnail</label>
+      <div class="mb-3">
+        <label for="thumbnail" class="form-label">Thumbnail</label>
         <input
           id="thumbnail"
           type="file"
-          class="border outline-none bg-gray-300"
+          class="form-control"
           name="thumbnail"
           @change="handleFileChange"
         />
-        <img v-if="imgUrl" :src="imgUrl" class="w-full h-36 object-cover object-center" />
+        <img v-if="imgUrl" :src="imgUrl" class="w-100 mt-2 rounded" alt="Thumbnail" />
       </div>
-      <div class="input-group mb-3">
-        <label for="content">Content</label>
+      <div class="mb-3">
+        <label class="form-label">Content</label>
         <QuillEditor
           v-model:content="state.content"
           :options="options"
-          toolbar="essential"
           theme="snow"
-          content-type="html"
           @editor-change="handleContentChange"
         />
-        <!-- <div class="border border-green-500">
-          <h2>Display content</h2>
-          <QuillEditor v-model="initialContent" :options="options" />
-        </div> -->
       </div>
-      <div class="input-group mb-3">
-        <label for="createdAt">Date</label>
-        <input id="createdAt" type="datetime-local" name="createdAt" />
+      <div class="mb-3">
+        <label for="createdAt" class="form-label">Date</label>
+        <input id="createdAt" type="datetime-local" class="form-control" name="createdAt" />
       </div>
-      <div class="input-group mb-3">
-        <label for="category">Category</label>
-        <select id="category" v-model="articleState.category" name="category">
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" v-model="articleState.category" class="form-select" name="category">
           <option v-for="cat in props.categories" :value="cat.id">{{ cat.name }}</option>
         </select>
       </div>
-      <div class="input-group mb-3">
-        <label for="author">Author</label>
-        <select id="author" v-model="articleState.author" name="author">
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <select id="author" v-model="articleState.author" class="form-select" name="author">
           <option v-for="a in props.authors" :value="a.id">{{ a.name }}</option>
         </select>
       </div>
-      <div class="input-group mb-3">
-        <label for="link">Link</label>
-        <input
-          id="link"
-          v-model="articleState.link"
-          type="text"
-          class="border outline-none bg-gray-300"
-          name="link"
-        />
+      <div class="mb-3">
+        <label for="link" class="form-label">Link</label>
+        <input id="link" v-model="articleState.link" type="text" class="form-control" name="link" />
       </div>
-      <div class="input-group">
-        <button type="submit">Add</button>
-      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
     </form>
-  </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -89,11 +75,32 @@ const articleState = reactive({
 const uploadedImg = ref<File | null>(null);
 const imgUrl = ref<string | null>(null);
 
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+  ['blockquote', 'code-block'],
+  ['link', 'image', 'video', 'formula'],
+
+  [{ header: 1 }, { header: 2 }], // custom button values
+  [{ list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
+  [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+  [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+  [{ direction: 'rtl' }], // text direction
+
+  [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ font: [] }],
+  [{ align: [] }],
+
+  ['clean'], // remove formatting button
+];
+
 const options = {
   debug: 'info',
-  // modules: {
-  //   toolbar:  "essential" /*["bold", "italic", "underline"]*/,
-  // },
+  modules: {
+    toolbar: toolbarOptions /* ["bold", "italic", "underline"] */,
+  },
   placeholder: 'Compose an epic...',
   readOnly: isReadOnly,
   theme: 'snow',

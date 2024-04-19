@@ -59,7 +59,6 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/apollo',
-    '@nuxtjs/tailwindcss',
     '@nuxt/devtools',
     '@nuxtjs/cloudinary',
     'nuxt-icon',
@@ -76,9 +75,11 @@ export default defineNuxtConfig({
   },
   plugins: [
     // '~/plugins/apollo-client.ts'
+    { src: '~/plugins/bootstrap-client.ts', mode: 'client' }
   ],
   // some nuxt config...
   css: [
+    'bootstrap/dist/css/bootstrap.min.css',
     // ...
     'quill/dist/quill.core.css',
     // for snow theme
