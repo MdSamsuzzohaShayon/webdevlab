@@ -29,5 +29,5 @@ type Category = {
   allCategories: ICategory[];
 };
 const { data } = await useAsyncQuery<Category>(query);
-console.log(data.value);
+// console.log(data.value);
 </script>

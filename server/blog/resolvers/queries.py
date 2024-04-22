@@ -1,16 +1,17 @@
 import graphene
-from .queryTypes import AuthorType, CategoryType, ArticleType, CommentType, TagType
-from ..models import Author, Category, Article, Comment, Tag
+from .queryTypes import CategoryType, ArticleType, CommentType, TagType, CommenterType
+from ..models import Category, Article, Comment, Tag
+from account.models import User
 
 class Query(graphene.ObjectType):
 
-    all_authors = graphene.List(AuthorType)
+    all_authors = graphene.List(CommenterType)
     all_categories = graphene.List(CategoryType)
     all_articles = graphene.List(ArticleType, start=graphene.Int(), limit=graphene.Int())
     all_comments = graphene.List(CommentType)
     all_tags = graphene.List(TagType)
 
-    author_by_id = graphene.Field(AuthorType, id=graphene.Int())
+    author_by_id = graphene.Field(CommenterType, id=graphene.Int())
     category_by_id = graphene.Field(CategoryType, id=graphene.Int())
     article_by_id = graphene.Field(ArticleType, id=graphene.Int())
     article_by_link = graphene.Field(ArticleType, link=graphene.String())
@@ -18,7 +19,7 @@ class Query(graphene.ObjectType):
     # tag_by_id = graphene.Field(TagType, id=graphene.Int())
 
     def resolve_all_authors(self, info):
-        return Author.objects.all()
+        return User.objects.all()
 
     def resolve_all_categories(self, info):
         objects = Category.objects.all().order_by('-id')
@@ -39,7 +40,7 @@ class Query(graphene.ObjectType):
         return Tag.objects.all()
 
     def resolve_author_by_id(self, info, id):
-        return Author.objects.get(pk=id)
+        return User.objects.get(pk=id)
 
     def resolve_category_by_id(self, info, id):
         return Category.objects.get(pk=id)

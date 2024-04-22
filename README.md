@@ -2,9 +2,10 @@
 
 ### Todo
  - Add tests for Django and Nuxt.js
- - Add eslint on Nuxt.js
- - Add linting for Django project
- -
+ - Fix linting issue on Nuxt.js
+ - Fix liniting issues for Django project
+ - Seed data to the database
+ - Frontend design with bootstrap
 
 ### Features
  - Selling courses

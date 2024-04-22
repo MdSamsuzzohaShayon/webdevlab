@@ -1,7 +1,8 @@
 import graphene
 from graphene_django import DjangoObjectType
-from ..models import Category, Article, Comment, Author
-from .queryTypes import CategoryType, ArticleType, CommentType, AuthorType
+from ..models import Category, Article, Comment, Commenter
+from account.models import User
+from .queryTypes import CategoryType, ArticleType, CommentType, CommenterType
 from core.settings import cloudinary
 from graphene_file_upload.scalars import Upload
 from datetime import datetime
@@ -9,38 +10,6 @@ from django.conf import settings
 import os
 
 
-# class RegisterUserMutation(graphene.Mutation):
-#     """
-#     Step-1: Arguments are firstName, lastName, email, password, confirmPassword
-#     Step-2: Create an unverified user and generate a JWT token
-#     Step-3: Send that token to email via a link
-#     Step-4: When user click on that link he will be verified afterward he can login
-#     """
-#
-#
-# class EmailVerifyMutation(graphene.Mutation):
-#     """"""
-#
-# class LoginUserMutation(graphene.Mutation):
-#     """
-#     Step-1: Arguments are username/email and password
-#     Step-2: Check a user with that email does exist or not
-#     Step-3: Check the user has verified his email address or not
-#     Step-4: Check the password match or not
-#     Step-5: If password does match send the user 2 tokens first one is access token another one is refresh token
-#     Step-6: Protect route with some kinds of middleware or something
-#     """
-#
-#
-# class PasswordChangeMutation(graphene.Mutation):
-#     """
-#     Step-1: Arguments are oldPassword, newPassword
-#     Step-2: Check old password did match
-#     Step-3: If old password match let them change their password
-#     """
-
-# class LoginWithGoogleMutation
-# class LoginWithGithubMutation
 
 
 class CategoryMutation(graphene.Mutation):
@@ -94,7 +63,7 @@ class ArticleMutation(graphene.Mutation):
             current_date_time = datetime.now()
 
             print(f"ID: {id}, Title: {title}, Content: {content}, Thumbnail URL: {thumbnail_url}, Author ID: {author_id}")
-            author = Author.objects.get(pk=author_id)
+            author = User.objects.get(pk=author_id)
 
             if id:
                 article = Article.objects.get(pk=id)
@@ -117,8 +86,6 @@ class ArticleMutation(graphene.Mutation):
             print(e)
 
 
-
-
 class CommentMutation(graphene.Mutation):
     class Arguments:
         id = graphene.ID()
@@ -133,42 +100,41 @@ class CommentMutation(graphene.Mutation):
     @classmethod
     def mutate(cls, root, info, author, email, text, article_id, created_at=None, id=None):
         current_date_time = datetime.now()
+        commenter, _ = Commenter.objects.get_or_create(email=email, defaults={'name': author})
+
         if id:
             comment = Comment.objects.get(pk=id)
             comment.author = author
             comment.created_at = current_date_time
             comment.text = text
             comment.email = email
-            if article_id:
-                comment.article_id = article_id
+            comment.article_id = article_id
+            comment.commenter = commenter
             comment.save()
         else:
             comment = Comment.objects.create(author=author, email=email, text=text, article_id=article_id,
-                                             created_at=current_date_time)
+                                             created_at=current_date_time, commenter=commenter)
         return CommentMutation(comment=comment)
 
 # Temporary
-class AuthorMutation(graphene.Mutation):
+class CommenterMutation(graphene.Mutation):
     class Arguments:
         id = graphene.ID()
-        name = graphene.String(required = True)
+        name = graphene.String(required=True)
         email = graphene.String(required=True)
-        bio = graphene.String(required=True)
 
-    author = graphene.Field(AuthorType)
+    commenter = graphene.Field(CommenterType)
 
     @classmethod
-    def mutate(cls, root, info, name, email, bio, id=None):
+    def mutate(cls, root, info, name, email, id=None):
         if id:
-            author = Author.objects.get(pk=id)
-            author.name = name
-            author.email = email
-            author.bio = bio
-            author.save()
+            commenter = Commenter.objects.get(pk=id)
+            commenter.name = name
+            commenter.email = email
+            commenter.save()
         else:
-            author = Author.objects.create(name=name, email=email, bio=bio)
-
-        return AuthorMutation(author)
+            commenter, _ = Commenter.objects.get_or_create(email=email, defaults={'name': name})
+        return CommenterMutation(commenter=commenter)
 
 
 
@@ -176,4 +142,4 @@ class Mutation(graphene.ObjectType):
     create_or_update_category = CategoryMutation.Field()
     create_or_update_article = ArticleMutation.Field()
     create_or_update_comment = CommentMutation.Field()
-    create_or_update_author = AuthorMutation.Field()
+    # create_or_update_author = AuthorMutation.Field()

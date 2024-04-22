@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 const GET_ARTICLES = gql`
-  query GetArticles {
+  query GetArticles ($limit: Int!, $start: Int!) {
     allArticles(limit: 10, start: 0) {
       title
       link
