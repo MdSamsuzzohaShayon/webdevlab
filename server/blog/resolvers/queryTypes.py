@@ -3,6 +3,10 @@ from ..models import Category, Article, Comment, Tag, Commenter
 from account.models import User
 
 
+class AuthorType(DjangoObjectType):
+    class Meta:
+        model = User
+
 class CommenterType(DjangoObjectType):
     class Meta:
         model = Commenter

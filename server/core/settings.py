@@ -12,24 +12,38 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 from dotenv import load_dotenv
 from datetime import  datetime, timedelta
-
-load_dotenv()  # loads the configs from .env
 
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-cloudinary.config( 
-  cloud_name = os.environ["CLOUDINARY_CLOUD_NAME"], 
-  api_key = os.environ["CLOUDINARY_API_KEY"], 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Determine whether the environment is set to development or production
+ENVIRONMENT = os.getenv("PY_ENV", "development")
+
+
+# Load environment-specific .env file
+if ENVIRONMENT == "test":
+    dotenv_path = os.path.join(BASE_DIR, 'test.env')
+else:
+    dotenv_path = os.path.join(BASE_DIR, 'development.env')
+
+load_dotenv(dotenv_path)
+
+cloudinary.config(
+  cloud_name = os.environ["CLOUDINARY_CLOUD_NAME"],
+  api_key = os.environ["CLOUDINARY_API_KEY"],
   api_secret = os.environ["CLOUDINARY_API_SECRET"],
   secure = True
 )
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -127,7 +141,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if DEBUG:
+
+
+
+# Define the database settings for development and production
+if ENVIRONMENT == "development":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -141,11 +159,24 @@ else:
             'NAME':  os.environ["SUPABASE_DB"],
             'USER': os.environ["SUPABASE_DB_USER"],
             'PASSWORD': os.environ["SUPABASE_DB_PASSWORD"],
-            'HOST': os.environ["SUPABASE_DB_HOST"],  # Set to the appropriate host
-            'PORT': os.environ["SUPABASE_DB_PORT"],       # Set to the appropriate port
+            'HOST': os.environ["SUPABASE_DB_HOST"],
+            'PORT': os.environ["SUPABASE_DB_PORT"],
         }
     }
 
+if ENVIRONMENT == "test":
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'test_db.sqlite3',
+        }
+    }
 
 # Use the SMTP backend for sending emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

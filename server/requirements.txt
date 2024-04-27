@@ -12,6 +12,7 @@ Django==5.0.3
 django-cors-headers==4.3.1
 django-dotenv==1.4.2
 django-filter==24.1
+Faker==12.0.1
 filelock==3.13.3
 flake8==6.1.0
 flake8-django==1.4
@@ -30,12 +31,15 @@ gunicorn==21.2.0
 httplib2==0.22.0
 identify==2.5.35
 idna==3.6
+iniconfig==2.0.0
 lazy-object-proxy==1.10.0
 mccabe==0.7.0
+mixer==7.2.2
 nodeenv==1.8.0
 oauthlib==3.2.2
 packaging==23.2
 platformdirs==4.2.0
+pluggy==1.5.0
 pre-commit==3.7.0
 promise==2.3
 protobuf==4.25.3
@@ -46,6 +50,8 @@ pycodestyle==2.11.1
 pyflakes==3.1.0
 PyJWT==1.7.1
 pyparsing==3.1.2
+pytest==8.1.1
+python-dateutil==2.9.0.post0
 python-dotenv==1.0.0
 PyYAML==6.0.1
 requests==2.31.0
