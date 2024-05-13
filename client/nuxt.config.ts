@@ -65,25 +65,17 @@ export default defineNuxtConfig({
     'nuxt-icon',
   ],
 
-  // buildModules: ['@nuxtjs/eslint-module'],
-  // eslint: {
-  //   /* module options */
-  //   configFile: '.eslintrc.js', // Specify ESLint config file
-  //   fix: true, // Autofix ESLint errors on save (optional)
-  // },
-
-  // buildModules: ['@nuxt/typescript-build'],
   apollo: {
-    autoImports: true,
     clients: {
       default: {
-        httpEndpoint: 'http://localhost:8000/graphql/',
-      },
+        httpEndpoint: 'http://localhost:8000/graphql/'
+      }
     },
   },
+
   plugins: [
     // '~/plugins/apollo-client.ts'
-    { src: '~/plugins/apollo-client.ts', mode: 'client' },
+    // { src: '~/plugins/apollo-client.ts', mode: 'client' },
     { src: '~/plugins/bootstrap-client.ts', mode: 'client' }
   ],
   // some nuxt config...

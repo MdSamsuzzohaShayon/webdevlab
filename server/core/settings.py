@@ -31,8 +31,10 @@ ENVIRONMENT = os.getenv("PY_ENV", "development")
 # Load environment-specific .env file
 if ENVIRONMENT == "test":
     dotenv_path = os.path.join(BASE_DIR, 'test.env')
-else:
+elif ENVIRONMENT == "development":
     dotenv_path = os.path.join(BASE_DIR, 'development.env')
+else:
+    dotenv_path = os.path.join(BASE_DIR, '.env')
 
 load_dotenv(dotenv_path)
 

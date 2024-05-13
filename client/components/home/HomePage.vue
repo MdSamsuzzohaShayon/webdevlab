@@ -80,7 +80,8 @@
 import type { Ref } from 'vue';
 import type { IArticle } from '../../types/Article';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
+// import { useQuery } from '@vue/apollo-composable';
 
 type ArticlesResult = {
   allArticles: IArticle[];
@@ -112,14 +113,13 @@ const GET_ARTICLES = gql`
 `;
 
 // Fetch articles
-const { data, error } = await useQuery<ArticlesResult>(GET_ARTICLES);
-  const { $value } = useNuxtApp()
-console.log({ articles: data, v: $value });
+const { data, error } = await useAsyncQuery<ArticlesResult>(GET_ARTICLES, {start: 1, limit: 10});
+console.log({ articles: data.value?.allArticles });
 
 // Log data in a nice-looking format
 const articles: Ref<IArticle[]> = ref([]);
 if (data) {
-  // articles.value = data?.value?.allArticles ? data?.value?.allArticles : [];
+  articles.value = data?.value?.allArticles ? data?.value?.allArticles : [];
   console.log('Fetched articles:', articles);
 }
 
