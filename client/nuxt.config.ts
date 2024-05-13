@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
@@ -62,8 +63,15 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     '@nuxtjs/cloudinary',
     'nuxt-icon',
-    '@nuxtjs/eslint-module',
   ],
+
+  // buildModules: ['@nuxtjs/eslint-module'],
+  // eslint: {
+  //   /* module options */
+  //   configFile: '.eslintrc.js', // Specify ESLint config file
+  //   fix: true, // Autofix ESLint errors on save (optional)
+  // },
+
   // buildModules: ['@nuxt/typescript-build'],
   apollo: {
     autoImports: true,

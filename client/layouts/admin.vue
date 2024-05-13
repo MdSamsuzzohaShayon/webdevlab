@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
 import { adminMenuList } from '~/assets/js/staticData';
 
 const state = reactive({ showMenu: false });

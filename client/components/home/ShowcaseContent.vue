@@ -14,7 +14,7 @@
         <span class="relative flex-shrink-0 w-2 h-2 rounded-full dark:bg-violet-400">
           <span
             class="absolute flex-shrink-0 w-3 h-3 rounded-full -left-1 -top-1 animate-ping dark:bg-violet-400"
-          ></span>
+          />
         </span>
         <span class="text-sm font-bold">Live</span>
       </span>

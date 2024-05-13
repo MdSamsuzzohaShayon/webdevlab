@@ -8,7 +8,6 @@ from graphene.test import Client
 from core.schema import schema
 from account.models import User
 from blog.models import Category, Article, Comment, Tag
-from django.test import TestCase
 
 
 

@@ -20,7 +20,7 @@
           alt=""
           class="flex-shrink-0 object-cover w-20 h-20 mr-4 dark:bg-gray-500"
           src="https://source.unsplash.com/random/244x324"
-        />
+        >
         <div class="flex flex-col flex-grow">
           <a rel="noopener noreferrer" href="#" class="font-serif hover:underline"
             >Aenean ac tristique lorem, ut mollis dui.</a
@@ -41,7 +41,7 @@
           alt=""
           class="flex-shrink-0 object-cover w-20 h-20 mr-4 dark:bg-gray-500"
           src="https://source.unsplash.com/random/245x325"
-        />
+        >
         <div class="flex flex-col flex-grow">
           <a rel="noopener noreferrer" href="#" class="font-serif hover:underline"
             >Nulla consectetur efficitur.</a
@@ -62,7 +62,7 @@
           alt=""
           class="flex-shrink-0 object-cover w-20 h-20 mr-4 dark:bg-gray-500"
           src="https://source.unsplash.com/random/246x326"
-        />
+        >
         <div class="flex flex-col flex-grow">
           <a rel="noopener noreferrer" href="#" class="font-serif hover:underline"
             >Vitae semper augue purus tincidunt libero.</a
@@ -83,7 +83,7 @@
           alt=""
           class="flex-shrink-0 object-cover w-20 h-20 mr-4 dark:bg-gray-500"
           src="https://source.unsplash.com/random/247x327"
-        />
+        >
         <div class="flex flex-col flex-grow">
           <a rel="noopener noreferrer" href="#" class="font-serif hover:underline"
             >Suspendisse potenti.</a

@@ -1,5 +1,5 @@
 <template>
-  <header class="" v-if="!props.showMenu">
+  <header v-if="!props.showMenu" class="admin-header">
     <nav class="navbar">
       <div class="container-fluid">
         <div v-if="!props.showMenu" class="w-full menu-wrapper d-flex justify-centent-start">
@@ -18,7 +18,7 @@
             width="30"
             height="24"
             class="d-inline-block align-text-top"
-          />
+          >
           WebDevLab
         </a>
       </div>

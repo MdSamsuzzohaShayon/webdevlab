@@ -10,7 +10,7 @@
           type="text"
           class="form-control"
           name="title"
-        />
+        >
       </div>
       <div class="mb-3">
         <label for="thumbnail" class="form-label">Thumbnail</label>
@@ -20,8 +20,8 @@
           class="form-control"
           name="thumbnail"
           @change="handleFileChange"
-        />
-        <img v-if="imgUrl" :src="imgUrl" class="w-100 mt-2 rounded" alt="Thumbnail" />
+        >
+        <img v-if="imgUrl" :src="imgUrl" class="w-100 mt-2 rounded" alt="Thumbnail" >
       </div>
       <div class="mb-3">
         <label class="form-label">Content</label>
@@ -34,23 +34,23 @@
       </div>
       <div class="mb-3">
         <label for="createdAt" class="form-label">Date</label>
-        <input id="createdAt" type="datetime-local" class="form-control" name="createdAt" />
+        <input id="createdAt" type="datetime-local" class="form-control" name="createdAt" >
       </div>
       <div class="mb-3">
         <label for="category" class="form-label">Category</label>
         <select id="category" v-model="articleState.category" class="form-select" name="category">
-          <option v-for="cat in props.categories" :value="cat.id">{{ cat.name }}</option>
+          <option v-for="cat in props.categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
         </select>
       </div>
       <div class="mb-3">
         <label for="author" class="form-label">Author</label>
         <select id="author" v-model="articleState.author" class="form-select" name="author">
-          <option v-for="a in props.authors" :value="a.id">{{ a.name }}</option>
+          <option v-for="a in props.authors" :key="a.id" :value="a.id">{{ a.name }}</option>
         </select>
       </div>
       <div class="mb-3">
         <label for="link" class="form-label">Link</label>
-        <input id="link" v-model="articleState.link" type="text" class="form-control" name="link" />
+        <input id="link" v-model="articleState.link" type="text" class="form-control" name="link" >
       </div>
       <button type="submit" class="btn btn-primary">Add</button>
     </form>
@@ -58,8 +58,9 @@
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-import { QuillEditor, Delta, Quill } from '@vueup/vue-quill';
+// @ts-expect-error
+import type { Delta} from '@vueup/vue-quill';
+import { QuillEditor, Quill } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { ADD_ARTICLE_RAW } from '../../graphql/articles';
 
@@ -167,7 +168,7 @@ const handleFileChange = (e: Event) => {
 };
 
 const handleContentChange = (e: Delta) => {
-  // console.log(e);
+  console.log(e);
 };
 </script>
 

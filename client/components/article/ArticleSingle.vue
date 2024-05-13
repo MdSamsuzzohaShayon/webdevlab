@@ -34,13 +34,13 @@
         v-else
         class="object-cover w-full rounded h-44 dark:bg-gray-500"
         src="https://source.unsplash.com/random/480x360?1"
-      />
+      >
       <div class="p-6 space-y-2">
         <h3 class="text-2xl font-semibold group-hover:underline group-focus:underline">
           {{ article.title }}
         </h3>
         <span class="text-xs dark:text-gray-400">{{ article.createdAt }}</span>
-        <p v-html="truncateContent(article.content, 100)"></p>
+        <p v-html="truncateContent(article.content, 100)"/>
       </div>
     </NuxtLink>
   </ClientOnly>

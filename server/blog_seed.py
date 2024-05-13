@@ -248,7 +248,7 @@ def display_data():
 
 """
 ./manage.py shell
->>> from blog_seed import seed_users, verify_users, login_and_get_tokens, seed_data, cleanup_database
+>>> from blog_seed import cleanup_database, seed_users, verify_users, login_and_get_tokens, seed_data
 >>> cleanup_database()
 >>> seed_users()
 >>> verify_users()
