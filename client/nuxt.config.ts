@@ -83,6 +83,7 @@ export default defineNuxtConfig({
   },
   plugins: [
     // '~/plugins/apollo-client.ts'
+    { src: '~/plugins/apollo-client.ts', mode: 'client' },
     { src: '~/plugins/bootstrap-client.ts', mode: 'client' }
   ],
   // some nuxt config...

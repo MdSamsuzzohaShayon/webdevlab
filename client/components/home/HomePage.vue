@@ -79,6 +79,8 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue';
 import type { IArticle } from '../../types/Article';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 
 type ArticlesResult = {
   allArticles: IArticle[];
@@ -110,16 +112,14 @@ const GET_ARTICLES = gql`
 `;
 
 // Fetch articles
-const { data, error } = await useAsyncQuery<ArticlesResult>(GET_ARTICLES, {
-  limit: 20,
-  start: 0,
-});
-console.log({ articles: data?.value?.allArticles });
+const { data, error } = await useQuery<ArticlesResult>(GET_ARTICLES);
+  const { $value } = useNuxtApp()
+console.log({ articles: data, v: $value });
 
 // Log data in a nice-looking format
 const articles: Ref<IArticle[]> = ref([]);
 if (data) {
-  articles.value = data?.value?.allArticles ? data?.value?.allArticles : [];
+  // articles.value = data?.value?.allArticles ? data?.value?.allArticles : [];
   console.log('Fetched articles:', articles);
 }
 
