@@ -22,23 +22,25 @@ def cleanup_database():
 def seed_users():
     # Seed the database with three users
     for i in range(3):
-        email = f"user{i+1}@wdl.com"
+        email = f"ex-user{i+1}@wdl.com"
         password = "password123"
         first_name = f"User{i+1}"
         last_name = "Doe"
-        # Assuming birthdate is optional and not required for seeding
-        register_mutation = '''
-            mutation {
-                registerUser(email: "%s", password: "%s", firstName: "%s", lastName: "%s") {
-                    user {
-                        id
-                    }
-                }
-            }
-        ''' % (email, password, first_name, last_name)
-        client = Client(schema)
-        result = client.execute(register_mutation, context_value={'request': None, 'user': AnonymousUser()})
-        print(f"User {i+1} created with ID: {result['data']['registerUser']['user']['id']}")
+
+        # Create user directly using Django ORM
+        user = User.objects.create(
+            email=email,
+            username=email,
+            first_name=first_name,
+            last_name=last_name,
+            is_active=True  # Assuming all seeded users are active
+        )
+
+        # Set password using make_password to hash the password
+        user.set_password(password)
+        user.save()
+
+        print(f"User {i+1} created with ID: {user.id}")
 
 def verify_users():
     # Verify all the users
@@ -51,7 +53,7 @@ def verify_users():
 def login_and_get_tokens():
     # Log in each user and get their tokens
     for i in range(3):
-        email = f"user{i+1}@wdl.com"
+        email = f"ex-user{i+1}@wdl.com"
         password = "password123"
         login_mutation = '''
             mutation {

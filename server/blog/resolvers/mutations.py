@@ -89,32 +89,43 @@ class ArticleMutation(graphene.Mutation):
 class CommentMutation(graphene.Mutation):
     class Arguments:
         id = graphene.ID()
-        author = graphene.String(required=True)  # Who made the comment
-        email = graphene.String(required=True)
-        text = graphene.String(required=True)
-        created_at = graphene.DateTime(required=False)
+        author = graphene.String()  # Who made the comment
+        email = graphene.String()
+        text = graphene.String()
+        created_at = graphene.DateTime()
         article_id = graphene.ID()
 
     comment = graphene.Field(CommentType)
 
     @classmethod
-    def mutate(cls, root, info, author, email, text, article_id, created_at=None, id=None):
+    def mutate(cls, root, info, id=None, author=None, email=None, text=None, article_id=None, created_at=None):
         current_date_time = datetime.now()
-        commenter, _ = Commenter.objects.get_or_create(email=email, defaults={'name': author})
 
         if id:
             comment = Comment.objects.get(pk=id)
-            comment.author = author
+            if text is not None:
+                comment.text = text
+            if article_id is not None:
+                comment.article_id = article_id
+            if email is not None and author is not None:
+                commenter, _ = Commenter.objects.get_or_create(email=email, name=author)
+                comment.commenter = commenter
             comment.created_at = current_date_time
-            comment.text = text
-            comment.email = email
-            comment.article_id = article_id
-            comment.commenter = commenter
             comment.save()
         else:
-            comment = Comment.objects.create(author=author, email=email, text=text, article_id=article_id,
-                                             created_at=current_date_time, commenter=commenter)
+            if not (author and email and text and article_id):
+                raise Exception("author, email, text, and article_id are required for creating a new comment")
+            commenter, _ = Commenter.objects.get_or_create(email=email, name=author)
+            article = Article.objects.get(pk=article_id)  # Assuming Article model is imported
+            comment = Comment.objects.create(
+                article=article,
+                commenter=commenter,
+                text=text,
+                created_at=current_date_time
+            )
+
         return CommentMutation(comment=comment)
+
 
 # Temporary
 class CommenterMutation(graphene.Mutation):

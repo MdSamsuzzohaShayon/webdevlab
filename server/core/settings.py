@@ -30,9 +30,9 @@ ENVIRONMENT = os.getenv("PY_ENV", "development")
 
 # Load environment-specific .env file
 if ENVIRONMENT == "test":
-    dotenv_path = os.path.join(BASE_DIR, 'test.env')
+    dotenv_path = os.path.join(BASE_DIR, '.env.test')
 elif ENVIRONMENT == "development":
-    dotenv_path = os.path.join(BASE_DIR, 'development.env')
+    dotenv_path = os.path.join(BASE_DIR, '.env.development')
 else:
     dotenv_path = os.path.join(BASE_DIR, '.env')
 
@@ -57,7 +57,11 @@ SECRET_KEY = os.environ["DJANGO_SECRET"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.environ["PY_ENV"] == "development" else False
 
-ALLOWED_HOSTS = [os.getenv("FRONTEND_URL"), 'localhost', '127.0.0.1']
+host_list = [os.getenv("FRONTEND_URL"), 'localhost', '127.0.0.1']
+if ENVIRONMENT == "test":
+    host_list.append("testserver")
+
+ALLOWED_HOSTS = host_list
 
 
 # Application definition
@@ -75,8 +79,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # Internal
-    'blog',
     'account',
+    'blog',
     'forum',
     'career',
     'service',
@@ -154,6 +158,13 @@ if ENVIRONMENT == "development":
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+elif ENVIRONMENT == "test":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'dbtest.sqlite3',
+        }
+    }
 else:
     DATABASES = {
         'default': {
@@ -166,11 +177,6 @@ else:
         }
     }
 
-if ENVIRONMENT == "test":
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
-    }
 
 if 'test' in sys.argv:
     DATABASES = {

@@ -12,5 +12,5 @@ django.setup()
 
 
 # Load test environment variables
-dotenv_path = os.path.join(BASE_DIR, 'test.env')
+dotenv_path = os.path.join(BASE_DIR, '.env.test')
 load_dotenv(dotenv_path)
