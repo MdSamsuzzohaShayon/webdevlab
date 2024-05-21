@@ -1,30 +1,26 @@
 import gql from 'graphql-tag';
 
 const GET_ARTICLES = gql`
-  query GetArticles ($limit: Int!, $start: Int!) {
-    allArticles(limit: 10, start: 0) {
-      title
-      link
+  query GetArticles($start: Int!, $limit: Int!) {
+    allArticles(start: $start, limit: $limit) {
       id
+      title
+      thumbnail
+      link
       content
+      createdAt
+
       category {
         id
         name
       }
-      createdAt
+
       author {
         id
-        name
+        username
+        firstName
+        lastName
       }
-    }
-    allAuthors {
-      id
-      name
-      email
-    }
-    allCategories {
-      id
-      name
     }
   }
 `;

@@ -79,7 +79,7 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue';
 import type { IArticle } from '../../types/Article';
-import gql from 'graphql-tag';
+import { GET_ARTICLES } from '~/graphql/articles';
 // import { useQuery } from '@apollo/client';
 // import { useQuery } from '@vue/apollo-composable';
 
@@ -87,30 +87,7 @@ type ArticlesResult = {
   allArticles: IArticle[];
 };
 
-const GET_ARTICLES = gql`
-  query GetArticles($start: Int!, $limit: Int!) {
-    allArticles(start: $start, limit: $limit) {
-      id
-      title
-      thumbnail
-      link
-      content
-      createdAt
 
-      category {
-        id
-        name
-      }
-
-      author {
-        id
-        username
-        firstName
-        lastName
-      }
-    }
-  }
-`;
 
 // Fetch articles
 const { data, error } = await useAsyncQuery<ArticlesResult>(GET_ARTICLES, {start: 1, limit: 10});

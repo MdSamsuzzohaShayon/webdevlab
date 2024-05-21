@@ -257,3 +257,11 @@ def display_data():
 >>> login_and_get_tokens()
 >>> seed_data()
 """
+
+def init():
+    cleanup_database()
+    seed_users()
+    verify_users()
+    login_and_get_tokens()
+    seed_data()
+    display_data()

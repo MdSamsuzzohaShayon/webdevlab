@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Function to display environment options
+source .venv/bin/activate
 display_options() {
     echo "1. Development environment"
     echo "2. Development environment with migrations"
