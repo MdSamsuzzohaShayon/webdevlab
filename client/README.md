@@ -4,6 +4,11 @@
  - Display article content properly according to quill editor
 
 
+# Requirements
+ - Create a post with multiple categories
+ - Make it more responsive
+ - Categories are tutorial, news,
+
  # Testing Guide for Nuxt.js Frontend Applications
 
 ## 1. Component Tests
@@ -107,3 +112,79 @@ By covering these areas in your testing strategy, you can ensure that your Nuxt.
 # Design
  - Main theme design inspired by https://networkertheme.com/networker/
  - Dashboard design inspiration - https://aries-admin-templates.websitedesignmarketingagency.com/ariesadmin-dark/ser/
+
+### Testing document
+ - [How to test nuxt composable useAsyncData in vitest #2205](https://github.com/vitest-dev/vitest/discussions/2205)
+ - [End to end and unit testing](https://github.com/vinayakkulkarni/nuxt-ava-e2e-unit-testing/blob/main/test/_setup.js)
+
+
+### End-to-end testing
+
+ - **End-to-End Testing (E2E):**
+ - End-to-end tests in Nuxt.js with Vitest typically involve testing the entire application from the user's perspective, including interactions with different pages and components. Vitest offers E2E testing capabilities through the use of testing libraries such as @vue/test-utils and @testing-library/*.
+ - Example (Vitest E2E with @testing-library/vue): Suppose you have a Nuxt.js application with a simple login page. You want to write an end-to-end test to ensure that users can successfully log in.
+  ```
+  // e2e/login.spec.js
+
+    import { createTest, vue } from 'vitest';
+    import Login from '~/pages/login.vue';
+    import { render, fireEvent } from '@testing-library/vue';
+
+    createTest('Login Page', () => {
+      it('successfully logs in with correct credentials', async () => {
+        const { getByLabelText, getByText } = render(Login, { vue });
+        const usernameInput = getByLabelText('Username');
+        const passwordInput = getByLabelText('Password');
+
+        await fireEvent.update(usernameInput, 'example_user');
+        await fireEvent.update(passwordInput, 'password123');
+
+        const submitButton = getByText('Login');
+        await fireEvent.click(submitButton);
+
+        // Assert redirection or success message
+      });
+
+      it('displays error message with incorrect credentials', async () => {
+        const { getByLabelText, getByText } = render(Login, { vue });
+        const usernameInput = getByLabelText('Username');
+        const passwordInput = getByLabelText('Password');
+
+        await fireEvent.update(usernameInput, 'wrong_user');
+        await fireEvent.update(passwordInput, 'wrong_password');
+
+        const submitButton = getByText('Login');
+        await fireEvent.click(submitButton);
+
+        // Assert error message
+      });
+    });
+
+  ```
+ - **Unit Testing:**
+ - Unit testing in Nuxt.js with Vitest focuses on testing individual units of code, such as components, functions, or modules, in isolation. Vitest provides utilities for unit testing Vue components and other JavaScript modules.
+ - Example (Vitest Unit Test): Suppose you have a simple Vue component that displays a greeting message.
+  ```
+    <!-- components/Greeting.vue -->
+    <template>
+      <div>
+        <h1>{{ greeting }}</h1>
+      </div>
+    </template>
+
+    <script>
+    export default {
+      props: {
+        name: {
+          type: String,
+          required: true
+        }
+      },
+      computed: {
+        greeting() {
+          return `Hello, ${this.name}!`;
+        }
+      }
+    };
+    </script>
+  ```

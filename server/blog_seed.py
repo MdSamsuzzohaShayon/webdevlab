@@ -86,10 +86,16 @@ def seed_data():
     users = User.objects.all()[:3]  # Assuming you have at least 3 verified users
 
     # Create 5 categories (Tech category)
-    categories = []
-    for i in range(5):
-        category = Category.objects.create(name=f"Tech category {i + 1}")
-        categories.append(category)
+    # categories = []
+    # for i in range(5):
+    #     category = Category.objects.create(name=f"Tech category {i + 1}")
+    #     categories.append(category)
+    category_news = Category.objects.create(name=f"News")
+    category_tutorial = Category.objects.create(name=f"Tutorial")
+    category_trending = Category.objects.create(name=f"Trending")
+    category_latest = Category.objects.create(name=f"Latest")
+    categories = [category_news, category_tutorial, category_trending, category_latest]
+
 
     commenters = []
     for i in range(10):

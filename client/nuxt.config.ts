@@ -63,6 +63,7 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
     '@nuxtjs/cloudinary',
     'nuxt-icon',
+    '@nuxt/test-utils/module'
   ],
 
   apollo: {
@@ -80,6 +81,8 @@ export default defineNuxtConfig({
   ],
   // some nuxt config...
   css: [
+    'assets/sass/global.scss',
+
     'bootstrap/dist/css/bootstrap.min.css',
     // ...
     'quill/dist/quill.core.css',
