@@ -35,7 +35,7 @@ mutation ($title: String!, $content: String!, $thumbnail: Upload!, $authorId: ID
         thumbnail
         author {
           id
-          name
+          username
         }
         category {
           id

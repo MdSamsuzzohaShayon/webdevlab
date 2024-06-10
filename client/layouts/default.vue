@@ -3,13 +3,8 @@
     <div class="row">
       <div v-if="state.showMenu" class="col-md-2 bg-dark text-capitalize">
         <div class="menu-wrapper w-full d-flex justify-content-end me-3 mt-3">
-          <Icon
-            :name="iName.close"
-            :size="iDesign.smSize"
-            :color="iColor.light"
-            role="presentation"
-            @click.prevent="handleToggleMenu(false)"
-          />
+          <Icon :name="iName.close" :size="iDesign.smSize" :color="iColor.light" role="presentation"
+            @click.prevent="handleToggleMenu(false)" />
         </div>
         <ul v-if="state.showMenu" class="nav flex-column">
           <li v-for="(item, index) in userMenuList" :key="index" class="nav-item">
@@ -29,14 +24,31 @@
         </main>
       </div>
     </div>
-    <AdminFooter />
+    <Footer :allCategories="state.allCategories" :userMenuList="userMenuList" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { userMenuList } from '~/assets/js/staticData';
+import { GET_CATEGORIES } from '~/graphql/categories';
+import type { ICategory } from '~/types';
 
-const state = reactive({ showMenu: false });
+interface IStateProps {
+  showMenu: boolean;
+  allCategories: ICategory[];
+}
+
+const state = reactive<IStateProps>({ showMenu: false, allCategories: [] });
+
+try {
+  const { data } = await useAsyncQuery(GET_CATEGORIES);
+  state.allCategories = data.value?.allCategories || [];
+  
+} catch (error) {
+  console.log(error);
+
+}
+
 
 const handleToggleMenu = (showMenu: boolean) => {
   state.showMenu = showMenu;

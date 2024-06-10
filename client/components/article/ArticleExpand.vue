@@ -43,7 +43,6 @@
 </template>
 
 <script lang="ts" setup>
-// @ts-expect-error
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Delta, QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';

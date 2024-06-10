@@ -1,0 +1,331 @@
+[
+    {
+        "title": "India’s election overshadowed by the rise of online misinformation",
+        "content": "As India kicks off the world’s biggest election.",
+        "thumbnail": "static/01.webp",
+        "category_id": 2,
+        "author_id": 4
+    },
+    {
+        "title": "Economic growth trends in 2024",
+        "content": "An analysis of the economic growth trends for the upcoming year.",
+        "thumbnail": "static/02.webp",
+        "category_id": 3,
+        "author_id": 5
+    },
+    {
+        "title": "Advancements in AI technology",
+        "content": "Recent breakthroughs in artificial intelligence and their implications.",
+        "thumbnail": "static/03.webp",
+        "category_id": 1,
+        "author_id": 6
+    },
+    {
+        "title": "Climate change and its global impact",
+        "content": "How climate change is affecting different parts of the world.",
+        "thumbnail": "static/04.webp",
+        "category_id": 4,
+        "author_id": 7
+    },
+    {
+        "title": "The future of space exploration",
+        "content": "What the next decade holds for space travel and exploration.",
+        "thumbnail": "static/05.webp",
+        "category_id": 5,
+        "author_id": 8
+    },
+    {
+        "title": "Healthcare innovations in 2024",
+        "content": "New technologies and treatments in the healthcare industry.",
+        "thumbnail": "static/06.webp",
+        "category_id": 2,
+        "author_id": 9
+    },
+    {
+        "title": "The rise of electric vehicles",
+        "content": "How electric vehicles are transforming the automotive industry.",
+        "thumbnail": "static/07.webp",
+        "category_id": 3,
+        "author_id": 10
+    },
+    {
+        "title": "Blockchain technology and its applications",
+        "content": "Exploring the various uses of blockchain beyond cryptocurrencies.",
+        "thumbnail": "static/08.webp",
+        "category_id": 1,
+        "author_id": 11
+    },
+    {
+        "title": "Educational reforms in 2024",
+        "content": "Changes and improvements in the educational sector.",
+        "thumbnail": "static/09.webp",
+        "category_id": 4,
+        "author_id": 12
+    },
+    {
+        "title": "Global politics and international relations",
+        "content": "Current trends and key issues in global politics.",
+        "thumbnail": "static/10.webp",
+        "category_id": 5,
+        "author_id": 13
+    },
+    {
+        "title": "Technological advancements in 2024",
+        "content": "An overview of the latest technological innovations.",
+        "thumbnail": "static/11.webp",
+        "category_id": 2,
+        "author_id": 14
+    },
+    {
+        "title": "Renewable energy sources",
+        "content": "The growing importance of renewable energy in the modern world.",
+        "thumbnail": "static/12.webp",
+        "category_id": 3,
+        "author_id": 15
+    },
+    {
+        "title": "Cybersecurity threats and solutions",
+        "content": "How to protect against the latest cybersecurity threats.",
+        "thumbnail": "static/13.webp",
+        "category_id": 1,
+        "author_id": 16
+    },
+    {
+        "title": "Artificial Intelligence in healthcare",
+        "content": "The role of AI in modern healthcare systems.",
+        "thumbnail": "static/14.webp",
+        "category_id": 4,
+        "author_id": 17
+    },
+    {
+        "title": "Sustainable living practices",
+        "content": "Tips and strategies for living a more sustainable lifestyle.",
+        "thumbnail": "static/15.webp",
+        "category_id": 5,
+        "author_id": 18
+    },
+    {
+        "title": "Economic policies shaping the future",
+        "content": "Key economic policies and their impact on global markets.",
+        "thumbnail": "static/16.webp",
+        "category_id": 2,
+        "author_id": 19
+    },
+    {
+        "title": "Technological integration in education",
+        "content": "How technology is revolutionizing the educational experience.",
+        "thumbnail": "static/17.webp",
+        "category_id": 3,
+        "author_id": 20
+    },
+    {
+        "title": "The impact of social media on society",
+        "content": "Examining the positive and negative effects of social media.",
+        "thumbnail": "static/18.webp",
+        "category_id": 1,
+        "author_id": 21
+    },
+    {
+        "title": "Healthcare policies and reforms",
+        "content": "Recent changes in healthcare policies and their implications.",
+        "thumbnail": "static/19.webp",
+        "category_id": 4,
+        "author_id": 22
+    },
+    {
+        "title": "Advances in renewable energy",
+        "content": "New developments in renewable energy technologies.",
+        "thumbnail": "static/20.webp",
+        "category_id": 5,
+        "author_id": 23
+    },
+    {
+        "title": "Global economic forecasts for 2024",
+        "content": "Predictions for the global economy in the coming year.",
+        "thumbnail": "static/21.webp",
+        "category_id": 2,
+        "author_id": 24
+    },
+    {
+        "title": "The evolution of smart homes",
+        "content": "How smart home technology is changing the way we live.",
+        "thumbnail": "static/22.webp",
+        "category_id": 3,
+        "author_id": 25
+    },
+    {
+        "title": "Artificial Intelligence in everyday life",
+        "content": "The increasing presence of AI in our daily routines.",
+        "thumbnail": "static/23.webp",
+        "category_id": 1,
+        "author_id": 26
+    },
+    {
+        "title": "Climate action and policy",
+        "content": "Efforts and policies aimed at combating climate change.",
+        "thumbnail": "static/24.webp",
+        "category_id": 4,
+        "author_id": 27
+    },
+    {
+        "title": "Exploring the universe: New discoveries",
+        "content": "Recent discoveries in space and their significance.",
+        "thumbnail": "static/25.webp",
+        "category_id": 5,
+        "author_id": 28
+    },
+    {
+        "title": "Innovations in medical technology",
+        "content": "Cutting-edge technologies improving healthcare outcomes.",
+        "thumbnail": "static/26.webp",
+        "category_id": 2,
+        "author_id": 29
+    },
+    {
+        "title": "The future of the automotive industry",
+        "content": "Trends and innovations shaping the future of cars.",
+        "thumbnail": "static/27.webp",
+        "category_id": 3,
+        "author_id": 30
+    },
+    {
+        "title": "Blockchain and its future potential",
+        "content": "Understanding the potential uses of blockchain technology.",
+        "thumbnail": "static/28.webp",
+        "category_id": 1,
+        "author_id": 31
+    },
+    {
+        "title": "The impact of technology on education",
+        "content": "How technology is enhancing learning experiences.",
+        "thumbnail": "static/29.webp",
+        "category_id": 4,
+        "author_id": 32
+    },
+    {
+        "title": "Current trends in global politics",
+        "content": "Analyzing the latest developments in international relations.",
+        "thumbnail": "static/30.webp",
+        "category_id": 5,
+        "author_id": 33
+    },
+    {
+        "title": "The role of AI in modern industry",
+        "content": "How AI is transforming various industrial sectors.",
+        "thumbnail": "static/31.webp",
+        "category_id": 2,
+        "author_id": 34
+    },
+    {
+        "title": "Sustainable energy solutions",
+        "content": "Exploring sustainable energy sources and their benefits.",
+        "thumbnail": "static/32.webp",
+        "category_id": 3,
+        "author_id": 35
+    },
+    {
+        "title": "Cybersecurity in the digital age",
+        "content": "Protecting data and privacy in an interconnected world.",
+        "thumbnail": "static/33.webp",
+        "category_id": 1,
+        "author_id": 36
+    },
+    {
+        "title": "AI-driven healthcare solutions",
+        "content": "The impact of AI on diagnosing and treating diseases.",
+        "thumbnail": "static/34.webp",
+        "category_id": 4,
+        "author_id": 37
+    },
+    {
+        "title": "Promoting sustainable living",
+        "content": "Strategies for adopting more sustainable practices.",
+        "thumbnail": "static/35.webp",
+        "category_id": 5,
+        "author_id": 38
+    },
+    {
+        "title": "Economic recovery post-pandemic",
+        "content": "Analyzing economic recovery trends after the COVID-19 pandemic.",
+        "thumbnail": "static/36.webp",
+        "category_id": 2,
+        "author_id": 39
+    },
+    {
+        "title": "The integration of tech in classrooms",
+        "content": "How technology is enhancing educational environments.",
+        "thumbnail": "static/37.webp",
+        "category_id": 3,
+        "author_id": 40
+    },
+    {
+        "title": "Social media's influence on public opinion",
+        "content": "The role of social media in shaping societal views.",
+        "thumbnail": "static/38.webp",
+        "category_id": 1,
+        "author_id": 41
+    },
+    {
+        "title": "Healthcare policy changes in 2024",
+        "content": "Recent reforms in healthcare policies and their impacts.",
+        "thumbnail": "static/39.webp",
+        "category_id": 4,
+        "author_id": 42
+    },
+    {
+        "title": "Advancing renewable technologies",
+        "content": "Innovations in renewable energy and their implications.",
+        "thumbnail": "static/40.webp",
+        "category_id": 5,
+        "author_id": 43
+    },
+    {
+        "title": "Global economic outlook",
+        "content": "Predictions for the global economy over the next few years.",
+        "thumbnail": "static/41.webp",
+        "category_id": 2,
+        "author_id": 44
+    },
+    {
+        "title": "Smart technology in modern homes",
+        "content": "The evolution and benefits of smart home technologies.",
+        "thumbnail": "static/42.webp",
+        "category_id": 3,
+        "author_id": 45
+    },
+    {
+        "title": "AI advancements and daily life",
+        "content": "How AI is becoming a part of our everyday routines.",
+        "thumbnail": "static/43.webp",
+        "category_id": 1,
+        "author_id": 46
+    },
+    {
+        "title": "Climate change mitigation strategies",
+        "content": "Effective strategies for mitigating the effects of climate change.",
+        "thumbnail": "static/44.webp",
+        "category_id": 4,
+        "author_id": 47
+    },
+    {
+        "title": "Space exploration milestones",
+        "content": "Key achievements in space exploration and their significance.",
+        "thumbnail": "static/45.webp",
+        "category_id": 5,
+        "author_id": 48
+    },
+    {
+        "title": "Medical technology breakthroughs",
+        "content": "New technologies that are transforming healthcare.",
+        "thumbnail": "static/46.webp",
+        "category_id": 2,
+        "author_id": 49
+    },
+    {
+        "title": "The automotive industry's future",
+        "content": "Exploring future trends and innovations in the automotive sector.",
+        "thumbnail": "static/47.webp",
+        "category_id": 3,
+        "author_id": 50
+    }
+]

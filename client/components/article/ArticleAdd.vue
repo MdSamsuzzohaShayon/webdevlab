@@ -6,7 +6,7 @@
         <label for="title" class="form-label">Title</label>
         <input
           id="title"
-          v-model="articleState.title"
+          v-on:change="handleTitleChange"
           type="text"
           class="form-control"
           name="title"
@@ -42,12 +42,12 @@
           <option v-for="cat in props.categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
         </select>
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="author" class="form-label">Author</label>
         <select id="author" v-model="articleState.author" class="form-select" name="author">
           <option v-for="a in props.authors" :key="a.id" :value="a.id">{{ a.name }}</option>
         </select>
-      </div>
+      </div> -->
       <div class="mb-3">
         <label for="link" class="form-label">Link</label>
         <input id="link" v-model="articleState.link" type="text" class="form-control" name="link" >
@@ -58,7 +58,6 @@
 </template>
 
 <script setup lang="ts">
-// @ts-expect-error
 import type { Delta} from '@vueup/vue-quill';
 import { QuillEditor, Quill } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
@@ -116,7 +115,16 @@ const initialContent = `
 `;
 
 const state = reactive({ content: initialContent });
-const props = defineProps(['categories', 'authors']);
+const props = defineProps(['categories']);
+
+
+const handleTitleChange=(e: Event)=>{
+  e.preventDefault();
+  const inputEl = e.target as HTMLInputElement;
+  const inputTitle =inputEl.value;
+  articleState.title = inputTitle;
+  articleState.link = stringToSlug(inputTitle);
+}
 
 const handleArticleAdd = async (e: Event) => {
   e.preventDefault();
@@ -134,8 +142,7 @@ const handleArticleAdd = async (e: Event) => {
         title: articleState.title,
         content: state.content,
         thumbnail: null, // You may need to handle thumbnail separately based on your requirements
-        // authorId: articleState.author,
-        authorId: 1,
+        authorId: 10, // Get author ID from token
         categoryId: articleState.category,
       },
     };
