@@ -67,3 +67,7 @@
  - pip install pre-commit
  - pip freeze > requirements.txt
  - pre-commit install
+
+
+### Requirements
+ - Create a mail services for **contact@webdevlab.com**

@@ -2,6 +2,7 @@
 
 export default defineNuxtConfig({
   ssr: false,
+  target: 'static',
   devtools: { enabled: true },
   app: {
     // <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">

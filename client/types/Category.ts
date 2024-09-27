@@ -9,5 +9,5 @@ export interface ICategory {
 export interface ICategoryWithArticle extends ICategory {
   id: number;
   name: string;
-  articleSet: IArticle[];
+  allArticles: IArticle[];
 }

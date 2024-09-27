@@ -1,10 +1,18 @@
 <!-- components/CategoryForm.vue -->
 <template>
-  <form @submit.prevent="addCategory">
-    <label for="categoryName">Category Name:</label>
-    <input id="categoryName" v-model="categoryName" type="text" required >
-
-    <button type="submit">Add</button>
+  <form @submit.prevent="addCategory" class="container mt-5">
+    <div class="form-group">
+      <label for="categoryName">Category Name:</label>
+      <input
+        id="categoryName"
+        v-model="categoryName"
+        type="text"
+        class="form-control"
+        required
+        placeholder="Enter category name"
+      >
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Add Category</button>
   </form>
 </template>
 
@@ -13,16 +21,11 @@ import { CREATE_CATEGORY } from '~/graphql/categories';
 
 const categoryName = ref('');
 
-const { mutate: addComment } = useMutation(CREATE_CATEGORY);
+const { mutate: addArticleCategory } = useMutation(CREATE_CATEGORY);
 const addCategory = async () => {
   try {
-    const response = await addComment({
-      variables: {
-        name: categoryName.value,
-      },
-      context: {
-        clientName: 'default', // Provide the client name explicitly
-      },
+    const response = await addArticleCategory({
+      name: categoryName.value,
     });
 
     // Handle response as needed

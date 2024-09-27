@@ -1,205 +1,173 @@
 <template>
   <div class="container">
-    <section class="section section-1">
-      <div class="row">
-        <!-- Left side / Top side on mobile start  -->
-        <div class="col-12 col-md-8">
-          <NuxtLink v-if="state.latestArticles && state.latestArticles.length > 0" class="card text-bg-dark text-decoration-none" id="feature-card" :to="state.latestArticles[0].link">
-            <CldImage :src="state.latestArticles[1].thumbnail" width="800" height="800" class="card-img"
-              :alt="state.latestArticles[1].title" />
-            <div class="card-img-overlay d-flex flex-column justify-content-end">
-              <h1 class="card-title">{{ state.latestArticles[1].title }}</h1>
-              <p class="card-text">
-                {{ shortDesc(state.latestArticles[1].content, 200) }}
-              </p>
-              <p class="card-text">
-                <small>{{
-            state.latestArticles[1].createdAt &&
-            formatReadableDate(state.latestArticles[1].createdAt)
-          }}</small>
-              </p>
-            </div>
-          </NuxtLink>
-        </div>
-        <!-- Left side / Top side on mobile end  -->
-
-        <!-- Right side / bottom side on the mobile start  -->
-        <div class="col-12 col-md-4">
-          <p class="text-uppercase">This week's</p>
-          <h2>Trending Posts</h2>
-
-          <div v-if="state.trendingArticles && state.trendingArticles.length > 0" class="d-flex flex-column"
-            id="latest-posts">
-            <NuxtLink v-for="trendingArticle in state.trendingArticles.slice(0, 4)" :key="trendingArticle.id"
-              class="card mb-3 latest-post-card border border-bottom text-decoration-none" :to="trendingArticle.link" style="max-width: 540px">
-              <div class="row">
-                <div class="col-4">
-                  <CldImage :src="trendingArticle.thumbnail" width="400" height="400" class="img-fluid rounded-start"
-                    :alt="trendingArticle.title" />
-                </div>
-                <div class="col-8">
-                  <div class="card-body">
-                    <h2 class="card-title">{{ trendingArticle.title }}</h2>
-                    <!-- <p class="card-text">{{ shortDesc(article.content, 200) }}</p>
-                    <p class="card-text">
-                      <small class="text-body-secondary">{{
-                        article.createdAt && formatRelativeDate(article.createdAt)
-                      }}</small>
-                    </p> -->
-                  </div>
-                </div>
-              </div>
-            </NuxtLink>
-          </div>
-        </div>
-        <!-- Right side / bottom side on the mobile end  -->
-      </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1 class="display-4">Welcome to WebDevLab</h1>
+      <p class="lead">Your Partner for Web Development and Web3 Solutions</p>
+      <a href="#contact" class="btn btn-primary btn-lg">Get in Touch</a>
     </section>
 
-    <section class="section section-2">
-      <div class="row">
-        <p class="text-uppercase">Popular</p>
-        <h2>Tutorial</h2>
-      </div>
-      <div class="row">
-        <NuxtLink class="col-md-4 text-decoration-none" v-if="state.tutorialArticles && state.tutorialArticles.length > 0"
-              v-for="tutorialArticle in state.tutorialArticles.slice(1, 5)" :key="tutorialArticle.id" v-bind:to="tutorialArticle.link" >
-          <div class="card mb-3" style="width: 100%;"  >
-            <div class="row g-0">
-              <div class="col-md-4">
-                <CldImage :src="tutorialArticle.thumbnail" width="800" height="800" class="card-img img-fluid rounded-start"
-                  :alt="tutorialArticle.title" />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{ tutorialArticle.title }}</h5>
-                  <p class="card-text">{{ shortDesc(tutorialArticle.content, 200) }}</p>
-                  <p class="card-text"><small class="text-body-secondary">{{
-            tutorialArticle.createdAt &&
-            formatReadableDate(tutorialArticle.createdAt)
-                      }}</small></p>
-                </div>
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+      <div class="container text-center">
+        <h2 class="mb-5">Our Services</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card service-card">
+              <div class="card-body">
+                <h5 class="card-title">Web Development</h5>
+                <p class="card-text">Custom websites, responsive design, and full-stack development to bring your ideas
+                  to life.</p>
               </div>
             </div>
           </div>
-        </NuxtLink>
-      </div>
-    </section>
-
-    <section class="section section-3">
-      <div class="row">
-        <p class="text-uppercase">Popular</p>
-        <h2>Tech News</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-5">
-          <div v-if="state.newsArticles && state.newsArticles.length > 0" class="card text-bg-dark">
-            <CldImage :src="state.newsArticles[1].thumbnail" width="800" height="800" class="card-img"
-              :alt="state.newsArticles[1].title" />
-            <div class="card-img-overlay d-flex flex-column justify-content-end">
-              <h1 class="card-title">{{ state.newsArticles[1].title }}</h1>
-              <p class="card-text">
-                {{ shortDesc(state.newsArticles[1].content, 200) }}
-              </p>
-              <p class="card-text">
-                <small>{{
-            state.newsArticles[1].createdAt &&
-            formatReadableDate(state.newsArticles[1].createdAt)
-          }}</small>
-              </p>
+          <div class="col-md-4">
+            <div class="card service-card">
+              <div class="card-body">
+                <h5 class="card-title">Web3 Solutions</h5>
+                <p class="card-text">Build decentralized applications and integrate blockchain technology into your
+                  business.</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-7">
-          <div class="row">
-            <NuxtLink v-if="state.newsArticles && state.newsArticles.length > 0"
-              v-for="newsArticle in state.newsArticles.slice(1, 5)" :to="newsArticle.link" :key="newsArticle.id" class="col-md-6 text-decoration-none">
-              <div class="card text-bg-dark">
-                <CldImage :src="newsArticle.thumbnail" width="800" height="800" class="card-img"
-                  :alt="newsArticle.title" />
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  <h1 class="card-title">{{ newsArticle.title }}</h1>
-                  <p class="card-text">
-                    {{ shortDesc(newsArticle.content, 200) }}
-                  </p>
-                  <p class="card-text">
-                    <small>{{
-            newsArticle.createdAt &&
-            formatReadableDate(newsArticle.createdAt)
-                      }}</small>
-                  </p>
-                </div>
+          <div class="col-md-4">
+            <div class="card service-card">
+              <div class="card-body">
+                <h5 class="card-title">Consulting</h5>
+                <p class="card-text">Expert advice on Web3, blockchain, and digital transformation strategies.</p>
               </div>
-            </NuxtLink>
-            <div class="col-md-6">
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- YouTube Section -->
+    <section class="youtube-section bg-light py-5">
+      <div class="container text-center">
+        <h2 class="mb-4">Check out our YouTube Channel</h2>
+        <p class="lead">Learn more about Web Development and Web3 through our tutorials and insights.</p>
+        <a href="https://www.youtube.com/@web-dev-lab" class="btn btn-danger btn-lg">Visit our YouTube Channel</a>
+      </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="contact-section py-5">
+      <div class="container text-center">
+        <h2 class="mb-5 display-6">Get in Touch</h2>
+        <p class="lead text-muted">We’d love to hear from you! Whether you have a project in mind or just want to ask a
+          question, reach out to us.</p>
+
+        <!-- Contact Details -->
+        <div class="row text-center mb-5">
+          <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded shadow-sm bg-light">
+              <i class="bi bi-envelope-fill fs-2 mb-3 text-primary"></i>
+              <h5>Email</h5>
+              <p class="text-muted"><a href="mailto:mdsamsuzzoha5222@gmail.com"
+                  class="text-decoration-none text-dark">mdsamsuzzoha5222@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded shadow-sm bg-light">
+              <i class="bi bi-telephone-fill fs-2 mb-3 text-primary"></i>
+              <h5>Phone</h5>
+              <p class="text-muted"><a href="tel:+8801889171929" class="text-decoration-none text-dark">+8801889171929</a>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded shadow-sm bg-light">
+              <i class="bi bi-geo-alt-fill fs-2 mb-3 text-primary"></i>
+              <h5>Address</h5>
+              <p class="text-muted">58-Gha, West Rajabazaar, Dhaka, Bangladesh</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="p-4 border rounded shadow-lg bg-light">
+              <h5 class="mb-4">Send Us a Message</h5>
+              <form class="contact-form">
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                  <input type="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                <div class="mb-3">
+                  <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2024 WebDevLab | Web Development & Web3 Agency | <a href="mailto:mdsamsuzzoha5222@gmail.com"
+          style="color: #fff;">mdsamsuzzoha5222@gmail.com</a> | 58-Gha, West Rajabazaar, Dhaka, Bangladesh</p>
+    </footer>
+
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from 'vue';
-import type { IArticle } from '../../types/Article';
-import { GET_ARTICLES } from '~/graphql/articles';
 
-interface IStateProps {
-  allArticles: IArticle[];
-  latestArticles: IArticle[];
-  newsArticles: IArticle[];
-  tutorialArticles: IArticle[];
-  trendingArticles: IArticle[];
-}
-
-const state = reactive<IStateProps>({
-  allArticles: [],
-  latestArticles: [],
-  newsArticles: [],
-  tutorialArticles: [],
-  trendingArticles: [],
-});
-
-type ArticlesResult = {
-  allArticles: IArticle[];
-};
-
-
-
-// Fetch articles
-const { data, error } = await useAsyncQuery<ArticlesResult>(GET_ARTICLES, { start: 1, limit: 50 });
-// console.log({ articles: data.value?.allArticles });
-
-// Log data in a nice-looking format
-// const articles: Ref<IArticle[]> = ref([]);
-if (data) {
-  const allArticles: IArticle[] = data?.value?.allArticles ? data?.value?.allArticles : [];
-  state.allArticles = allArticles;
-
-  const latestArticles = [], newsArticles = [], tutorialArticles = [], trendingArticles = [];
-  // Seperate all category
-  for (let i = 0; i < allArticles.length; i += 1) {
-    const element = allArticles[i];
-    if (element.category.name.toUpperCase() === "LATEST") {
-      latestArticles.push(element);
-    } else if (element.category.name.toUpperCase() === "NEWS") {
-      newsArticles.push(element);
-    } else if (element.category.name.toUpperCase() === "TUTORIAL") {
-      tutorialArticles.push(element);
-    } else if (element.category.name.toUpperCase() === "TRENDING") {
-      trendingArticles.push(element);
-    }
-  }
-
-  state.latestArticles = latestArticles;
-  state.newsArticles = newsArticles;
-  state.tutorialArticles = tutorialArticles;
-  state.trendingArticles = trendingArticles;
-}
-
-// Handle error
-if (error) {
-  console.error('Error fetching articles:', error);
-}
 </script>
+
+
+<style lang="scss">
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.hero-section {
+  height: 50vh;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.services-section,
+.contact-section {
+  padding: 60px 0;
+}
+
+.service-card {
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+}
+
+.contact-form input,
+.contact-form textarea {
+  border-radius: 0;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #6a11cb;
+  border-color: #6a11cb;
+}
+</style>
