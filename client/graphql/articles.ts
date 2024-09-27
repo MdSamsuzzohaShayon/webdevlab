@@ -1,32 +1,29 @@
+import gql from 'graphql-tag';
+
 const GET_ARTICLES = gql`
-  query GetArticles {
-    allArticles(limit: 10, start: 0) {
-      title
-      link
+  query GetArticles($start: Int!, $limit: Int!) {
+    allArticles(start: $start, limit: $limit) {
       id
+      title
+      thumbnail
+      link
       content
+      createdAt
+
       category {
         id
         name
       }
-      createdAt
+
       author {
         id
-        name
+        username
+        firstName
+        lastName
       }
-    }
-    allAuthors {
-      id
-      name
-      email
-    }
-    allCategories {
-      id
-      name
     }
   }
 `;
-
 
 const ADD_ARTICLE_RAW = `
 mutation ($title: String!, $content: String!, $thumbnail: Upload!, $authorId: ID!, $categoryId: ID!, $id: ID) {
@@ -38,7 +35,7 @@ mutation ($title: String!, $content: String!, $thumbnail: Upload!, $authorId: ID
         thumbnail
         author {
           id
-          name
+          username
         }
         category {
           id
@@ -49,4 +46,25 @@ mutation ($title: String!, $content: String!, $thumbnail: Upload!, $authorId: ID
   }
 `;
 
-export { GET_ARTICLES, ADD_ARTICLE_RAW };
+const GET_ARTICLE_BY_LINK = gql`
+  query ArticleByLink($link: String) {
+    articleByLink(link: $link) {
+      content
+      id
+      link
+      title
+      thumbnail
+      createdAt
+      author {
+        name
+        id
+      }
+      category {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export { GET_ARTICLES, ADD_ARTICLE_RAW, GET_ARTICLE_BY_LINK };

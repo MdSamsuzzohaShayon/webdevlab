@@ -1,6 +1,7 @@
-<!-- <NuxtWelcome /> -->
 <template>
-  <Home />
+  <HomePage />
 </template>
 
-
+<style lang="scss">
+@use "~/assets/sass/HomePage.scss";
+</style>

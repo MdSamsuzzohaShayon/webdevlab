@@ -12,22 +12,40 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 from dotenv import load_dotenv
-load_dotenv()  # loads the configs from .env
+from datetime import  datetime, timedelta
 
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-cloudinary.config( 
-  cloud_name = os.environ["CLOUDINARY_CLOUD_NAME"], 
-  api_key = os.environ["CLOUDINARY_API_KEY"], 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Determine whether the environment is set to development or production
+ENVIRONMENT = os.getenv("PY_ENV", "development")
+
+
+# Load environment-specific .env file
+if ENVIRONMENT == "test":
+    dotenv_path = os.path.join(BASE_DIR, '.env.test')
+elif ENVIRONMENT == "development":
+    dotenv_path = os.path.join(BASE_DIR, '.env.development')
+else:
+    dotenv_path = os.path.join(BASE_DIR, '.env')
+
+load_dotenv(dotenv_path)
+
+cloudinary.config(
+  cloud_name = os.environ["CLOUDINARY_CLOUD_NAME"],
+  api_key = os.environ["CLOUDINARY_API_KEY"],
   api_secret = os.environ["CLOUDINARY_API_SECRET"],
   secure = True
 )
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,11 +55,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["DJANGO_SECRET"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ["PY_ENV"] == "development" else False
 
-ALLOWED_HOSTS = [
-                'localhost',
-                 ]
+host_list = [os.getenv("FRONTEND_URL"), 'localhost', '127.0.0.1']
+if ENVIRONMENT == "test":
+    host_list.append("testserver")
+
+ALLOWED_HOSTS = host_list
 
 
 # Application definition
@@ -59,8 +79,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # Internal
-    'blog',
     'account',
+    'blog',
     'forum',
     'career',
     'service',
@@ -70,10 +90,10 @@ INSTALLED_APPS = [
 # GraphQL Schema Path
 GRAPHENE = {
     "SCHEMA": "core.schema.schema",
-    "MIDDLEWARE": [
-        "graphql_jwt.middleware.JSONWebTokenMiddleware",
-    ],
+    "MIDDLEWARE": [],
 }
+
+JWT_EXPIRATION_DELTA = timedelta(days=1)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -86,10 +106,13 @@ MIDDLEWARE = [
 
     'corsheaders.middleware.CorsMiddleware',
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+
 ]
 
+JWT_ACCESS_TOKEN_EXPIRATION_DELTA = timedelta(minutes=15)
+JWT_REFRESH_TOKEN_EXPIRATION_DELTA = timedelta(days=1)
+
 AUTHENTICATION_BACKENDS = [
-    "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
 
@@ -98,7 +121,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'account', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,31 +147,59 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': os.environ["POSTGRES_ENGINE"],
-#             'NAME':  os.environ["SUPABASE_DB"],
-#             'USER': os.environ["SUPABASE_DB_USER"],
-#             'PASSWORD': os.environ["SUPABASE_DB_PASSWORD"],
-#             'HOST': os.environ["SUPABASE_DB_HOST"],  # Set to the appropriate host
-#             'PORT': os.environ["SUPABASE_DB_PORT"],       # Set to the appropriate port
-#         }
-#     }
 
-DATABASES = {
+
+
+# Define the database settings for development and production
+if ENVIRONMENT == "development":
+    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+elif ENVIRONMENT == "test":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'dbtest.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': os.environ["POSTGRES_ENGINE"],
+            'NAME':  os.environ["SUPABASE_DB"],
+            'USER': os.environ["SUPABASE_DB_USER"],
+            'PASSWORD': os.environ["SUPABASE_DB_PASSWORD"],
+            'HOST': os.environ["SUPABASE_DB_HOST"],
+            'PORT': os.environ["SUPABASE_DB_PORT"],
+        }
+    }
+
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'test_db.sqlite3',
+        }
+    }
+
+# Use the SMTP backend for sending emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Gmail SMTP settings
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = 587  # Use TLS (587) or SSL (465)
+EMAIL_USE_TLS = True if os.getenv("EMAIL_USE_TLS") == "True" else False
+EMAIL_USE_SSL = True if not DEBUG else False
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
+# Default "from" address for outgoing emails
+SERVER_EMAIL = os.getenv("EMAIL_HOST_USER")
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 
 
 # Password validation

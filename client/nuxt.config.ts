@@ -1,72 +1,96 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   ssr: false,
+  target: 'static',
   devtools: { enabled: true },
   app: {
     // <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     head: {
       // link: [{ rel: "stylesheet", href: "https://cdn.quilljs.com/1.3.6/quill.snow.css" }],
     },
+    pageTransition: {
+      name: 'fade',
+      mode: 'out-in', // default
+    },
+    layoutTransition: {
+      name: 'slide',
+      mode: 'out-in', // default
+    },
   },
   components: [
     {
-      path: "~/components/layouts",
+      path: '~/components/layouts',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/home",
+      path: '~/components/home',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/admin",
+      path: '~/components/admin',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/article",
+      path: '~/components/article',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/category",
+      path: '~/components/category',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/author",
+      path: '~/components/author',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     {
-      path: "~/components/elements",
+      path: '~/components/elements',
       pathPrefix: false,
-      extensions: [".vue"],
+      extensions: ['.vue'],
     },
     // "~/components",
   ],
   typescript: {
     strict: true,
   },
-  modules: ["@nuxtjs/apollo", "@nuxtjs/tailwindcss", "@nuxt/devtools", "@nuxtjs/cloudinary"],
+  modules: [
+    '@nuxtjs/apollo',
+    '@nuxt/devtools',
+    '@nuxtjs/cloudinary',
+    'nuxt-icon',
+    '@nuxt/test-utils/module'
+  ],
+
   apollo: {
     clients: {
       default: {
-        httpEndpoint: "http://localhost:8000/graphql/",
-        // httpLinkOptions: { credentials: "include" },
-      },
+        httpEndpoint: 'http://localhost:8000/graphql/'
+      }
     },
   },
-  plugins: [],
+
+  plugins: [
+    // '~/plugins/apollo-client.ts'
+    // { src: '~/plugins/apollo-client.ts', mode: 'client' },
+    { src: '~/plugins/bootstrap-client.ts', mode: 'client' }
+  ],
   // some nuxt config...
   css: [
+    'assets/sass/global.scss',
+
+    'bootstrap/dist/css/bootstrap.min.css',
     // ...
-    "quill/dist/quill.core.css",
+    'quill/dist/quill.core.css',
     // for snow theme
-    "quill/dist/quill.snow.css",
+    'quill/dist/quill.snow.css',
     // for bubble theme
-    "quill/dist/quill.bubble.css",
+    'quill/dist/quill.bubble.css',
     // ...
   ],
 });

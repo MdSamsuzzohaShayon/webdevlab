@@ -1,6 +1,7 @@
 import graphene
-from .queryTypes import AuthorType, CategoryType, ArticleType, CommentType, TagType
-from ..models import Author, Category, Article, Comment, Tag
+from .queryTypes import CategoryType, ArticleType, CommentType, TagType, CommenterType, AuthorType
+from ..models import Category, Article, Comment, Tag, Commenter
+from account.models import User
 
 class Query(graphene.ObjectType):
 
@@ -8,9 +9,11 @@ class Query(graphene.ObjectType):
     all_categories = graphene.List(CategoryType)
     all_articles = graphene.List(ArticleType, start=graphene.Int(), limit=graphene.Int())
     all_comments = graphene.List(CommentType)
+    all_commenters = graphene.List(CommenterType)
     all_tags = graphene.List(TagType)
 
     author_by_id = graphene.Field(AuthorType, id=graphene.Int())
+    commenter_by_id = graphene.Field(AuthorType, id=graphene.Int())
     category_by_id = graphene.Field(CategoryType, id=graphene.Int())
     article_by_id = graphene.Field(ArticleType, id=graphene.Int())
     article_by_link = graphene.Field(ArticleType, link=graphene.String())
@@ -18,7 +21,7 @@ class Query(graphene.ObjectType):
     # tag_by_id = graphene.Field(TagType, id=graphene.Int())
 
     def resolve_all_authors(self, info):
-        return Author.objects.all()
+        return User.objects.all()
 
     def resolve_all_categories(self, info):
         objects = Category.objects.all().order_by('-id')
@@ -35,11 +38,18 @@ class Query(graphene.ObjectType):
         objects = Comment.objects.all().order_by('-id')
         return objects
 
+    def resolve_all_commenters(self, info):
+        objects = Commenter.objects.all().order_by('-id')
+        return objects
+
+    def resolve_commenter_by_id(self, info, id):
+        return Commenter.objects.get(pk=id)
+
     def resolve_all_tags(self, info):
         return Tag.objects.all()
 
     def resolve_author_by_id(self, info, id):
-        return Author.objects.get(pk=id)
+        return User.objects.get(pk=id)
 
     def resolve_category_by_id(self, info, id):
         return Category.objects.get(pk=id)

@@ -1,5 +1,12 @@
 # Web Dev Lab
 
+### Todo
+ - Add tests for Django and Nuxt.js
+ - Fix linting issue on Nuxt.js
+ - Fix liniting issues for Django project
+ - Seed data to the database
+ - Frontend design with bootstrap
+
 ### Features
  - Selling courses
  - Blog on http://blog.webdevlab.org
@@ -11,7 +18,7 @@
  - Do nuxt js seo for all pages
 
 ### Requirements
- - Quill text editor 
+ - Quill text editor
  - Use time function [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
  - Design layout for admin
  - Main menu for home
@@ -51,3 +58,16 @@
    - article_id (Foreign Key referencing the Articles Table)
    - tag_id (Foreign Key referencing the Tags Table)
 
+### Flake setup
+ - pip install flake8 flake8-django
+ - nano setup.cfg
+ - flake8 .
+ - nano setup.cfgpip install pre-commit
+ - flake8 .
+ - pip install pre-commit
+ - pip freeze > requirements.txt
+ - pre-commit install
+
+
+### Requirements
+ - Create a mail services for **contact@webdevlab.com**

@@ -1,5 +1,5 @@
-import { type IAuthor } from "./Author";
-import type { ICategory } from "./Category";
+import { type IAuthor } from './Author';
+import type { ICategory } from './Category';
 
 export interface IArticle {
   id: number;

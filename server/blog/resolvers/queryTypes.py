@@ -1,10 +1,15 @@
 from graphene_django.types import DjangoObjectType
-from ..models import Author, Category, Article, Comment, Tag
+from ..models import Category, Article, Comment, Tag, Commenter
+from account.models import User
 
 
 class AuthorType(DjangoObjectType):
     class Meta:
-        model = Author
+        model = User
+
+class CommenterType(DjangoObjectType):
+    class Meta:
+        model = Commenter
 
 
 class CategoryType(DjangoObjectType):

@@ -1,57 +1,66 @@
 <template>
-  <ClientOnly>
-    <h1>Add Article</h1>
-    <form class="mb-4" v-on:submit.prevent="handleArticleAdd">
-      <div class="input-group mb-3">
-        <label for="title">Title</label>
-        <input type="text" class="border outline-none bg-gray-300" name="title" id="title" v-model="articleState.title" />
+  <div class="container-fluid bg-light">
+    <h1 class="mb-4 text-center">Add Article</h1>
+    <form class="mb-4" @submit.prevent="handleArticleAdd">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          id="title"
+          v-on:change="handleTitleChange"
+          type="text"
+          class="form-control"
+          name="title"
+        >
       </div>
-      <div class="input-group flex mb-3 flex-col items-start gap-2">
-        <label for="thumbnail">Thumbnail</label>
-        <input type="file" class="border outline-none bg-gray-300" name="thumbnail" id="thumbnail"
-          v-on:change="handleFileChange" />
-        <img v-if="imgUrl" v-bind:src="imgUrl" class="w-full h-36 object-cover object-center" />
+      <div class="mb-3">
+        <label for="thumbnail" class="form-label">Thumbnail</label>
+        <input
+          id="thumbnail"
+          type="file"
+          class="form-control"
+          name="thumbnail"
+          @change="handleFileChange"
+        >
+        <img v-if="imgUrl" :src="imgUrl" class="w-100 mt-2 rounded" alt="Thumbnail" >
       </div>
-      <div class="input-group mb-3">
-        <label for="content">Content</label>
-        <QuillEditor v-model:content="state.content" :options="options" theme="snow" @editorChange="handleContentChange"
-          contentType="html" />
-        <!-- <div class="border border-green-500">
-          <h2>Display content</h2>
-          <QuillEditor v-model="initialContent" :options="options" />
-        </div> -->
+      <div class="mb-3">
+        <label class="form-label">Content</label>
+        <QuillEditor
+          v-model:content="state.content"
+          :options="options"
+          theme="snow"
+          @editor-change="handleContentChange"
+        />
       </div>
-      <div class="input-group mb-3">
-        <label for="createdAt">Date</label>
-        <input type="datetime-local" name="createdAt" id="createdAt" />
+      <div class="mb-3">
+        <label for="createdAt" class="form-label">Date</label>
+        <input id="createdAt" type="datetime-local" class="form-control" name="createdAt" >
       </div>
-      <div class="input-group mb-3">
-        <label for="category">Category</label>
-        <select name="category" id="category" v-model="articleState.category">
-          <option v-for="cat in props.categories" v-bind:value="cat.id">{{ cat.name }}</option>
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" v-model="articleState.category" class="form-select" name="category">
+          <option v-for="cat in props.categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
         </select>
       </div>
-      <div class="input-group mb-3">
-        <label for="author">Author</label>
-        <select name="author" id="author" v-model="articleState.author">
-          <option v-for="a in props.authors" v-bind:value="a.id">{{ a.name }}</option>
+      <!-- <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <select id="author" v-model="articleState.author" class="form-select" name="author">
+          <option v-for="a in props.authors" :key="a.id" :value="a.id">{{ a.name }}</option>
         </select>
+      </div> -->
+      <div class="mb-3">
+        <label for="link" class="form-label">Link</label>
+        <input id="link" v-model="articleState.link" type="text" class="form-control" name="link" >
       </div>
-      <div class="input-group mb-3">
-        <label for="link">Link</label>
-        <input type="text" class="border outline-none bg-gray-300" name="link" id="link" v-model="articleState.link" />
-      </div>
-      <div class="input-group">
-        <button type="submit">Add</button>
-      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
     </form>
-  </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-import { QuillEditor, Delta, Quill } from "@vueup/vue-quill";
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import type { Delta} from '@vueup/vue-quill';
+import { QuillEditor, Quill } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { ADD_ARTICLE_RAW } from '../../graphql/articles';
 
 const isReadOnly = false;
@@ -66,14 +75,35 @@ const articleState = reactive({
 const uploadedImg = ref<File | null>(null);
 const imgUrl = ref<string | null>(null);
 
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+  ['blockquote', 'code-block'],
+  ['link', 'image', 'video', 'formula'],
+
+  [{ header: 1 }, { header: 2 }], // custom button values
+  [{ list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
+  [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+  [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+  [{ direction: 'rtl' }], // text direction
+
+  [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ font: [] }],
+  [{ align: [] }],
+
+  ['clean'], // remove formatting button
+];
+
 const options = {
-  debug: "info",
+  debug: 'info',
   modules: {
-    toolbar: isReadOnly ? false : ["bold", "italic", "underline"],
+    toolbar: toolbarOptions /* ["bold", "italic", "underline"] */,
   },
-  placeholder: "Compose an epic...",
-  readOnly: false,
-  theme: "snow",
+  placeholder: 'Compose an epic...',
+  readOnly: isReadOnly,
+  theme: 'snow',
 };
 
 const initialContent = `
@@ -84,18 +114,25 @@ const initialContent = `
   <p>Content...</p>
 `;
 
-
 const state = reactive({ content: initialContent });
-const props = defineProps(["categories", "authors"]);
+const props = defineProps(['categories']);
+
+
+const handleTitleChange=(e: Event)=>{
+  e.preventDefault();
+  const inputEl = e.target as HTMLInputElement;
+  const inputTitle =inputEl.value;
+  articleState.title = inputTitle;
+  articleState.link = stringToSlug(inputTitle);
+}
 
 const handleArticleAdd = async (e: Event) => {
   e.preventDefault();
   try {
     const formData = new FormData();
 
-
     const myHeaders = new Headers();
-    myHeaders.append("Cookie", "csrftoken=ccS5qh2RZofjzKhe6KeN51RMYOGQAb5t");
+    myHeaders.append('Cookie', 'csrftoken=ccS5qh2RZofjzKhe6KeN51RMYOGQAb5t');
 
     const newImgFile = uploadedImg.value as File;
 
@@ -105,29 +142,26 @@ const handleArticleAdd = async (e: Event) => {
         title: articleState.title,
         content: state.content,
         thumbnail: null, // You may need to handle thumbnail separately based on your requirements
-        // authorId: articleState.author,
-        authorId: 1,
+        authorId: 10, // Get author ID from token
         categoryId: articleState.category,
       },
     };
 
-    formData.set("operations", JSON.stringify(operations));
-    formData.set("map", "{\n  \"0\": [\"variables.thumbnail\"]\n}");
-    formData.set("0", newImgFile);
+    formData.set('operations', JSON.stringify(operations));
+    formData.set('map', '{\n  "0": ["variables.thumbnail"]\n}');
+    formData.set('0', newImgFile);
 
-    const response = await fetch("http://localhost:8000/graphql/", {
+    const response = await fetch('http://localhost:8000/graphql/', {
       method: 'POST',
       headers: myHeaders,
       body: formData,
-      redirect: 'follow'
+      redirect: 'follow',
     });
 
     console.log(response);
   } catch (error) {
-    console.log("Error adding article", error);
-
+    console.log('Error adding article', error);
   }
-
 };
 
 const handleFileChange = (e: Event) => {
@@ -136,9 +170,9 @@ const handleFileChange = (e: Event) => {
   if (inputEl.files && inputEl.files.length > 0) {
     uploadedImg.value = inputEl.files[0];
     const objectUrl = URL.createObjectURL(inputEl.files[0]);
-    imgUrl.value = objectUrl;;
+    imgUrl.value = objectUrl;
   }
-}
+};
 
 const handleContentChange = (e: Delta) => {
   console.log(e);
