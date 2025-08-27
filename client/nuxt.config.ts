@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  ssr: false,
-  target: 'static',
+  ssr: true,
+  // target: 'static',
   devtools: { enabled: true },
   app: {
     // <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
