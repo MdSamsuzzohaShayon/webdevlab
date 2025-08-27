@@ -45,6 +45,6 @@ npm install --legacy-peer-deps
 npm run build
 npm run generate
 sudo rm -rf /var/www/html
-sudo cp -r .output/public /var/www/html 
+sudo cp -r .output/public /var/www/html
 cd
 ls -la

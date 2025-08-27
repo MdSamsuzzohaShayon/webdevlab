@@ -1,4 +1,4 @@
-import json 
+import json
 from core.settings import cloudinary
 from graphene.test import Client
 from core.schema import schema  # Import your GraphQL schema
@@ -108,7 +108,7 @@ def seed_data():
 
     # Upload thumbnail and save public ID for each article
     articles_data = []
-    json_data = None 
+    json_data = None
     with open('blog_data.json', 'r') as blog_data_file:
         json_data = json.load(blog_data_file)
 
