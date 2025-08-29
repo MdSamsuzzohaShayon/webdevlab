@@ -8,7 +8,7 @@
               <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
                 <span class="text-white font-bold text-lg">L</span>
               </div>
-              <span class="text-xl font-bold">LearnHub</span>
+              <span class="text-xl font-bold">WebDevLab</span>
             </div>
             <p class="text-gray-300 mb-4 max-w-md">
               Your gateway to knowledge. Discover articles, master new skills through courses, 
@@ -63,7 +63,7 @@
         <div class="mt-8 pt-8 border-t border-gray-700">
           <div class="flex flex-col md:flex-row justify-between items-center">
             <p class="text-gray-300 text-sm">
-              © {{ new Date().getFullYear() }} LearnHub. All rights reserved.
+              © {{ new Date().getFullYear() }} WebDevLab. All rights reserved.
             </p>
             <p class="text-gray-300 text-sm mt-2 md:mt-0">
               Made with ❤️ for learners everywhere
