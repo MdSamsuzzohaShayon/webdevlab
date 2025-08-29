@@ -176,7 +176,7 @@
   ])
   
   useHead({
-    title: 'Forum - LearnHub',
+    title: 'Forum - WebDevLab',
     meta: [
       { name: 'description', content: 'Join our community forum to connect with fellow learners, share knowledge, and get help.' }
     ]

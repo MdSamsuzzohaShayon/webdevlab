@@ -8,7 +8,7 @@
               <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
                 <span class="text-white font-bold text-lg">L</span>
               </div>
-              <span class="text-xl font-bold text-gray-900">LearnHub</span>
+              <span class="text-xl font-bold text-gray-900">WebDevLab</span>
             </NuxtLink>
           </div>
   

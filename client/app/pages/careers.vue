@@ -181,7 +181,7 @@
   ])
   
   useHead({
-    title: 'Careers - LearnHub',
+    title: 'Careers - WebDevLab',
     meta: [
       { name: 'description', content: 'Find exciting career opportunities from top companies. Discover your next role.' }
     ]
