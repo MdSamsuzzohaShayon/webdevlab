@@ -24,5 +24,10 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+<<<<<<< HEAD
   modules: ['@nuxtjs/tailwindcss', ]
+=======
+  modules: ['@nuxtjs/tailwindcss'],
+  css: ['~/assets/scss/main.scss']
+>>>>>>> f6c2e9f (Feat(sample-pages): Created sample blog, courses, careers, shots, services, about, contact)
 });

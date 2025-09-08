@@ -66,7 +66,7 @@
               © {{ new Date().getFullYear() }} WebDevLab. All rights reserved.
             </p>
             <p class="text-gray-300 text-sm mt-2 md:mt-0">
-              Made with ❤️ for learners everywhere
+              Made with ❤️ for WebDevLab
             </p>
           </div>
         </div>
