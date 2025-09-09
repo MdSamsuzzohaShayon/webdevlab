@@ -18,7 +18,7 @@
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-8">
             <NuxtLink to="/" class="nav-link capitalize">Home</NuxtLink>
-            <NuxtLink to="/blog" class="nav-link capitalize">Blog</NuxtLink>
+            <NuxtLink to="https://blog.webdevlab.org" target="_blank" class="nav-link capitalize">Blog</NuxtLink>
             <NuxtLink to="/courses" class="nav-link capitalize">Courses</NuxtLink>
             <NuxtLink to="/careers" class="nav-link capitalize">Careers</NuxtLink>
             <NuxtLink to="/forum" class="nav-link capitalize">Forum</NuxtLink>
@@ -63,7 +63,7 @@
           class="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg mt-2 shadow-lg"
         >
           <NuxtLink to="/" class="mobile-nav-link capitalize">Home</NuxtLink>
-          <NuxtLink to="/blog" class="mobile-nav-link capitalize">Blog</NuxtLink>
+          <NuxtLink to="https://blog.webdevlab.org" target="_blank" class="mobile-nav-link capitalize">Blog</NuxtLink>
           <NuxtLink to="/courses" class="mobile-nav-link capitalize">Courses</NuxtLink>
           <NuxtLink to="/careers" class="mobile-nav-link capitalize">Careers</NuxtLink>
           <NuxtLink to="/forum" class="mobile-nav-link capitalize">Forum</NuxtLink>
