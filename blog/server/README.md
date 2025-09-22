@@ -355,4 +355,27 @@ shayon@shayonhost:~$ sudo -u postgres psql
  1020  sqlx migrate add 20250911_create_comments
 
 
+  1021  sqlx migrate add create_posts
+ 1022  sqlx migrate add create_tags
+ 1023  sqlx migrate add create_post_tags
+ 1024  sqlx migrate add create_comments
+ 1025  sqlx migrate add create_categories
+ 1026  sqlx migrate add add_category_to_posts
+
+
+
+
+  1001  sudo -u postgres psql
+ 1002  cd Documents/web/webdevlab/blog
+ 1003  sudo -u postgres psql
+ 1004  cd server/
+ 1005  rm -rf migrations/
+ 1006  mkdir migrations
+ 1007  sqlx migrate add create_users
+ 1008  export DATABASE_URL=postgres://shayon:Test1234@localhost:5432/webdevlab_blog
+ 1009  sqlx migrate run
+ 1010  sqlx migrate info
+
+
+
 

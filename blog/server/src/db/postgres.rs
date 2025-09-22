@@ -1,10 +1,13 @@
-use sqlx::{PgPool, Pool, Postgres};
+use sqlx::{PgPool, postgres::PgPoolOptions};
 
 pub async fn init_db(database_url: &str) -> PgPool {
-    // Create a connection pool
-    let pool: Pool<Postgres> = PgPool::connect(database_url)
+    // Create a connection pool with proper configuration
+    let pool = PgPoolOptions::new()
+        .max_connections(5)
+        .connect(database_url)
         .await
         .expect("❌ Failed to connect to PostgreSQL");
+    
     println!("✅ Connected to PostgreSQL");
     pool
 }
