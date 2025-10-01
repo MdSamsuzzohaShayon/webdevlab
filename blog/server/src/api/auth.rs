@@ -116,3 +116,8 @@ pub fn init_routes(cfg: &mut web::ServiceConfig) {
         .service(reset_password)
         .service(get_me);
 }
+
+
+pub fn init_protected_routes(cfg: &mut web::ServiceConfig) {
+    cfg.service(get_me); // only authenticated routes
+}

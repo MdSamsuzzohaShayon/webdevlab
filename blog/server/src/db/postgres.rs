@@ -1,13 +1,13 @@
 use sqlx::{PgPool, postgres::PgPoolOptions};
+use std::io;
 
-pub async fn init_db(database_url: &str) -> PgPool {
-    // Create a connection pool with proper configuration
+pub async fn init_db(database_url: &str) -> io::Result<PgPool> {
     let pool = PgPoolOptions::new()
         .max_connections(5)
         .connect(database_url)
         .await
-        .expect("❌ Failed to connect to PostgreSQL");
-    
+        .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+
     println!("✅ Connected to PostgreSQL");
-    pool
+    Ok(pool)
 }

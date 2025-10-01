@@ -9,6 +9,7 @@ use crate::{
     errors::AppError,
 };
 
+#[derive(Clone)]
 pub struct AuthService {
     pool: PgPool,
     cache_service: CacheService,
@@ -45,12 +46,13 @@ impl AuthService {
 
         // Create user
         sqlx::query!(
-            "INSERT INTO users (email, password_hash, first_name, last_name, verification_token) 
-             VALUES ($1, $2, $3, $4, $5)",
+            "INSERT INTO users (email, password_hash, first_name, last_name, photo, verification_token) 
+             VALUES ($1, $2, $3, $4, $5, $6)",
             user_data.email,
             password_hash,
             user_data.first_name,
             user_data.last_name,
+            None::<String>,   // photo is optional, set to NULL initially
             verification_token
         )
         .execute(&self.pool)
@@ -101,7 +103,7 @@ impl AuthService {
         self.cache_service.store_refresh_token(
             user.id,
             &refresh_token,
-            self.config.refresh_token_expires_in as usize,
+            self.config.refresh_token_expires_in as u64,
         )?;
 
         Ok(AuthResponse {
@@ -132,7 +134,7 @@ impl AuthService {
         self.cache_service.store_refresh_token(
             claims.sub,
             &new_refresh_token,
-            self.config.refresh_token_expires_in as usize,
+            self.config.refresh_token_expires_in as u64,
         )?;
 
         // Get user data

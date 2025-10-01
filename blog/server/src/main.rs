@@ -6,7 +6,7 @@ mod models;
 mod services;
 mod utils;
 
-use actix_web::{App, HttpServer, web};
+use actix_web::{App, HttpServer, web, HttpResponse, Responder};
 use actix_web_httpauth::middleware::HttpAuthentication;
 use sqlx::migrate::Migrator;
 use std::path::Path;
@@ -16,17 +16,19 @@ use crate::{
     utils::middleware::validator,
 };
 
+// A simple test handler
+async fn test_route() -> impl Responder {
+    HttpResponse::Ok().body("🚀 Test route is working!")
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let config = AppConfig::from_env();
 
     // Connect to PostgreSQL
     let pg_pool = db::postgres::init_db(&config.database_url)
-        .await
-        .expect("❌ Failed to connect to PostgreSQL");
+        .await?; // assuming init_db returns Result<PgPool, _>
 
-    // Run migrations
-    run_migrations(&pg_pool).await;
 
     // Connect to Redis
     let redis_client = db::redis::init_client(&config.redis_url)
@@ -38,6 +40,9 @@ async fn main() -> std::io::Result<()> {
 
     println!("🚀 Server running at http://127.0.0.1:{}", config.port);
 
+    // Clone config for the closure so the original can still be used in .bind()
+    let server_config = config.clone();
+
     HttpServer::new(move || {
         let auth_middleware = HttpAuthentication::bearer(validator);
 
@@ -45,7 +50,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::Data::new(pg_pool.clone()))
             .app_data(web::Data::new(redis_client.clone()))
             .app_data(web::Data::new(auth_service.clone()))
-            .app_data(web::Data::new(config.clone()))
+            .app_data(web::Data::new(server_config.clone())) // use cloned config here
             .service(
                 web::scope("/api/auth")
                     .configure(api::auth::init_routes)
@@ -55,20 +60,11 @@ async fn main() -> std::io::Result<()> {
                     .wrap(auth_middleware)
                     .configure(api::auth::init_protected_routes)
             )
+            .route("/api/test", web::get().to(test_route))
     })
-    .bind(("127.0.0.1", config.port))?
+    .bind(("127.0.0.1", config.port))? // original config is still available here
     .run()
     .await
 }
 
-async fn run_migrations(pool: &sqlx::PgPool) {
-    let migrator = Migrator::new(Path::new("./migrations"))
-        .await
-        .expect("❌ Failed to load migrations");
-    
-    migrator.run(pool)
-        .await
-        .expect("❌ Failed to run migrations");
-    
-    println!("✅ Database migrations completed");
-}
+

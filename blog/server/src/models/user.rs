@@ -10,6 +10,7 @@ pub struct User {
     pub password_hash: String,
     pub first_name: String,
     pub last_name: String,
+    pub photo: String,
     pub is_verified: bool,
     pub verification_token: Option<String>,
     pub reset_token: Option<String>,
@@ -28,6 +29,9 @@ pub struct RegisterUser {
     pub first_name: String,
     #[validate(length(min = 2))]
     pub last_name: String,
+    #[validate(length(min = 2))]
+    pub photo: String,
+
 }
 
 #[derive(Debug, Serialize, Deserialize, Validate)]
