@@ -1,13 +1,23 @@
 use actix_web::{web, HttpResponse, post, get};
 use validator::Validate;
+use utoipa::IntoParams;
 use crate::{
-    models::user::{RegisterUser, LoginUser, ForgotPassword, ResetPassword, VerifyEmail},
+    models::user::{RegisterUser, LoginUser, ForgotPassword, ResetPassword, VerifyEmail, AuthResponse, UserResponse},
     services::auth_service::AuthService,
     errors::AppError,
 };
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/register",
+    request_body = LoginUser,
+    responses(
+        (status = 200, description = "Logged in successfully", body = AuthResponse),
+        (status = 401, description = "Invalid credentials")
+    )
+)]
 #[post("/register")]
-async fn register(
+pub async fn register(
     auth_service: web::Data<AuthService>,
     user_data: web::Json<RegisterUser>,
 ) -> Result<HttpResponse, AppError> {
@@ -20,8 +30,18 @@ async fn register(
     })))
 }
 
+
+#[utoipa::path(
+    post,
+    path = "/api/auth/login",
+    request_body = LoginUser,
+    responses(
+        (status = 200, description = "Logged in successfully", body = AuthResponse),
+        (status = 401, description = "Invalid credentials")
+    )
+)]
 #[post("/login")]
-async fn login(
+pub async fn login(
     auth_service: web::Data<AuthService>,
     login_data: web::Json<LoginUser>,
 ) -> Result<HttpResponse, AppError> {
@@ -32,8 +52,17 @@ async fn login(
     Ok(HttpResponse::Ok().json(response))
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/refresh",
+    request_body = serde_json::Value,
+    responses(
+        (status = 200, description = "Refreshed token successfully", body = AuthResponse),
+        (status = 401, description = "Invalid refresh token")
+    )
+)]
 #[post("/refresh")]
-async fn refresh_token(
+pub async fn refresh_token(
     auth_service: web::Data<AuthService>,
     token: web::Json<serde_json::Value>,
 ) -> Result<HttpResponse, AppError> {
@@ -46,8 +75,16 @@ async fn refresh_token(
     Ok(HttpResponse::Ok().json(response))
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/logout",
+    responses(
+        (status = 200, description = "Logged out successfully"),
+        (status = 401, description = "Invalid refresh token")
+    )
+)]
 #[post("/logout")]
-async fn logout(
+pub async fn logout(
     auth_service: web::Data<AuthService>,
     user_id: web::ReqData<i32>,
 ) -> Result<HttpResponse, AppError> {
@@ -58,8 +95,17 @@ async fn logout(
     })))
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/verify-email",
+    request_body = VerifyEmail,
+    responses(
+        (status = 200, description = "Email verified successfully"),
+        (status = 401, description = "Invalid verification token")
+    )
+)]
 #[post("/verify-email")]
-async fn verify_email(
+pub async fn verify_email(
     auth_service: web::Data<AuthService>,
     data: web::Json<VerifyEmail>,
 ) -> Result<HttpResponse, AppError> {
@@ -70,8 +116,17 @@ async fn verify_email(
     })))
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/forgot-password",
+    request_body = ForgotPassword,
+    responses(
+        (status = 200, description = "Password reset instructions sent to your email"),
+        (status = 401, description = "Invalid email")
+    )
+)]
 #[post("/forgot-password")]
-async fn forgot_password(
+pub async fn forgot_password(
     auth_service: web::Data<AuthService>,
     data: web::Json<ForgotPassword>,
 ) -> Result<HttpResponse, AppError> {
@@ -82,8 +137,17 @@ async fn forgot_password(
     })))
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/reset-password",
+    request_body = ResetPassword,
+    responses(
+        (status = 200, description = "Password reset successfully"),
+        (status = 401, description = "Invalid reset token")
+    )
+)]
 #[post("/reset-password")]
-async fn reset_password(
+pub async fn reset_password(
     auth_service: web::Data<AuthService>,
     data: web::Json<ResetPassword>,
 ) -> Result<HttpResponse, AppError> {
@@ -96,8 +160,16 @@ async fn reset_password(
     })))
 }
 
+#[utoipa::path(
+    get,
+    path = "/api/auth/me",
+    responses(
+        (status = 200, description = "User information", body = UserResponse),
+        (status = 401, description = "Unauthorized")
+    )
+)]
 #[get("/me")]
-async fn get_me(
+pub async fn get_me(
     auth_service: web::Data<AuthService>,
     user_id: web::ReqData<i32>,
 ) -> Result<HttpResponse, AppError> {

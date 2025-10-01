@@ -2,6 +2,8 @@ use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 use sqlx::FromRow;
 use validator::Validate;
+use utoipa::ToSchema;
+
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct User {
@@ -19,7 +21,7 @@ pub struct User {
     pub updated_at: DateTime<Utc>,
 }
 
-#[derive(Debug, Serialize, Deserialize, Validate)]
+#[derive(Debug, Serialize, Deserialize, Validate, ToSchema)]
 pub struct RegisterUser {
     #[validate(email)]
     pub email: String,
@@ -34,7 +36,7 @@ pub struct RegisterUser {
 
 }
 
-#[derive(Debug, Serialize, Deserialize, Validate)]
+#[derive(Debug, Serialize, Deserialize, Validate, ToSchema)]
 pub struct LoginUser {
     #[validate(email)]
     pub email: String,
@@ -42,24 +44,24 @@ pub struct LoginUser {
     pub password: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct ForgotPassword {
     pub email: String,
 }
 
-#[derive(Debug, Serialize, Deserialize, Validate)]
+#[derive(Debug, Serialize, Deserialize, Validate, ToSchema)]
 pub struct ResetPassword {
     pub token: String,
     #[validate(length(min = 6))]
     pub new_password: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct VerifyEmail {
     pub token: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct AuthResponse {
     pub access_token: String,
     pub refresh_token: String,
@@ -68,7 +70,7 @@ pub struct AuthResponse {
     pub user: UserResponse,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct UserResponse {
     pub id: i32,
     pub email: String,

@@ -1,15 +1,19 @@
 mod config;
 mod db;
+mod api_doc; // add this at the top
 mod errors;
 mod api;
 mod models;
 mod services;
 mod utils;
 
+use utoipa::OpenApi; 
 use actix_web::{App, HttpServer, web, HttpResponse, Responder};
 use actix_web_httpauth::middleware::HttpAuthentication;
 use sqlx::migrate::Migrator;
 use std::path::Path;
+use utoipa_swagger_ui::SwaggerUi;
+use crate::api_doc::ApiDoc;
 use crate::{
     config::AppConfig,
     services::{auth_service::AuthService, cache_service::CacheService},
@@ -61,6 +65,11 @@ async fn main() -> std::io::Result<()> {
                     .configure(api::auth::init_protected_routes)
             )
             .route("/api/test", web::get().to(test_route))
+            // Swagger UI route
+            .service(
+                SwaggerUi::new("/api/docs/{_:.*}")
+                    .url("/api-doc/openapi.json", ApiDoc::openapi())
+            )
     })
     .bind(("127.0.0.1", config.port))? // original config is still available here
     .run()
