@@ -1,3 +1,13 @@
+# Color Scheme
+
+| Hex Code  | Suggested Color Name |
+| --------- | -------------------- |
+| `#9d3cea` | **Vivid Purple**     |
+| `#22e3c8` | **Aqua Cyan**        |
+| `#c9f236` | **Lime Yellow**      |
+| `#3080f3` | **Bright Blue**      |
+
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

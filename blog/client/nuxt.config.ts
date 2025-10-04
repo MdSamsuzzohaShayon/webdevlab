@@ -6,6 +6,15 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss'],
-  css: ['~/assets/scss/main.scss']
-});
+  modules: ['@nuxtjs/tailwindcss',  '@nuxt/image'],
+  css: [
+    '~/assets/scss/main.scss',
+    // 'swiper/css' // Updated path for Swiper v8+
+  ],
+  plugins: [
+    { src: '~/plugins/particles.js', mode: 'client' }
+  ],
+  build: {
+    transpile: ['swiper'] // Add this to transpile Swiper
+  }
+})
