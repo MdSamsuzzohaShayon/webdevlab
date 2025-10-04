@@ -1,73 +1,98 @@
 # Web Dev Lab
 
-### Todo
- - Add tests for Django and Nuxt.js
- - Fix linting issue on Nuxt.js
- - Fix liniting issues for Django project
- - Seed data to the database
- - Frontend design with bootstrap
+A full-stack platform with three interconnected parts:
 
-### Features
- - Selling courses
- - Blog on http://blog.webdevlab.org
- - Create short tutorial
- - Create developer team (career opportunity)
- - Create most advanced User Authentication system (Cookie based, refresh token)
- - Forum on http://forum.webdevlab.org
- - User role (Admin, Student, Viewer)
- - Do nuxt js seo for all pages
+1. **Main Website:** [webdevlab.org](https://webdevlab.org)  
+2. **Blog:** [blog.webdevlab.org](https://blog.webdevlab.org)  
+3. **Forum:** [forum.webdevlab.org](https://forum.webdevlab.org)  
 
-### Requirements
- - Quill text editor
- - Use time function [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
- - Design layout for admin
- - Main menu for home
+This project aims to provide a modern developer-focused platform featuring a blog, forum, course-selling system, and an advanced authentication mechanism.
 
-### Database Modeling (PostgresSQL)
- - Articles Table:
-    - article_id (Primary Key)
-    - title
-    - content
-    - publication_date
-    - author_id (Foreign Key referencing the Authors Table)
-    - category_id (Foreign Key referencing the Categories Table)
+---
 
- - Authors Table:
-    - author_id (Primary Key)
-    - name
-    - email
-    - bio
+## 📌 Main Website (webdevlab.org)
 
- - Comments Table:
-    - comment_id (Primary Key)
-    - article_id (Foreign Key referencing the Articles Table)
-    - author_name
-    - email
-    - comment_text
-    - comment_date
+### ✅ Features
+- Course selling platform
+- Blog integration ([blog.webdevlab.org](https://blog.webdevlab.org))
+- Short tutorials & guides
+- Developer team / career opportunity portal
+- Advanced cookie-based authentication with refresh token support
+- Forum integration ([forum.webdevlab.org](https://forum.webdevlab.org))
+- User roles: **Admin**, **Student**, **Viewer**
+- Full SEO optimization for Nuxt.js pages
 
- - Categories Table:
-    - category_id (Primary Key)
-    - name
+### 🛠 Tech Stack
+- **Frontend:** Nuxt.js (with Bootstrap for UI)
+- **Backend:** Django
+- **Database:** PostgreSQL
+- **Auth:** Cookie + Refresh Token flow
+- **Editor:** Quill text editor
+- **Internationalization:** [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
 
- - Tags Table:
-    - tag_id (Primary Key)
-    - name
+### 📝 Todo
+- [ ] Add unit & integration tests (Django + Nuxt.js)
+- [ ] Fix linting issues (Django + Nuxt.js)
+- [ ] Seed data into the database
+- [ ] Complete frontend design with Bootstrap
+- [ ] Implement mail service for **contact@webdevlab.com**
 
- - ArticleTags Table (a junction table to implement many-to-many relationship between Articles and Tags):
-   - article_id (Foreign Key referencing the Articles Table)
-   - tag_id (Foreign Key referencing the Tags Table)
+---
 
-### Flake setup
- - pip install flake8 flake8-django
- - nano setup.cfg
- - flake8 .
- - nano setup.cfgpip install pre-commit
- - flake8 .
- - pip install pre-commit
- - pip freeze > requirements.txt
- - pre-commit install
+## 🚀 Running the Main Website
 
+### Frontend Setup
+```sh
+cd client
+npm install
+npm run dev
+````
 
-### Requirements
- - Create a mail services for **contact@webdevlab.com**
+Frontend will be available at **[http://localhost:3000](http://localhost:3000)**
+
+---
+
+## 📰 Blog (blog.webdevlab.org)
+
+### 🛠 Tech Stack
+
+* **Backend:** Rust (Actix Web)
+* **Frontend:** Nuxt.js
+* **Database:** PostgreSQL
+* **Cache:** Redis
+
+### ▶️ Running Without Docker
+
+```sh
+# Backend
+cd blog/server
+cargo run
+
+# Frontend
+cd blog/client
+npm install
+npm run dev
+```
+
+* Backend runs at: **[http://localhost:8000/hey](http://localhost:8000/hey)**
+* Frontend runs at: **[http://localhost:3001](http://localhost:3001)**
+
+### 🐳 Running With Docker
+
+*Coming soon — will include Docker setup instructions for full-stack development.*
+
+---
+
+## 🧑‍💻 Contribution
+
+Contributions are welcome!
+Please open an issue or submit a pull request with clear descriptions of your changes.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+See the [LICENSE](./LICENSE) file for details.
+
+```
