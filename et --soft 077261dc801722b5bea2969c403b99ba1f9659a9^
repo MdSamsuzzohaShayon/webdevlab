@@ -1,0 +1,486 @@
+[33mcommit 077261dc801722b5bea2969c403b99ba1f9659a9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelopment[m[33m)[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sat Oct 4 14:48:49 2025 +0600
+
+    Reapply current code after reverting previous commit
+
+[33mcommit 316c920570f05a1024530c0b4d52fba245cfaa36[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sat Oct 4 14:41:44 2025 +0600
+
+    feat: create home page and single blog post page with proper design for the blog
+
+[33mcommit 70349151a8aad40adc04b6aa1a33c82b789f2308[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Oct 3 16:38:48 2025 +0600
+
+    feat(auth): implement user registration with role and Brevo email verification
+    
+    - Register users with proper role assignment (default to Viewer if none provided)
+    - Store verification tokens in Redis for 24-hour expiration
+    - Send professional verification emails via Brevo using business email (admin@webdevlab.org)
+    - Ensure transactional email content includes HTML and plain-text fallback
+    - Added logging for Brevo API responses for easier debugging
+
+[33mcommit 7c86087acd184ea531b39ac0c00ca4c1a9d2d3a8[m[33m ([m[1;31morigin/development[m[33m)[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Oct 1 19:45:21 2025 +0600
+
+    Feat: Add swagger ui documentation
+
+[33mcommit fa5ade1de54e8795420f9333173f412782968b5a[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Oct 1 19:16:30 2025 +0600
+
+    feat: Created all routes for auth and fixed all issues with it
+
+[33mcommit 5b2b80c6b669deccf315aa863ad64db9d81b18ab[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon Sep 22 21:59:50 2025 +0600
+
+    Feat: Created auth backend with RUST(Incomplete).
+
+[33mcommit 515877940cbc7f2702f28527704055f6e1f4a125[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Thu Sep 11 16:08:28 2025 +0600
+
+    feat: Connecting postgresql and redis with our backend, now we need to create migration properly for this project
+
+[33mcommit b36d01c0a7526b2c48e682dc82e54595baef54d8[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Sep 10 04:00:58 2025 +0600
+
+    Fix blog link
+
+[33mcommit 5f894a437ad479be9626565cf3d914c6c74055dc[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Sep 10 03:52:42 2025 +0600
+
+    Create simple project setup with resut actix web and nuxt.js
+
+[33mcommit ec69049359f5df6dc6630fa2b846f52cd373b7b3[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Tue Sep 9 00:45:03 2025 +0600
+
+    fix: Fixed comflict
+
+[33mcommit 559ecafe396cafd28b08ad326548834d03530b6a[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Tue Sep 9 00:37:25 2025 +0600
+
+    Feat(sample-pages): Created sample blog, courses, careers, shots, services, about, contact
+
+[33mcommit 4fb1659943bd7088bc56cc029dee3c79ad900006[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Sep 3 18:14:55 2025 +0600
+
+    feat: Added google tag manager
+
+[33mcommit 56cecc2b5c7e3b809f43af5f3435a4f3000c36ed[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sat Aug 30 03:32:30 2025 +0600
+
+    feat(tailwindcss): included tailwind css properly and followed nuxt.js project structure
+
+[33mcommit 0a1db27b40c3ee90bfd803c10a4711e17763d21c[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Thu Aug 28 15:16:15 2025 +0600
+
+    TailwindCSS working but custom css is not working
+
+[33mcommit 233098ffe2501b911832d1f5b74d145d4dc4334a[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Aug 27 21:53:50 2025 +0600
+
+    Design by loveable
+
+[33mcommit b808b734eb463b5d91102c3848f36323da13aaa9[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Aug 27 21:42:49 2025 +0600
+
+    Nuxt setting change
+
+[33mcommit 91bd97cb46a29d687734b0b42cc63415ebf64ddd[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Aug 27 21:05:24 2025 +0600
+
+    New fresh project from scratch
+
+[33mcommit 0469103d7da34850648dccbc2a9f36ee5c348cfd[m
+Merge: 433188a 5b595df
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Aug 27 20:56:05 2025 +0600
+
+    Merged to development
+
+[33mcommit 5b595dfd8e9a71e2da3ea463be4e2c444f631092[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Aug 27 20:53:06 2025 +0600
+
+    Enable ssr
+
+[33mcommit 433188a046766381bcfae97cd5079372e52436be[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Apr 4 21:31:26 2025 +0600
+
+    Update
+
+[33mcommit 7c05a270c34df04da6bf096a1d10dc24912cbdfa[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Apr 4 21:29:31 2025 +0600
+
+    Update
+
+[33mcommit 5d3b50cf318dd3647cf66de74d0f40bec79c2254[m
+Merge: f62eb07 d1814cf
+Author: Md Samsuzzoha Shayon <mdshayon0@gmail.com>
+Date:   Fri Sep 27 18:42:21 2024 +0600
+
+    Merge pull request #7 from MdSamsuzzohaShayon/deployment
+    
+    Deployment - Create a minimal project for deployment temporarily
+
+[33mcommit d1814cfda13f6ad02ad3dfbb9fe99ea9584e62dd[m[33m ([m[1;31morigin/deployment[m[33m)[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Sep 27 18:40:18 2024 +0600
+
+    Minimal product deployment
+
+[33mcommit 5f8f77475778218a18fa2c4e61ca9473790a5738[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon Jun 10 15:11:16 2024 +0600
+
+    Database reset, design change
+
+[33mcommit 01e2ac77ff36c3b20be65135d7837556cc3173ba[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed May 29 16:14:26 2024 +0600
+
+    Design change on the frontend
+
+[33mcommit 2b37db145617d63dea9a8a2aa75e395dfe7268fb[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Tue May 21 12:27:42 2024 +0600
+
+    Running Django tests properly but not working with adding and updating article due to image contained by an article
+
+[33mcommit 3fb0332ddb2b4808dcd9406b69761c00f29f6cd9[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sat May 18 16:20:15 2024 +0600
+
+    Fixed comment testing
+
+[33mcommit 8e46ebfbbcbd5fe02574d7f7339b026ba5b1524e[m[33m ([m[1;31morigin/development_laptop[m[33m)[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon May 13 15:52:52 2024 +0600
+
+    graphql is working properly
+
+[33mcommit 5ae93fe8afb53b2c1a890b25917e59e0f860d8a6[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon May 13 12:53:17 2024 +0600
+
+    Apollo client is not working
+
+[33mcommit f6e878844514bb22b949b5b2d1d8b047d6e48d1b[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon May 13 12:19:26 2024 +0600
+
+    Setting up eslint configurations but still it is not working with visual studio code
+
+[33mcommit 7f26c3bab985a3c9cd5ba8f904d4bc0dfab0d3b2[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Apr 28 01:23:11 2024 +0600
+
+    Setup testing and seeding data properly - Need to work more with testing
+
+[33mcommit d51a181a3ec125e7a46ca726685e1e54e37659aa[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon Apr 22 21:58:28 2024 +0600
+
+    Seeding properly
+
+[33mcommit f3f231573769ce331d698072921a6fef91773ac9[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Apr 19 23:31:02 2024 +0600
+
+    Removed tailwind css and added bootstrap, fixing menu, add more options to quill editor
+
+[33mcommit b09ba037780260aa590e9a9c0cb36e38cc7b84ba[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Apr 7 18:06:05 2024 +0600
+
+    Add flake to linting
+
+[33mcommit c1dcf0e8e5c1be1cc40e7a031314b3e8012735bb[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Apr 7 17:52:18 2024 +0600
+
+    Adding eslint on client Nuxt.js
+
+[33mcommit 99ce4c709c40aecedff56f2f7e57395c6e61647a[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon Mar 18 12:58:36 2024 +0600
+
+    Keep database back to google drive
+
+[33mcommit e87663300e5bbc95a5c8c16c8ebe4f4190570da5[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Mar 17 12:09:12 2024 +0600
+
+    navbar designed properly need to make it more poolish
+
+[33mcommit 5e6b7e4fa7af488c19ca727c584b1708e2bc6a6c[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Thu Mar 14 11:37:22 2024 +0600
+
+    Register, verify user and login user mutation working successfully
+
+[33mcommit 6fb703b99bc5cda54b94fefdc8eac8e2cad7cb36[m
+Merge: db6808f f62eb07
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Mar 10 12:54:22 2024 +0600
+
+    Merge with master and resolve conflicts
+
+[33mcommit db6808f0845ad0e93212b4c3681185ddf42b74d5[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Mar 10 12:48:57 2024 +0600
+
+    Made some changes
+
+[33mcommit f62eb07422e8a36971fa18e8e33ec1863d96e899[m
+Merge: bdc65dc 7fff6cc
+Author: Md Samsuzzoha Shayon <mdshayon0@gmail.com>
+Date:   Sun Mar 10 12:48:07 2024 +0600
+
+    Merge pull request #6 from MdSamsuzzohaShayon/development_laptop
+    
+    Development laptop - User auth
+
+[33mcommit 7fff6cc1c4c600b59e94d3ce960ce1f77b754448[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Mar 10 12:42:49 2024 +0600
+
+    Creating user successfully, now need to protect the routes
+
+[33mcommit d9d8c2b988ee315f2f1eb0f170e8cfa8448d1d39[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Mar 6 17:57:26 2024 +0600
+
+    Getting error creating user
+
+[33mcommit 79411f086aefc684cf47e19665fb40987f49fb5c[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Tue Mar 5 05:18:06 2024 +0600
+
+    Need to add author in order to add a new article. Nevertheless, made structure for the whole project with GraphQL
+
+[33mcommit 76e4dfc93c8266db5b9e900e615d44261a18adf9[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sat Mar 2 21:26:48 2024 +0600
+
+    Adding article is not working successfully
+
+[33mcommit bdc65dc80a6ae908eeb063308ba04aa4c9a58f4e[m
+Merge: 56f4068 abf04cf
+Author: Md Samsuzzoha Shayon <mdshayon0@gmail.com>
+Date:   Sat Feb 3 05:39:18 2024 +0600
+
+    Merge pull request #5 from MdSamsuzzohaShayon/development
+    
+    Development
+
+[33mcommit abf04cf307733cde9cbfd8dd538f7d6d92092f0b[m
+Merge: 0177459 56f4068
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sat Feb 3 05:36:45 2024 +0600
+
+    Merge branch 'master' into development
+    Changed is master
+
+[33mcommit 56f4068d76071ea4e3baaada7afab7687789bea4[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sat Feb 3 05:36:15 2024 +0600
+
+    changed in master
+
+[33mcommit 017745913db46b9dbe7e6f75d7d9d8a3b699aed1[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Thu Feb 1 13:15:17 2024 +0600
+
+    auto deploy
+
+[33mcommit cb23c0596b3d33d57ac169a2ae936acc915a7675[m
+Merge: a6c4adb 113a486
+Author: Md Samsuzzoha Shayon <mdshayon0@gmail.com>
+Date:   Wed Jan 31 01:37:17 2024 +0600
+
+    Merge pull request #4 from MdSamsuzzohaShayon/development
+    
+    Auto deploy with linux bash
+
+[33mcommit 113a486325c68daa23a378bab97715f2a06d8145[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Wed Jan 31 01:36:23 2024 +0600
+
+    Auto deploy with linux bash
+
+[33mcommit a6c4adb66a278bb51a0895b56b7c6c0fe11efa0a[m
+Merge: a9101a4 9c6634c
+Author: Md Samsuzzoha Shayon <mdshayon0@gmail.com>
+Date:   Mon Jan 22 16:12:38 2024 +0600
+
+    Merge pull request #3 from MdSamsuzzohaShayon/development
+    
+    Change variables names
+
+[33mcommit 9c6634cdc1bc6aa1b3dec9fd62c458b84152a498[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon Jan 22 16:11:10 2024 +0600
+
+    Change variables names
+
+[33mcommit a9101a42532b1fc616d8b76d1ace3c355686b22d[m
+Merge: 89c716c 32e0d70
+Author: Md Samsuzzoha Shayon <mdshayon0@gmail.com>
+Date:   Mon Jan 22 16:03:00 2024 +0600
+
+    Merge pull request #2 from MdSamsuzzohaShayon/development
+    
+    prepare for deployment - Development
+
+[33mcommit 32e0d700d4bfbdacc080e73b2b090560b2e04bc9[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon Jan 22 16:01:55 2024 +0600
+
+    Hosting django server
+
+[33mcommit 86c67d77623e6afaae0361b77a5d5bc8fd2e5c58[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon Jan 22 15:36:42 2024 +0600
+
+    Making everything ready for deployment
+
+[33mcommit 6ffbd521fa2be36bc0446d261f98eeb5541b3ee0[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Jan 21 02:01:57 2024 +0600
+
+    Added spabase database
+
+[33mcommit bd053cb414e0f95ed61177c9f8537a927a70ed8f[m
+Author: Md Shayon <mdsamsuzzoha5222@gmail.com>
+Date:   Fri Dec 29 12:36:07 2023 +0600
+
+    Adding article properly
+
+[33mcommit 66682c79fd512600b708ee30295347142c5c5c1b[m
+Author: Md Shayon <mdsamsuzzoha5222@gmail.com>
+Date:   Mon Dec 25 13:07:26 2023 +0600
+
+    Fixing some quill editor issues
+
+[33mcommit 2fec54ffcf66d522da2971b703a1d02749b8d789[m
+Author: Md Shayon <mdsamsuzzoha5222@gmail.com>
+Date:   Sun Dec 24 01:43:56 2023 +0600
+
+    remove dotenv
+
+[33mcommit edf6c0c532e77687f2067221fcfeba3831348aac[m
+Author: Md Shayon <mdsamsuzzoha5222@gmail.com>
+Date:   Sat Dec 23 10:50:54 2023 +0600
+
+    Added thumbnail but regrettably createdAt is not working
+
+[33mcommit d1db29dce81085bf021a55fafd930dc3bc333097[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Dec 1 14:20:05 2023 +0600
+
+    Incomplete web dev lab
+
+[33mcommit ae8e53fdcf30ef7b8e49a9efea9dac0d4602f2c8[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Nov 10 22:19:33 2023 +0600
+
+    Fetch single post and more
+
+[33mcommit 89c716ca318cc88cf27b090b63c26b23f89acce0[m
+Merge: 3ccb0e3 921cf7f
+Author: Md Samsuzzoha Shayon <mdshayon0@gmail.com>
+Date:   Fri Nov 10 14:30:35 2023 +0600
+
+    Merge pull request #1 from MdSamsuzzohaShayon/development
+    
+    Development with djagno and graphql on the server and nuxt js on frontend
+
+[33mcommit 921cf7f876069d24afab300f5ce50bdc7beb6dde[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Nov 10 14:29:14 2023 +0600
+
+    Frontend setup
+
+[33mcommit 737b5b29de47eba563a6be7c88580de9713101e1[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sat Nov 4 12:29:40 2023 +0600
+
+    Connecting nuxt js with django
+
+[33mcommit 7188715e7752d9683be81f9f57fbdd4755bfd603[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Nov 3 17:04:55 2023 +0600
+
+    Created a graphql server
+
+[33mcommit 8d3ef4679029d95693e0f1f221765c05b14965ab[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Nov 3 12:42:14 2023 +0600
+
+    Project setup
+
+[33mcommit 9314633e0dfca24ae0fdcd389bd67a2b6e1ef864[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Fri Nov 3 12:16:34 2023 +0600
+
+    Database modeling
+
+[33mcommit 3ccb0e308d806a0ded6a72ea7b66337737da8ee0[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Tue Oct 12 05:22:38 2021 +0600
+
+    some problem regarding iframe, we should use python in order to validate url for embabed iframe url
+
+[33mcommit 8063fc8f2fe30b58b74e0ba4593653c05fe7327f[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Mon Oct 11 23:03:06 2021 +0600
+
+    creating dependant field for model, solving some common problems
+
+[33mcommit 55562060621a6805a146c0c02f37af4f9cb201d0[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Oct 10 14:36:59 2021 +0600
+
+    one to many relationship. getting some kind of error
+
+[33mcommit 7d145c5b1afab1c9449fe4653bb4696de2234f1c[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Oct 10 14:04:26 2021 +0600
+
+    create tutorial models, admin setup, series tutorial templates
+
+[33mcommit c3101d3f472ca2dbf555b209425a191945692370[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Oct 10 05:32:06 2021 +0600
+
+    create simple list of directory, creating series tutorial page
+
+[33mcommit 394810a3c9e2b2ca00afa40e93218793e0bcc141[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Oct 10 04:16:46 2021 +0600
+
+    all views pages, urls, and debug tool setup
+
+[33mcommit 319802be5ffc4ab0b9e2db3a38d9de6f8ee0c6a1[m
+Author: Md Shayon <mdshayon0@gmail.com>
+Date:   Sun Oct 10 02:21:13 2021 +0600
+
+    initial project with static file loading, templating, views, urls all setup
