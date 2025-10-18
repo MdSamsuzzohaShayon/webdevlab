@@ -1,6 +1,6 @@
-use lettre::{Message, SmtpTransport, Transport};
-use lettre::transport::smtp::authentication::Credentials;
 use crate::config::AppConfig;
+use lettre::transport::smtp::authentication::Credentials;
+use lettre::{Message, SmtpTransport, Transport};
 
 pub struct EmailUtil;
 
@@ -11,7 +11,7 @@ impl EmailUtil {
         token: &str,
     ) -> Result<(), String> {
         let verification_url = format!("{}/verify-email?token={}", config.frontend_url, token);
-        
+
         let email_body = format!(
             "Please click the link to verify your email: {}",
             verification_url
@@ -26,7 +26,7 @@ impl EmailUtil {
         token: &str,
     ) -> Result<(), String> {
         let reset_url = format!("{}/reset-password?token={}", config.frontend_url, token);
-        
+
         let email_body = format!(
             "Please click the link to reset your password: {}",
             reset_url
@@ -42,16 +42,18 @@ impl EmailUtil {
         body: &str,
     ) -> Result<(), String> {
         let email = Message::builder()
-            .from(config.from_email.parse().map_err(|e| format!("Invalid from email: {}", e))?)
+            .from(
+                config
+                    .from_email
+                    .parse()
+                    .map_err(|e| format!("Invalid from email: {}", e))?,
+            )
             .to(to.parse().map_err(|e| format!("Invalid to email: {}", e))?)
             .subject(subject)
             .body(body.to_string())
             .map_err(|e| format!("Email build error: {}", e))?;
 
-        let creds = Credentials::new(
-            config.smtp_username.clone(),
-            config.smtp_password.clone(),
-        );
+        let creds = Credentials::new(config.smtp_username.clone(), config.smtp_password.clone());
 
         let mailer = SmtpTransport::relay(&config.smtp_host)
             .map_err(|e| format!("SMTP relay error: {}", e))?
@@ -59,7 +61,8 @@ impl EmailUtil {
             .credentials(creds)
             .build();
 
-        mailer.send(&email)
+        mailer
+            .send(&email)
             .map_err(|e| format!("Email send error: {}", e))?;
 
         Ok(())

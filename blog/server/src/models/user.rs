@@ -1,9 +1,8 @@
-use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
 use sqlx::FromRow;
-use validator::Validate;
 use utoipa::ToSchema;
-
+use validator::Validate;
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct User {
@@ -12,7 +11,7 @@ pub struct User {
     pub password_hash: String,
     pub first_name: String,
     pub last_name: String,
-    pub photo: String,
+    pub photo: Option<String>,
     pub is_verified: bool,
     pub verification_token: Option<String>,
     pub reset_token: Option<String>,
@@ -31,9 +30,9 @@ pub struct RegisterUser {
     pub first_name: String,
     #[validate(length(min = 2))]
     pub last_name: String,
-    #[validate(length(min = 2))]
-    pub photo: String,
 
+    // ✅ Make photo optional (no validation if it's None)
+    pub photo: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Validate, ToSchema)]

@@ -24,12 +24,24 @@ impl AppConfig {
         AppConfig {
             database_url: env::var("DATABASE_URL").expect("DATABASE_URL must be set"),
             redis_url: env::var("REDIS_URL").expect("REDIS_URL must be set"),
-            port: env::var("PORT").unwrap_or_else(|_| "8000".to_string()).parse().expect("PORT must be a number"),
+            port: env::var("PORT")
+                .unwrap_or_else(|_| "8000".to_string())
+                .parse()
+                .expect("PORT must be a number"),
             jwt_secret: env::var("JWT_SECRET").expect("JWT_SECRET must be set"),
-            jwt_expires_in: env::var("JWT_EXPIRES_IN").unwrap_or_else(|_| "3600".to_string()).parse().expect("JWT_EXPIRES_IN must be a number"),
-            refresh_token_expires_in: env::var("REFRESH_TOKEN_EXPIRES_IN").unwrap_or_else(|_| "2592000".to_string()).parse().expect("REFRESH_TOKEN_EXPIRES_IN must be a number"),
+            jwt_expires_in: env::var("JWT_EXPIRES_IN")
+                .unwrap_or_else(|_| "3600".to_string())
+                .parse()
+                .expect("JWT_EXPIRES_IN must be a number"),
+            refresh_token_expires_in: env::var("REFRESH_TOKEN_EXPIRES_IN")
+                .unwrap_or_else(|_| "2592000".to_string())
+                .parse()
+                .expect("REFRESH_TOKEN_EXPIRES_IN must be a number"),
             smtp_host: env::var("SMTP_HOST").expect("SMTP_HOST must be set"),
-            smtp_port: env::var("SMTP_PORT").unwrap_or_else(|_| "587".to_string()).parse().expect("SMTP_PORT must be a number"),
+            smtp_port: env::var("SMTP_PORT")
+                .unwrap_or_else(|_| "587".to_string())
+                .parse()
+                .expect("SMTP_PORT must be a number"),
             smtp_username: env::var("SMTP_USERNAME").expect("SMTP_USERNAME must be set"),
             smtp_password: env::var("SMTP_PASSWORD").expect("SMTP_PASSWORD must be set"),
             from_email: env::var("FROM_EMAIL").expect("FROM_EMAIL must be set"),

@@ -1,13 +1,16 @@
-use sqlx::PgPool;
-use uuid::Uuid;
-use chrono::Utc;
 use crate::{
-    models::user::{User, RegisterUser, LoginUser, ForgotPassword, ResetPassword, VerifyEmail, AuthResponse, UserResponse},
-    utils::{jwt::JwtUtil, password::PasswordUtil, email::EmailUtil},
-    services::cache_service::CacheService,
     config::AppConfig,
     errors::AppError,
+    models::user::{
+        AuthResponse, ForgotPassword, LoginUser, RegisterUser, ResetPassword, User, UserResponse,
+        VerifyEmail,
+    },
+    services::cache_service::CacheService,
+    utils::{email::EmailUtil, jwt::JwtUtil, password::PasswordUtil},
 };
+use chrono::Utc;
+use sqlx::PgPool;
+use uuid::Uuid;
 
 #[derive(Clone)]
 pub struct AuthService {
@@ -27,12 +30,10 @@ impl AuthService {
 
     pub async fn register(&self, user_data: RegisterUser) -> Result<(), AppError> {
         // Check if user already exists
-        let existing_user = sqlx::query_as::<_, User>(
-            "SELECT * FROM users WHERE email = $1"
-        )
-        .bind(&user_data.email)
-        .fetch_optional(&self.pool)
-        .await?;
+        let existing_user = sqlx::query_as::<_, User>("SELECT * FROM users WHERE email = $1")
+            .bind(&user_data.email)
+            .fetch_optional(&self.pool)
+            .await?;
 
         if existing_user.is_some() {
             return Err(AppError::ValidationError("User already exists".to_string()));
@@ -66,24 +67,20 @@ impl AuthService {
         )?;
 
         // Send verification email
-        EmailUtil::send_verification_email(
-            &self.config,
-            &user_data.email,
-            &verification_token,
-        ).await.map_err(|e| AppError::EmailError(e))?;
+        EmailUtil::send_verification_email(&self.config, &user_data.email, &verification_token)
+            .await
+            .map_err(|e| AppError::EmailError(e))?;
 
         Ok(())
     }
 
     pub async fn login(&self, login_data: LoginUser) -> Result<AuthResponse, AppError> {
         // Find user
-        let user = sqlx::query_as::<_, User>(
-            "SELECT * FROM users WHERE email = $1"
-        )
-        .bind(&login_data.email)
-        .fetch_optional(&self.pool)
-        .await?
-        .ok_or_else(|| AppError::Unauthorized("Invalid credentials".to_string()))?;
+        let user = sqlx::query_as::<_, User>("SELECT * FROM users WHERE email = $1")
+            .bind(&login_data.email)
+            .fetch_optional(&self.pool)
+            .await?
+            .ok_or_else(|| AppError::Unauthorized("Invalid credentials".to_string()))?;
 
         // Verify password
         if !PasswordUtil::verify_password(&login_data.password, &user.password_hash)? {
@@ -121,7 +118,7 @@ impl AuthService {
 
         // Check if refresh token exists in Redis
         let stored_token = self.cache_service.get_refresh_token(claims.sub)?;
-        
+
         if stored_token != refresh_token {
             return Err(AppError::Unauthorized("Invalid refresh token".to_string()));
         }
@@ -138,12 +135,10 @@ impl AuthService {
         )?;
 
         // Get user data
-        let user = sqlx::query_as::<_, User>(
-            "SELECT * FROM users WHERE id = $1"
-        )
-        .bind(claims.sub)
-        .fetch_one(&self.pool)
-        .await?;
+        let user = sqlx::query_as::<_, User>("SELECT * FROM users WHERE id = $1")
+            .bind(claims.sub)
+            .fetch_one(&self.pool)
+            .await?;
 
         Ok(AuthResponse {
             access_token,
@@ -162,19 +157,19 @@ impl AuthService {
 
     pub async fn verify_email(&self, token: String) -> Result<(), AppError> {
         // Find user by verification token
-        let user = sqlx::query_as::<_, User>(
-            "SELECT * FROM users WHERE verification_token = $1"
-        )
-        .bind(&token)
-        .fetch_optional(&self.pool)
-        .await?
-        .ok_or_else(|| AppError::NotFound("Invalid verification token".to_string()))?;
+        let user = sqlx::query_as::<_, User>("SELECT * FROM users WHERE verification_token = $1")
+            .bind(&token)
+            .fetch_optional(&self.pool)
+            .await?
+            .ok_or_else(|| AppError::NotFound("Invalid verification token".to_string()))?;
 
         // Verify token in Redis
         let stored_token = self.cache_service.get_verification_token(&user.email)?;
-        
+
         if stored_token != token {
-            return Err(AppError::ValidationError("Invalid verification token".to_string()));
+            return Err(AppError::ValidationError(
+                "Invalid verification token".to_string(),
+            ));
         }
 
         // Update user as verified
@@ -190,13 +185,11 @@ impl AuthService {
 
     pub async fn forgot_password(&self, email: String) -> Result<(), AppError> {
         // Find user
-        let user = sqlx::query_as::<_, User>(
-            "SELECT * FROM users WHERE email = $1"
-        )
-        .bind(&email)
-        .fetch_optional(&self.pool)
-        .await?
-        .ok_or_else(|| AppError::NotFound("User not found".to_string()))?;
+        let user = sqlx::query_as::<_, User>("SELECT * FROM users WHERE email = $1")
+            .bind(&email)
+            .fetch_optional(&self.pool)
+            .await?
+            .ok_or_else(|| AppError::NotFound("User not found".to_string()))?;
 
         // Generate reset token
         let reset_token = Uuid::new_v4().to_string();
@@ -218,11 +211,9 @@ impl AuthService {
         )?;
 
         // Send reset email
-        EmailUtil::send_password_reset_email(
-            &self.config,
-            &email,
-            &reset_token,
-        ).await.map_err(|e| AppError::EmailError(e))?;
+        EmailUtil::send_password_reset_email(&self.config, &email, &reset_token)
+            .await
+            .map_err(|e| AppError::EmailError(e))?;
 
         Ok(())
     }
@@ -230,7 +221,7 @@ impl AuthService {
     pub async fn reset_password(&self, reset_data: ResetPassword) -> Result<(), AppError> {
         // Find user by reset token
         let user = sqlx::query_as::<_, User>(
-            "SELECT * FROM users WHERE reset_token = $1 AND reset_token_expires > $2"
+            "SELECT * FROM users WHERE reset_token = $1 AND reset_token_expires > $2",
         )
         .bind(&reset_data.token)
         .bind(Utc::now())
@@ -240,7 +231,7 @@ impl AuthService {
 
         // Verify token in Redis
         let stored_token = self.cache_service.get_reset_token(&user.email)?;
-        
+
         if stored_token != reset_data.token {
             return Err(AppError::ValidationError("Invalid reset token".to_string()));
         }
@@ -264,13 +255,11 @@ impl AuthService {
     }
 
     pub async fn get_user_by_id(&self, user_id: i32) -> Result<User, AppError> {
-        let user = sqlx::query_as::<_, User>(
-            "SELECT * FROM users WHERE id = $1"
-        )
-        .bind(user_id)
-        .fetch_one(&self.pool)
-        .await?;
-        
+        let user = sqlx::query_as::<_, User>("SELECT * FROM users WHERE id = $1")
+            .bind(user_id)
+            .fetch_one(&self.pool)
+            .await?;
+
         Ok(user)
     }
 }

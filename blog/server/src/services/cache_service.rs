@@ -1,5 +1,5 @@
-use redis::{Client, Commands};
 use crate::errors::AppError;
+use redis::{Client, Commands};
 
 #[derive(Clone)]
 pub struct CacheService {
@@ -11,16 +11,21 @@ impl CacheService {
         Self { client }
     }
 
-    pub fn store_refresh_token(&self, user_id: i32, token: &str, expires_in: u64) -> Result<(), AppError> {
+    pub fn store_refresh_token(
+        &self,
+        user_id: i32,
+        token: &str,
+        expires_in: u64,
+    ) -> Result<(), AppError> {
         let key = format!("refresh_token:{}", user_id);
         let mut con = self.client.get_connection()?;
         // Explicitly use RedisResult
         let _: () = redis::cmd("SETEX")
-        .arg(&key)
-        .arg(expires_in)
-        .arg(token)
-        .query(&mut con)?;
-            Ok(())
+            .arg(&key)
+            .arg(expires_in)
+            .arg(token)
+            .query(&mut con)?;
+        Ok(())
     }
 
     pub fn get_refresh_token(&self, user_id: i32) -> Result<String, AppError> {
@@ -37,15 +42,20 @@ impl CacheService {
         Ok(())
     }
 
-    pub fn store_verification_token(&self, email: &str, token: &str, expires_in: u64) -> Result<(), AppError> {
+    pub fn store_verification_token(
+        &self,
+        email: &str,
+        token: &str,
+        expires_in: u64,
+    ) -> Result<(), AppError> {
         let key = format!("verify_email:{}", email);
         let mut con = self.client.get_connection()?;
         // Explicitly use RedisResult
         let _: () = redis::cmd("SETEX")
-        .arg(&key)
-        .arg(expires_in)
-        .arg(token)
-        .query(&mut con)?;
+            .arg(&key)
+            .arg(expires_in)
+            .arg(token)
+            .query(&mut con)?;
         Ok(())
     }
 
@@ -56,15 +66,20 @@ impl CacheService {
         Ok(token)
     }
 
-    pub fn store_reset_token(&self, email: &str, token: &str, expires_in: u64) -> Result<(), AppError> {
+    pub fn store_reset_token(
+        &self,
+        email: &str,
+        token: &str,
+        expires_in: u64,
+    ) -> Result<(), AppError> {
         let key = format!("reset_token:{}", email);
         let mut con = self.client.get_connection()?;
         // Explicitly use RedisResult
         let _: () = redis::cmd("SETEX")
-        .arg(&key)
-        .arg(expires_in)
-        .arg(token)
-        .query(&mut con)?;
+            .arg(&key)
+            .arg(expires_in)
+            .arg(token)
+            .query(&mut con)?;
         Ok(())
     }
 

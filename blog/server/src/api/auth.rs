@@ -160,6 +160,7 @@ pub async fn reset_password(
     })))
 }
 
+// Protected route - only this one needs authentication
 #[utoipa::path(
     get,
     path = "/api/auth/me",
@@ -185,8 +186,7 @@ pub fn init_routes(cfg: &mut web::ServiceConfig) {
         .service(logout)
         .service(verify_email)
         .service(forgot_password)
-        .service(reset_password)
-        .service(get_me);
+        .service(reset_password);
 }
 
 
